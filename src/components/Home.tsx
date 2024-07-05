@@ -49,7 +49,7 @@ const Home: React.FC = () => {
           case 'login':
             return <LoginPage />;
       default:
-        return <Typography variant="h4" align="center">{selectedGame}</Typography>;
+        return <Typography variant="h2" align="center">{selectedGame}</Typography>;
     }
   };
 
