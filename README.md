@@ -1,6 +1,6 @@
 # Welcome to Avianaa Creation React Games App
 
-This project was bootstrapped with React Application.
+This app is a simple React application showcasing state management with Redux, UI components with Material-UI (MUI), and a theme switcher for light and dark modes. It features a game selection interface allowing users to switch between different games. The Redux store manages the state, specifically which game is selected. The Home component handles rendering the selected game, such as a Tic-Tac-Tooe game, based on the state. The theme switcher enables toggling between light and dark themes, enhancing user experience. This project demonstrates efficient state management and responsive, visually appealing UI design using MUI and Redux.
 
 ## Available Scripts
 

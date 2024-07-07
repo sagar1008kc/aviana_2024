@@ -11,18 +11,18 @@ const Footer: React.FC = () => {
         px: 2,
         mt: 'auto',
         textAlign: 'center',
-        backgroundColor: (theme) =>
-          theme.palette.mode === 'light' ? theme.palette.grey[200] : theme.palette.grey[800],
       }}
     >
       <Container maxWidth="md">
-        <Typography variant="body2" color="text.secondary">
-          {'Copyright © '}
+        <Typography variant="subtitle2" color="text.secondary">
+          {'© '}
+          {new Date().getFullYear()}
+          {'.'}
           <Link color="inherit" href="https://avianaa.com/">
             Avianaa.com
           </Link>{' '}
-          {new Date().getFullYear()}
-          {'.'}
+          All right reserved.
+         
         </Typography>
       </Container>
     </Box>

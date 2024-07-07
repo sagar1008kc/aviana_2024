@@ -6,7 +6,7 @@ import GameIcon from '@mui/icons-material/SportsEsports'; // Import an appropria
 
 const LandingPage: React.FC = () => {
   return (
-    <Box maxHeight='50vh' justifyContent='center' marginTop='12%' p={4}>
+    <Box maxHeight='50vh' justifyContent='center' marginTop='12%' paddingInline={4}>
         <Typography variant="h4" component="h1" gutterBottom textAlign='center' fontFamily={'fantasy'}>
         Welcome to Avianaa Games App!
         </Typography>

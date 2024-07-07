@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Grid, Paper, Typography, Button } from '@mui/material';
+import { Box, Grid, Paper, Typography, Button, useTheme } from '@mui/material';
 
 const TicTacToe: React.FC = () => {
   const [board, setBoard] = useState(Array(9).fill(null));
-  const [isXNext, setIsXNext] = useState(true);
+  const [isONext, setIsONext] = useState(true);
   const [winnerHistory, setWinnerHistory] = useState<string[]>([]);
+  const theme = useTheme();
 
   const handleClick = (index: number) => {
-    if (board[index] || calculateWinner(board) || !isXNext) {
+    if (board[index] || calculateWinner(board) || !isONext) {
       return;
     }
     const newBoard = board.slice();
-    newBoard[index] = 'X';
+    newBoard[index] = 'O';
     setBoard(newBoard);
-    setIsXNext(false);
+    setIsONext(false);
   };
 
   const calculateWinner = (squares: string[]) => {
@@ -45,7 +46,7 @@ const TicTacToe: React.FC = () => {
       let moveIndex;
 
       // AI strategy to win or block
-      const winOrBlockMove = findWinningMove('O') || findWinningMove('X');
+      const winOrBlockMove = findWinningMove('X') || findWinningMove('O');
       if (winOrBlockMove !== null) {
         moveIndex = winOrBlockMove;
       } else {
@@ -53,9 +54,9 @@ const TicTacToe: React.FC = () => {
       }
 
       const newBoard = board.slice();
-      newBoard[moveIndex] = 'O';
+      newBoard[moveIndex] = 'X';
       setBoard(newBoard);
-      setIsXNext(true);
+      setIsONext(true);
     }
   };
 
@@ -74,27 +75,30 @@ const TicTacToe: React.FC = () => {
 
   useEffect(() => {
     const winner = calculateWinner(board);
-    if (!isXNext && !winner) {
+    if (!isONext && !winner) {
       const timer = setTimeout(() => {
         makeComputerMove();
-      }, 500);
+      }, 1000);
       return () => clearTimeout(timer);
     } else if (winner) {
-      const winnerText = winner === 'X' ? 'You (X)' : 'AI (O)';
+      const winnerText = winner === 'O' ? 'You (O)' : 'AI (X)';
       setWinnerHistory(prev => [winnerText, ...prev].slice(0, 2));
     }
-  }, [isXNext, board]);
+  }, [isONext, board]);
 
   const winner = calculateWinner(board);
-  const status = winner ? `Winner is: ${winner === 'X' ? 'You (X)!' : 'AI (O)!'}` : isXNext ? 'Your turn' : 'AI turn';
+  const status = winner ? `Winner is: ${winner === 'O' ? 'You (O)!' : 'AI (X)!'}` : isONext ? 'Your turn' : 'AI turn';
 
   const handleReset = () => {
     setBoard(Array(9).fill(null));
-    setIsXNext(true);
+    setIsONext(true);
   };
 
   return (
     <Box display="flex" flexDirection="column" alignItems="center">
+       <Typography variant="h4" align="center" gutterBottom fontFamily={'fantasy'}>
+          Tic-Tac-Toe
+        </Typography>
       <Typography
         variant="h6"
         gutterBottom
@@ -105,20 +109,21 @@ const TicTacToe: React.FC = () => {
       >
         {status}
       </Typography>
-      <Grid container spacing={1} style={{ width: '300px' }}>
+      <Grid container spacing={2} style={{ width: '300px' }}>
         {board.map((value, index) => (
           <Grid item xs={4} key={index}>
             <Paper
               onClick={() => handleClick(index)}
               style={{
-                height: '100px',
+                height: '55px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 cursor: 'pointer',
                 fontSize: '24px',
                 boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
-                backgroundColor: '#465abd',
+                backgroundColor: theme.palette.mode === 'dark' ? '#333' : '#ddd',
+                color: theme.palette.text.primary,
                 transition: 'box-shadow 0.3s ease-in-out',
               }}
               onMouseEnter={(e) => (e.currentTarget.style.boxShadow = '0 8px 16px rgba(0, 0, 0, 0.3)')}
@@ -133,9 +138,9 @@ const TicTacToe: React.FC = () => {
         Reset Game
       </Button>
       <Box mt={2}>
-        <Typography variant="h6">Latest Winners</Typography>
+        <Typography variant="subtitle2">Latest Winners:</Typography>
         {winnerHistory.map((winner, index) => (
-          <Typography key={index}>
+          <Typography variant='subtitle2' key={index}>
             {winner}
           </Typography>
         ))}

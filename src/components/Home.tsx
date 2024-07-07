@@ -14,6 +14,8 @@ import {
   CardMedia,
   Switch,
   FormControlLabel,
+  Divider,
+  Chip,
 } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import TicTacToe from '../games/TicTacToe';
@@ -27,7 +29,7 @@ import LandingPage from './LandingPage';
 import Footer from './Footer';
 import Calculator from '../games/Calculator';
 import CalculatorIcon from '../assets/calculator.png'; // Correctly import the calculator image
-
+import ChessIcon from '../assets/chess.png';
 const Home: React.FC = () => {
   const dispatch = useDispatch();
   const selectedGame = useSelector((state: RootState) => state.game.selectedGame);
@@ -58,6 +60,10 @@ const Home: React.FC = () => {
         return <TicTacToe />;
       case 'Game 2':
         return <Calculator />;
+        case 'Game 3':
+        return (  <Typography variant="subtitle1" align="center">
+          Comming soon..
+        </Typography>)
       case 'Game 6':
         return <MemoryGame />;
       case 'home':
@@ -75,16 +81,27 @@ const Home: React.FC = () => {
     }
   };
 
+  const gameCardStyles = {
+    cursor: 'pointer',
+    flex: 1,
+    paddingBottom: '0px',
+    transition: 'border 0.3s ease-in-out',
+  };
+
+  const selectedGameCardStyles = {
+    border: '2px solid orange',
+  };
+
   return (
     <ThemeProvider theme={themeMode}>
-      <Container maxWidth="lg" sx={{ height: '100vh', backgroundColor: themeMode.palette.background.default }}>
+      <Container maxWidth="lg" sx={{ height: '100%', backgroundColor: themeMode.palette.background.default }}>
         <Box
           sx={{
             width: '100%',
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            padding: '10px',
+            padding: '5px',
           }}
         >
           <img
@@ -137,22 +154,25 @@ const Home: React.FC = () => {
             label={undefined}
           />
         </Box>
-
-        <Grid container spacing={1} sx={{ flex: 1 }}>
+        <Divider>
+          <Chip label="GAMES" size="small" />
+        </Divider>
+        <Grid container spacing={1} sx={{ flex: 1 }} mt="8px">
           {isSmallScreen && (
-            <Grid item xs={12}>
-              <Box display="flex" justifyContent="center">
+            <Grid item xs={12} >
+              <Box display="flex" justifyContent="center" >
                 {leftGames.map((game, index) => (
                   <Card
                     key={game}
                     onClick={() => dispatch(selectGame(game))}
-                    sx={{ cursor: 'pointer', flex: 1, paddingBottom: '0px' }}
+                    sx={{ cursor: 'pointer', flex: 1, mr:'10px'}}
                   >
-                    <CardContent sx={{ p: '4px', height: '35px' }}>
+                    <CardContent sx={{ p: '4px', height: '30px'}}>
                       {index === 0 ? (
                         <CardMedia
                           component="img"
-                          width="100%"
+                          width="50"
+                          height="50"
                           alt="Tic-Tac-Toe"
                           image={TicTacToeIcon}
                           title="Tic-Tac-Toe"
@@ -160,10 +180,22 @@ const Home: React.FC = () => {
                       ) : game === 'Game 2' ? (
                         <CardMedia
                           component="img"
-                          width="100%"
+                          width="50"
+                          height="50"
                           alt="Calculator"
                           image={CalculatorIcon}
                           title="Calculator"
+                          sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
+                        />
+                      ) : game === 'Game 3' ? (
+                        <CardMedia
+                          component="img"
+                          width="50"
+                          height="50"
+                          alt="Calculator"
+                          image={ChessIcon}
+                          title="Calculator"
+                          sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
                         />
                       ) : (
                         <Typography variant="body2" align="center" pt="10px">
@@ -182,16 +214,17 @@ const Home: React.FC = () => {
                 <Card
                   key={game}
                   onClick={() => dispatch(selectGame(game))}
-                  sx={{ marginBottom: '10px', cursor: 'pointer', boxShadow: 'none' }}
+                  sx={{ margin: '10px', cursor: 'pointer', boxShadow: 'none' }}
                 >
                   <CardContent>
                     {index === 0 ? (
                       <CardMedia
                         component="img"
                         alt="Tic-Tac-Toe"
-                        height="100"
+                        height="80"
                         image={TicTacToeIcon}
                         title="Tic-Tac-Toe"
+                        sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
                       />
                     ) : game === 'Game 2' ? (
                       <CardMedia
@@ -200,6 +233,7 @@ const Home: React.FC = () => {
                         height="100"
                         image={CalculatorIcon}
                         title="Calculator"
+                        sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
                       />
                     ) : (
                       <Typography variant="body1" align="center">
@@ -236,6 +270,7 @@ const Home: React.FC = () => {
                         height="100"
                         image={MemoryCardIcon}
                         title="Memory Game"
+                        sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
                       />
                     ) : (
                       <Typography variant="body1" align="center">
@@ -253,17 +288,18 @@ const Home: React.FC = () => {
                   <Card
                     key={game}
                     onClick={() => dispatch(selectGame(game))}
-                    sx={{ margin: '5px', cursor: 'pointer', flex: 1, boxShadow: 'none', padding: '0' }}
+                    sx={{ cursor: 'pointer', flex: 1, mr:'10px'}}
                   >
-                    <CardContent sx={{ p: '0', m: '0' }}>
+                    <CardContent sx={{ p: '4px', height: '30px' }}>
                       {index === 0 ? (
                         <CardMedia
                           component="img"
                           alt="Memory Game"
-                          height="50"
                           width="50"
+                          height="50"
                           image={MemoryCardIcon}
                           title="Memory Game"
+                          sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
                         />
                       ) : (
                         <Typography variant="body2" align="center">

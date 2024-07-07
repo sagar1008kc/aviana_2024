@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Button, Grid, TextField, Typography, Container } from '@mui/material';
+import { Height } from '@mui/icons-material';
 
 const Calculator: React.FC = () => {
   const [input, setInput] = useState<string>('');
@@ -25,15 +26,18 @@ const Calculator: React.FC = () => {
   };
 
   return (
-    <Container maxWidth="xs">
-        <Typography variant="h4" align="center" gutterBottom>
+    <Box sx={{
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        
+      }}>
+        <Typography variant="h5" align="center" fontFamily={'fantasy'} >
           Calculator
         </Typography>
         <TextField
           fullWidth
           variant="outlined"
           value={input}
-          margin="normal"
           InputProps={{
             readOnly: true,
             style: { textAlign: 'right', fontSize: '.8rem' }
@@ -49,14 +53,14 @@ const Calculator: React.FC = () => {
             style: { textAlign: 'right', fontSize: '.8rem' }
           }}
         />
-        <Grid container spacing={2}>
+        <Grid container spacing={1}>
           {['7', '8', '9', '/'].map((value) => (
             <Grid item xs={3} key={value}>
               <Button
                 variant="contained"
                 fullWidth
                 onClick={() => handleButtonClick(value)}
-                sx={{ height: '60px', fontSize: '1.2rem' }}
+                sx={{ height: '40px', fontSize: '1.2rem' }}
               >
                 {value}
               </Button>
@@ -68,7 +72,7 @@ const Calculator: React.FC = () => {
                 variant="contained"
                 fullWidth
                 onClick={() => handleButtonClick(value)}
-                sx={{ height: '60px', fontSize: '1.2rem' }}
+                sx={{ height: '40px', fontSize: '1.2rem' }}
               >
                 {value}
               </Button>
@@ -80,7 +84,7 @@ const Calculator: React.FC = () => {
                 variant="contained"
                 fullWidth
                 onClick={() => handleButtonClick(value)}
-                sx={{ height: '60px', fontSize: '1.2rem' }}
+                sx={{ height: '40px', fontSize: '1.2rem' }}
               >
                 {value}
               </Button>
@@ -92,7 +96,7 @@ const Calculator: React.FC = () => {
                 variant="contained"
                 fullWidth
                 onClick={() => (value === '=' ? handleCalculate() : handleButtonClick(value))}
-                sx={{ height: '60px', fontSize: '1.2rem' }}
+                sx={{ height: '40px', fontSize: '1.2rem' }}
               >
                 {value}
               </Button>
@@ -104,13 +108,13 @@ const Calculator: React.FC = () => {
               fullWidth
               color="error"
               onClick={handleClear}
-              sx={{ height: '60px', fontSize: '1.2rem' }}
+              sx={{ height: '40px', fontSize: '1rem' }}
             >
               Clear
             </Button>
           </Grid>
         </Grid>
-    </Container>
+    </Box>
   );
 };
 
