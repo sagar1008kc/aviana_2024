@@ -11,6 +11,7 @@ import AvianaIcon from '../assets/avianaa.png';
 import LoginPage from './Login';
 import About from './About';
 import LandingPage from './LandingPage';
+import Footer from './Footer';
 
 const Home: React.FC = () => {
   const dispatch = useDispatch();
@@ -222,6 +223,7 @@ const Home: React.FC = () => {
             </Grid>
           )}
         </Grid>
+        <Footer />
       </Container>
     </ThemeProvider>
   );

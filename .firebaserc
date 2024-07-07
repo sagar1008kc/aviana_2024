@@ -1,5 +1,9 @@
 {
   "projects": {
-    "default": "avianaaworld"
-  }
+    "default": "avianaa2024",
+    "prod": "avianaa2024"
+  },
+  "targets": {},
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
 }

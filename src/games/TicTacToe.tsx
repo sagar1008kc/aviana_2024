@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, Grid, Paper, Typography, Button } from '@mui/material';
-import { red } from '@mui/material/colors';
 
 const TicTacToe: React.FC = () => {
   const [board, setBoard] = useState(Array(9).fill(null));
   const [isXNext, setIsXNext] = useState(true);
+  const [winnerHistory, setWinnerHistory] = useState<string[]>([]);
 
   const handleClick = (index: number) => {
-    if (board[index] || calculateWinner(board)) {
+    if (board[index] || calculateWinner(board) || !isXNext) {
       return;
     }
     const newBoard = board.slice();
-    newBoard[index] = isXNext ? 'X' : 'O';
+    newBoard[index] = 'X';
     setBoard(newBoard);
-    setIsXNext(!isXNext);
+    setIsXNext(false);
   };
 
   const calculateWinner = (squares: string[]) => {
@@ -36,8 +36,57 @@ const TicTacToe: React.FC = () => {
     return null;
   };
 
+  const makeComputerMove = () => {
+    const availableIndexes = board
+      .map((value, index) => (value === null ? index : null))
+      .filter((value) => value !== null) as number[];
+
+    if (availableIndexes.length > 0) {
+      let moveIndex;
+
+      // AI strategy to win or block
+      const winOrBlockMove = findWinningMove('O') || findWinningMove('X');
+      if (winOrBlockMove !== null) {
+        moveIndex = winOrBlockMove;
+      } else {
+        moveIndex = availableIndexes[Math.floor(Math.random() * availableIndexes.length)];
+      }
+
+      const newBoard = board.slice();
+      newBoard[moveIndex] = 'O';
+      setBoard(newBoard);
+      setIsXNext(true);
+    }
+  };
+
+  const findWinningMove = (player: string) => {
+    for (let index of board.map((_, index) => index)) {
+      const newBoard = board.slice();
+      if (!newBoard[index]) {
+        newBoard[index] = player;
+        if (calculateWinner(newBoard) === player) {
+          return index;
+        }
+      }
+    }
+    return null;
+  };
+
+  useEffect(() => {
+    const winner = calculateWinner(board);
+    if (!isXNext && !winner) {
+      const timer = setTimeout(() => {
+        makeComputerMove();
+      }, 500);
+      return () => clearTimeout(timer);
+    } else if (winner) {
+      const winnerText = winner === 'X' ? 'You (X)' : 'AI (O)';
+      setWinnerHistory(prev => [winnerText, ...prev].slice(0, 2));
+    }
+  }, [isXNext, board]);
+
   const winner = calculateWinner(board);
-  const status = winner ? `Winner: ${winner}` : `Next player: ${isXNext ? 'X' : 'O'}`;
+  const status = winner ? `Winner is: ${winner === 'X' ? 'You (X)!' : 'AI (O)!'}` : isXNext ? 'Your turn' : 'AI turn';
 
   const handleReset = () => {
     setBoard(Array(9).fill(null));
@@ -45,14 +94,7 @@ const TicTacToe: React.FC = () => {
   };
 
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      alignItems="center"
-    >
-      <Typography variant="h4" gutterBottom >
-        Tic-Tac-Toe
-      </Typography>
+    <Box display="flex" flexDirection="column" alignItems="center">
       <Typography
         variant="h6"
         gutterBottom
@@ -87,9 +129,17 @@ const TicTacToe: React.FC = () => {
           </Grid>
         ))}
       </Grid>
-      <Button variant="contained" color="error" onClick={handleReset} style={{ marginTop: '20px', width:'50%' }}>
+      <Button variant="contained" color="error" onClick={handleReset} style={{ marginTop: '20px', width: '50%' }}>
         Reset Game
       </Button>
+      <Box mt={2}>
+        <Typography variant="h6">Latest Winners</Typography>
+        {winnerHistory.map((winner, index) => (
+          <Typography key={index}>
+            {winner}
+          </Typography>
+        ))}
+      </Box>
     </Box>
   );
 };
