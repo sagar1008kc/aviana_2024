@@ -8,7 +8,7 @@ const Footer: React.FC = () => {
       component="footer"
       sx={{
         py: 3,
-        px: 2,
+        px: 1,
         mt: 'auto',
         textAlign: 'center',
       }}
@@ -21,8 +21,7 @@ const Footer: React.FC = () => {
           <Link color="inherit" href="https://avianaa.com/">
             Avianaa.com
           </Link>{' '}
-          All right reserved.
-         
+          All rights reserved.
         </Typography>
       </Container>
     </Box>

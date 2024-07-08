@@ -58,14 +58,14 @@ const Home: React.FC = () => {
     switch (selectedGame) {
       case 'Game 1':
         return <TicTacToe />;
-      case 'Game 2':
-        return <Calculator />;
+        case 'Game 2':
+          return <MemoryGame />;
         case 'Game 3':
         return (  <Typography variant="subtitle1" align="center">
           Comming soon..
         </Typography>)
-      case 'Game 6':
-        return <MemoryGame />;
+            case 'Game 6':
+          return <Calculator />;
       case 'home':
         return <LandingPage />;
       case 'about':
@@ -182,9 +182,9 @@ const Home: React.FC = () => {
                           component="img"
                           width="50"
                           height="50"
-                          alt="Calculator"
-                          image={CalculatorIcon}
-                          title="Calculator"
+                          alt="MemoryGame"
+                          image={MemoryCardIcon}
+                          title="Memory Game "
                           sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
                         />
                       ) : game === 'Game 3' ? (
@@ -192,9 +192,9 @@ const Home: React.FC = () => {
                           component="img"
                           width="50"
                           height="50"
-                          alt="Calculator"
+                          alt="chess"
                           image={ChessIcon}
-                          title="Calculator"
+                          title="Chess Game"
                           sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
                         />
                       ) : (
@@ -229,10 +229,10 @@ const Home: React.FC = () => {
                     ) : game === 'Game 2' ? (
                       <CardMedia
                         component="img"
-                        alt="Calculator"
+                        alt="Memory Game"
                         height="100"
-                        image={CalculatorIcon}
-                        title="Calculator"
+                        image={MemoryCardIcon}
+                        title="Memory Game"
                         sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
                       />
                     ) : (
@@ -268,8 +268,8 @@ const Home: React.FC = () => {
                         component="img"
                         alt="Memory Game"
                         height="100"
-                        image={MemoryCardIcon}
-                        title="Memory Game"
+                        image={CalculatorIcon}
+                        title="Calculator"
                         sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
                       />
                     ) : (
@@ -297,7 +297,7 @@ const Home: React.FC = () => {
                           alt="Memory Game"
                           width="50"
                           height="50"
-                          image={MemoryCardIcon}
+                          image={CalculatorIcon}
                           title="Memory Game"
                           sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
                         />

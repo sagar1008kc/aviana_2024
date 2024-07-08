@@ -1,9 +1,46 @@
 import React from 'react';
-import { Container, Typography, Box, Paper } from '@mui/material';
-
+import { Container, Typography, Box, Paper, Stack, Avatar, Accordion, AccordionActions, AccordionDetails, AccordionSummary, Button } from '@mui/material';
+import SagarIcon from '../assets/sagar.png';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Link } from 'react-router-dom';
 const About: React.FC = () => {
   return (
     <Container maxWidth="md">
+      <Box display='flex' pb='2'>
+      <Stack direction="row" spacing={1}>
+        <Avatar
+        alt="Sagar"
+        src={SagarIcon}
+        sx={{ width: 100, height: 100 }}
+      />
+      </Stack>
+      <div>
+        <Accordion>
+          <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel3-content"
+          id="panel3-header"
+        >
+          About ME
+        </AccordionSummary>
+        <AccordionDetails>
+
+          <p>Sagar Khatri</p>
+          <span>React Developer</span>
+          <span></span>
+        </AccordionDetails>
+        
+        <a color="inherit" href="https://skcreation.org/">
+            SKcreation
+          </a>{' '}
+          <a color="inherit" href="https://www.youtube.com/@Digitalaitrends">
+            Youtube
+          </a>{' '}
+        
+        </Accordion>
+     </div>
+      </Box>
+
           <Typography variant='h4' component='h3' gutterBottom textAlign='center' fontFamily={'fantasy'}>
             About Our App
           </Typography>

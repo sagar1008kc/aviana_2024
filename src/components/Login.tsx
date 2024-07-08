@@ -17,9 +17,11 @@ const LoginPage: React.FC = () => {
         alignItems="center"
         minHeight="50vh"
       >
-        <Typography variant="h4" component="h1" gutterBottom>
+        <div>Full Source code and tutorials</div>
+        <Typography variant="h4" component="h4" fontFamily={'fantasy'} gutterBottom>
           Login
         </Typography>
+        
         <Button
           variant="contained"
           color="primary"
