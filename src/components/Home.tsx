@@ -30,6 +30,8 @@ import Footer from './Footer';
 import Calculator from '../games/Calculator';
 import CalculatorIcon from '../assets/calculator.png'; // Correctly import the calculator image
 import ChessIcon from '../assets/chess.png';
+import EmojiGame from '../games/EmojiGame';
+import EmojiIcon from '../assets/emojj.png';
 const Home: React.FC = () => {
   const dispatch = useDispatch();
   const selectedGame = useSelector((state: RootState) => state.game.selectedGame);
@@ -63,7 +65,9 @@ const Home: React.FC = () => {
         case 'Game 3':
         return (  <Typography variant="subtitle1" align="center">
           Comming soon..
-        </Typography>)
+        </Typography>);
+        case 'Game 4':
+          return <EmojiGame />;
             case 'Game 6':
           return <Calculator />;
       case 'home':
@@ -197,7 +201,17 @@ const Home: React.FC = () => {
                           title="Chess Game"
                           sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
                         />
-                      ) : (
+                      ) : game === 'Game 4' ? (
+                        <CardMedia
+                          component="img"
+                          width="50"
+                          height="50"
+                          alt="chess"
+                          image={EmojiIcon}
+                          title="Emoji game"
+                          sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
+                        />
+                      ) :(
                         <Typography variant="body2" align="center" pt="10px">
                           {game}
                         </Typography>
@@ -233,6 +247,24 @@ const Home: React.FC = () => {
                         height="100"
                         image={MemoryCardIcon}
                         title="Memory Game"
+                        sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
+                      />
+                    ) : game === 'Game 3' ? (
+                      <CardMedia
+                        component="img"
+                        alt="Chase"
+                        height="100"
+                        image={ChessIcon}
+                        title="Memory Game"
+                        sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
+                      />
+                    ) : game === 'Game 4' ? (
+                      <CardMedia
+                        component="img"
+                        alt="Chase"
+                        height="100"
+                        image={EmojiIcon}
+                        title="emoji"
                         sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
                       />
                     ) : (
@@ -294,11 +326,11 @@ const Home: React.FC = () => {
                       {index === 0 ? (
                         <CardMedia
                           component="img"
-                          alt="Memory Game"
+                          alt="Calculator"
                           width="50"
                           height="50"
                           image={CalculatorIcon}
-                          title="Memory Game"
+                          title="Calculator"
                           sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
                         />
                       ) : (

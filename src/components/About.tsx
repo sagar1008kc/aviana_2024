@@ -3,6 +3,7 @@ import { Container, Typography, Box, Paper, Stack, Avatar, Accordion, AccordionA
 import SagarIcon from '../assets/sagar.png';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Link } from 'react-router-dom';
+import { Padding } from '@mui/icons-material';
 const About: React.FC = () => {
   return (
     <Container maxWidth="md">
@@ -14,31 +15,30 @@ const About: React.FC = () => {
         sx={{ width: 100, height: 100 }}
       />
       </Stack>
-      <div>
+      <Box p="2">
         <Accordion>
           <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel3-content"
           id="panel3-header"
         >
-          About ME
+         <Typography variant='body2' fontFamily={'cursive'}> About ME</Typography>
         </AccordionSummary>
         <AccordionDetails>
-
           <p>Sagar Khatri</p>
           <span>React Developer</span>
           <span></span>
         </AccordionDetails>
-        
+        <Box paddingInline={2} paddingBottom={2}>
         <a color="inherit" href="https://skcreation.org/">
             SKcreation
           </a>{' '}
           <a color="inherit" href="https://www.youtube.com/@Digitalaitrends">
             Youtube
           </a>{' '}
-        
+          </Box>
         </Accordion>
-     </div>
+     </Box>
       </Box>
 
           <Typography variant='h4' component='h3' gutterBottom textAlign='center' fontFamily={'fantasy'}>
