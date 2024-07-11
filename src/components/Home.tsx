@@ -32,6 +32,9 @@ import CalculatorIcon from '../assets/calculator.png'; // Correctly import the c
 import ChessIcon from '../assets/chess.png';
 import EmojiGame from '../games/EmojiGame';
 import EmojiIcon from '../assets/emojj.png';
+import Hangman from '../games/HangMan';
+import HangmanIcon from '../assets/hangman.png';
+import ChessGame from '../games/ChessGame';
 const Home: React.FC = () => {
   const dispatch = useDispatch();
   const selectedGame = useSelector((state: RootState) => state.game.selectedGame);
@@ -63,11 +66,11 @@ const Home: React.FC = () => {
         case 'Game 2':
           return <MemoryGame />;
         case 'Game 3':
-        return (  <Typography variant="subtitle1" align="center">
-          Comming soon..
-        </Typography>);
+        return <ChessGame />;
         case 'Game 4':
           return <EmojiGame />;
+          case 'Game 5':
+          return <Hangman />;
             case 'Game 6':
           return <Calculator />;
       case 'home':
@@ -180,6 +183,7 @@ const Home: React.FC = () => {
                           alt="Tic-Tac-Toe"
                           image={TicTacToeIcon}
                           title="Tic-Tac-Toe"
+                          sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
                         />
                       ) : game === 'Game 2' ? (
                         <CardMedia
@@ -208,6 +212,16 @@ const Home: React.FC = () => {
                           height="50"
                           alt="chess"
                           image={EmojiIcon}
+                          title="Emoji game"
+                          sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
+                        />
+                      ) : game === 'Game 5' ? (
+                        <CardMedia
+                          component="img"
+                          width="50"
+                          height="50"
+                          alt="hangman"
+                          image={HangmanIcon}
                           title="Emoji game"
                           sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
                         />
@@ -264,6 +278,15 @@ const Home: React.FC = () => {
                         alt="Chase"
                         height="100"
                         image={EmojiIcon}
+                        title="emoji"
+                        sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
+                      />
+                    ) :game === 'Game 5' ? (
+                      <CardMedia
+                        component="img"
+                        alt="Chase"
+                        height="100"
+                        image={HangmanIcon}
                         title="emoji"
                         sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
                       />

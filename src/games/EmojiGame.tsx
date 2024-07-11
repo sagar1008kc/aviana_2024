@@ -83,7 +83,7 @@ const EmojiGame: React.FC = () => {
       <Typography variant="subtitle2">
         Time Left: {timeLeft}s
       </Typography>
-      <Grid container spacing={2} justifyContent="center">
+      <Grid container spacing={4} justifyContent="center">
         {displayedEmojis.map((emojiObj, index) => (
           <Grid item key={index}>
             <Button
