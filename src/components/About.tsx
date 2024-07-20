@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Typography, Box, Paper, Stack, Avatar, Accordion, AccordionActions, AccordionDetails, AccordionSummary, Button } from '@mui/material';
+import { Container, Typography, Box, Paper, Stack, Avatar, Accordion, AccordionActions, AccordionDetails, AccordionSummary, Button, CircularProgress } from '@mui/material';
 import SagarIcon from '../assets/sagar.png';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Link } from 'react-router-dom';
@@ -15,27 +15,27 @@ const About: React.FC = () => {
         sx={{ width: 100, height: 100 }}
       />
       </Stack>
-      <Box p="2">
+      <Box p="5px" width="100%">
         <Accordion>
           <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel3-content"
           id="panel3-header"
         >
-         <Typography variant='body2' fontFamily={'cursive'}> About ME</Typography>
+         <Typography variant='body2' fontFamily={'monospace'}> About ME</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <p>Sagar Khatri</p>
-          <span>React Developer</span>
-          <span></span>
+          <span>Software Engineer | AI & Cloud Enthusiast</span>
         </AccordionDetails>
         <Box paddingInline={2} paddingBottom={2}>
-        <a color="inherit" href="https://skcreation.org/">
-            SKcreation
-          </a>{' '}
-          <a color="inherit" href="https://www.youtube.com/@Digitalaitrends">
-            Youtube
-          </a>{' '}
+        <a href="https://skcreation.org/">
+        <Button> SKcreation.ORG</Button>
+           
+          </a>
+          <a color="#F8F8F8" href="https://www.youtube.com/@Digitalaitrends">
+          <Button> Youtube Channel</Button>
+          </a>
           </Box>
         </Accordion>
      </Box>
@@ -45,7 +45,7 @@ const About: React.FC = () => {
             About Our App
           </Typography>
           <Typography variant="body1" paragraph>
-            Welcome to our application! Our app features a collection of cool games designed to enhance your critical thinking and problem-solving skills. Each game is crafted to challenge your mind and help you learn React by developing engaging and interactive gameplay experiences.
+            Welcome to our application! Our react/redux app features a collection of cool games designed to enhance your critical thinking and problem-solving skills. Each game is crafted to challenge your mind and help you learn React by developing engaging and interactive gameplay experiences.
           </Typography>
           <Typography variant="body1" paragraph>
             Our primary goal is to create a fun and educational platform where users can improve their cognitive abilities while learning modern web development techniques. Whether you're a seasoned developer or just starting, our games offer a unique way to practice and enhance your React skills.

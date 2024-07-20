@@ -96,7 +96,7 @@ const TicTacToe: React.FC = () => {
 
   return (
     <Box display="flex" flexDirection="column" alignItems="center">
-       <Typography variant="h4" align="center" gutterBottom fontFamily={'fantasy'}>
+       <Typography variant="h4" align="center" fontFamily={'fantasy'}>
           Tic-Tac-Toe
         </Typography>
       <Typography
@@ -121,6 +121,7 @@ const TicTacToe: React.FC = () => {
                 justifyContent: 'center',
                 cursor: 'pointer',
                 fontSize: '24px',
+                fontWeight: 'bold',
                 boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
                 backgroundColor: theme.palette.mode === 'dark' ? '#333' : '#ddd',
                 color: theme.palette.text.primary,

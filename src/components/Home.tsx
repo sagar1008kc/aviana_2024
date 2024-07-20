@@ -16,6 +16,7 @@ import {
   FormControlLabel,
   Divider,
   Chip,
+  CssBaseline,
 } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import TicTacToe from '../games/TicTacToe';
@@ -35,6 +36,8 @@ import EmojiIcon from '../assets/emojj.png';
 import Hangman from '../games/HangMan';
 import HangmanIcon from '../assets/hangman.png';
 import ChessGame from '../games/ChessGame';
+import DigitalClock from './DigitalClock';
+import RatingComponent from './RatingComponent';
 const Home: React.FC = () => {
   const dispatch = useDispatch();
   const selectedGame = useSelector((state: RootState) => state.game.selectedGame);
@@ -163,6 +166,8 @@ const Home: React.FC = () => {
         </Box>
         <Divider>
           <Chip label="GAMES" size="small" />
+          <CssBaseline />
+          <DigitalClock />
         </Divider>
         <Grid container spacing={1} sx={{ flex: 1 }} mt="8px">
           {isSmallScreen && (
@@ -174,7 +179,7 @@ const Home: React.FC = () => {
                     onClick={() => dispatch(selectGame(game))}
                     sx={{ cursor: 'pointer', flex: 1, mr:'10px'}}
                   >
-                    <CardContent sx={{ p: '4px', height: '30px'}}>
+                    <CardContent sx={{ p: '4px', height: '58px'}}>
                       {index === 0 ? (
                         <CardMedia
                           component="img"
@@ -345,7 +350,7 @@ const Home: React.FC = () => {
                     onClick={() => dispatch(selectGame(game))}
                     sx={{ cursor: 'pointer', flex: 1, mr:'10px'}}
                   >
-                    <CardContent sx={{ p: '4px', height: '30px' }}>
+                    <CardContent sx={{ p: '4px', height: '58px' }}>
                       {index === 0 ? (
                         <CardMedia
                           component="img"
@@ -368,6 +373,8 @@ const Home: React.FC = () => {
             </Grid>
           )}
         </Grid>
+         
+      <RatingComponent />
         <Footer />
       </Container>
     </ThemeProvider>
