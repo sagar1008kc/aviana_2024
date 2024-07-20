@@ -66,7 +66,7 @@ const MemoryGame: React.FC = () => {
 
   return (
     <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" height="100%">
-      <Typography variant="h4" gutterBottom fontFamily={'cursive'}>Memory Game</Typography>
+      <Typography variant="h4" fontFamily={'cursive'}>Memory Game</Typography>
       <Typography variant="h6" gutterBottom>Moves: {moves}</Typography>
       <Grid container spacing={2} justifyContent="center" style={{ maxWidth: 600 }}>
         {gameCards.map((card, index) => (

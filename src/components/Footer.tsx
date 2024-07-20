@@ -1,15 +1,14 @@
 // src/components/Footer.tsx
 import React from 'react';
-import { Box, Container, Typography, Link } from '@mui/material';
+import { Box, Container, Typography, Link, Fab } from '@mui/material';
 
 const Footer: React.FC = () => {
   return (
     <Box
       component="footer"
       sx={{
-        py: 3,
+        py: 2,
         px: 1,
-        mt: 'auto',
         textAlign: 'center',
       }}
     >

@@ -96,7 +96,7 @@ const TicTacToe: React.FC = () => {
 
   return (
     <Box display="flex" flexDirection="column" alignItems="center">
-       <Typography variant="h4" align="center" fontFamily={'fantasy'}>
+       <Typography variant="h4" align="center" fontFamily={'cursive'}>
           Tic-Tac-Toe
         </Typography>
       <Typography

@@ -26,7 +26,7 @@ const Hangman: React.FC = () => {
 
   return (
     <Container>
-      <Typography variant="h3" align="center" fontFamily={'cursive'}>
+      <Typography variant="h4" align="center" fontFamily={'cursive'}>
         Hangman
       </Typography>
       <Typography variant="h4" align="center" >

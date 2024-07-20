@@ -44,7 +44,7 @@ const Home: React.FC = () => {
   const leftGames = ['Game 1', 'Game 2', 'Game 3', 'Game 4', 'Game 5'];
   const rightGames = ['Game 6', 'Game 7', 'Game 8', 'Game 9', 'Game 10'];
   const about = ['home', 'about', 'login'];
-
+  const borderGradient = 'linear-gradient(45deg, blue, black, red)';
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const [darkMode, setDarkMode] = useState(false);
@@ -169,6 +169,13 @@ const Home: React.FC = () => {
         </Divider>
         <CssBaseline />
         <DigitalClock />
+        <Divider 
+            sx={{
+              height: 1.5, 
+              border: 'none',
+              backgroundImage: borderGradient,
+            }} 
+          />
         <Grid container spacing={1} sx={{ flex: 1 }} mt="8px">
           {isSmallScreen && (
             <Grid item xs={12} >
@@ -247,14 +254,13 @@ const Home: React.FC = () => {
                 <Card
                   key={game}
                   onClick={() => dispatch(selectGame(game))}
-                  sx={{ margin: '10px', cursor: 'pointer', boxShadow: 'none' }}
+                  sx={{ margin: '5px', cursor: 'pointer', height: '100px', width: '110px'}}
                 >
-                  <CardContent>
+                  <CardContent sx={{p:'5px', width:'100%'}}>
                     {index === 0 ? (
                       <CardMedia
                         component="img"
                         alt="Tic-Tac-Toe"
-                        height="80"
                         image={TicTacToeIcon}
                         title="Tic-Tac-Toe"
                         sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
@@ -263,7 +269,6 @@ const Home: React.FC = () => {
                       <CardMedia
                         component="img"
                         alt="Memory Game"
-                        height="100"
                         image={MemoryCardIcon}
                         title="Memory Game"
                         sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
@@ -272,7 +277,6 @@ const Home: React.FC = () => {
                       <CardMedia
                         component="img"
                         alt="Chase"
-                        height="100"
                         image={ChessIcon}
                         title="Memory Game"
                         sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
@@ -281,7 +285,6 @@ const Home: React.FC = () => {
                       <CardMedia
                         component="img"
                         alt="Chase"
-                        height="100"
                         image={EmojiIcon}
                         title="emoji"
                         sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
@@ -290,7 +293,6 @@ const Home: React.FC = () => {
                       <CardMedia
                         component="img"
                         alt="Chase"
-                        height="100"
                         image={HangmanIcon}
                         title="emoji"
                         sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
@@ -320,14 +322,13 @@ const Home: React.FC = () => {
                 <Card
                   key={game}
                   onClick={() => dispatch(selectGame(game))}
-                  sx={{ marginBottom: '10px', cursor: 'pointer', boxShadow: 'none' }}
+                  sx={{ marginBottom: '10px', cursor: 'pointer', height: '90px', width: '110px'}}
                 >
-                  <CardContent>
+                  <CardContent sx={{ p: '4px', height: '80px', width:'105px'}}>
                     {index === 0 ? (
                       <CardMedia
                         component="img"
                         alt="Memory Game"
-                        height="100"
                         image={CalculatorIcon}
                         title="Calculator"
                         sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
@@ -372,9 +373,9 @@ const Home: React.FC = () => {
               </Box>
             </Grid>
           )}
-        </Grid>
-         
+        </Grid> 
       <RatingComponent />
+      <Divider />
         <Footer />
       </Container>
     </ThemeProvider>

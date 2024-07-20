@@ -59,7 +59,7 @@ const ChessGame: React.FC = () => {
   return (
     <SnackbarProvider maxSnack={1}>
       <Container>
-        <Typography variant="h3" align="center" fontFamily="cursive">
+        <Typography variant="h4" align="center" fontFamily="cursive">
           Chess Game
         </Typography>
         <Typography variant="body1" align="center">

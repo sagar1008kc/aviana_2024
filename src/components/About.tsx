@@ -2,9 +2,8 @@ import React from 'react';
 import { Container, Typography, Box, Paper, Stack, Avatar, Accordion, AccordionActions, AccordionDetails, AccordionSummary, Button, CircularProgress } from '@mui/material';
 import SagarIcon from '../assets/sagar.png';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Link } from 'react-router-dom';
-import { Padding } from '@mui/icons-material';
 const About: React.FC = () => {
+  const borderGradient = 'linear-gradient(45deg, blue, black, red)';
   return (
     <Container maxWidth="md">
       <Box display='flex' pb='2'>
@@ -12,7 +11,15 @@ const About: React.FC = () => {
         <Avatar
         alt="Sagar"
         src={SagarIcon}
-        sx={{ width: 100, height: 100 }}
+        sx={{
+          width: 90,
+          height: 90,
+          border: '5px solid transparent',
+          borderRadius: '50%',
+          backgroundImage: borderGradient,
+          backgroundClip: 'border-box',
+          backgroundOrigin: 'border-box',
+        }}
       />
       </Stack>
       <Box p="5px" width="100%">
