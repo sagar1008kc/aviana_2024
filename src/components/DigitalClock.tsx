@@ -24,7 +24,16 @@ const DigitalClock: React.FC = () => {
   }, []);
 
   return (
-      <Typography variant="subtitle2" fontSize="12px">
+      <Typography variant="subtitle2" fontSize="12px"       
+      sx={{
+        alignItems: 'center',
+        justifyContent: 'center',
+        textAlign: 'center',
+        paddingInline:'20px',
+        letterSpacing: 5 ,
+      
+      }}
+> 
         {currentTime}
       </Typography>
   );

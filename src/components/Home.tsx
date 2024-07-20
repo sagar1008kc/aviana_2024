@@ -166,9 +166,9 @@ const Home: React.FC = () => {
         </Box>
         <Divider>
           <Chip label="GAMES" size="small" />
-          <CssBaseline />
-          <DigitalClock />
         </Divider>
+        <CssBaseline />
+        <DigitalClock />
         <Grid container spacing={1} sx={{ flex: 1 }} mt="8px">
           {isSmallScreen && (
             <Grid item xs={12} >
