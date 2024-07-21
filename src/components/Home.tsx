@@ -316,7 +316,7 @@ const Home: React.FC = () => {
             sm={8}
             sx={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
           >
-            <Card sx={{ width: '100%', minHeight:'30vh'}}>
+            <Card sx={{ width: '100%', minHeight:'38vh'}}>
               <CardContent>{renderGame()}</CardContent>
             </Card>
           </Grid>
@@ -331,13 +331,21 @@ const Home: React.FC = () => {
                   <CardContent sx={{ p: '4px', height: '80px', width:'105px'}}>
                     {index === 0 ? (
                       <CardMedia
-                        component="img"
-                        alt="Memory Game"
-                        image={CalculatorIcon}
-                        title="Calculator"
-                        sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
-                      />
-                    ) : (
+                          component="img"
+                          alt="Rock"
+                          image={RockPaperIcon}
+                          title="Rock"
+                          sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
+                        />
+                      ) : game === 'Game 10' ? (
+                        <CardMedia
+                          component="img"
+                          alt="Calculator"
+                          image={CalculatorIcon}
+                          title="Rock paper"
+                          sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
+                        />
+                      ): (
                       <Typography variant="body1" align="center">
                         {game}
                       </Typography>
