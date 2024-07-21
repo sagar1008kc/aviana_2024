@@ -316,7 +316,7 @@ const Home: React.FC = () => {
             sm={8}
             sx={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
           >
-            <Card sx={{ width: '100%' }}>
+            <Card sx={{ width: '100%', minHeight:'30vh'}}>
               <CardContent>{renderGame()}</CardContent>
             </Card>
           </Grid>

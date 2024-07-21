@@ -19,6 +19,7 @@ const EmojiGame: React.FC = () => {
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
   const [timeLeft, setTimeLeft] = useState(30);
+  const [clickCount, setClickCount] = useState(0);
   const [displayedEmojis, setDisplayedEmojis] = useState(emojiData.slice(0, 6));
   const [gameActive, setGameActive] = useState(false);
   const [history, setHistory] = useState<{ score: number; time: string }[]>([]);
@@ -31,13 +32,18 @@ const EmojiGame: React.FC = () => {
   const handleEmojiClick = (value: number) => {
     if (gameActive) {
       setScore(score + value);
+      setClickCount(clickCount + 1);
       shuffleAndSelectEmojis();
+      if (clickCount + 1 >= 10) {
+        endGame();
+      }
     }
   };
 
   const startGame = () => {
     setScore(0);
     setTimeLeft(30);
+    setClickCount(0);
     setGameActive(true);
     shuffleAndSelectEmojis();
   };
@@ -54,7 +60,7 @@ const EmojiGame: React.FC = () => {
   useEffect(() => {
     if (gameActive && timeLeft > 0) {
       const timer = setInterval(() => {
-        setTimeLeft(timeLeft - 1);
+        setTimeLeft((prevTime) => prevTime - 1);
       }, 1000);
 
       return () => clearInterval(timer);
@@ -71,17 +77,20 @@ const EmojiGame: React.FC = () => {
 
   return (
     <Box sx={{ textAlign: 'center', p: 3 }}>
-      <Typography variant="h4" fontFamily={'fantasy'} >
+      <Typography variant="h4" fontFamily={'fantasy'}>
         Emoji Game
       </Typography>
-      <Typography variant="subtitle2" >
+      <Typography variant="subtitle2">
         Score: {score}
       </Typography>
-      <Typography variant="subtitle2" >
+      <Typography variant="subtitle2">
         High Score: {highScore}
       </Typography>
       <Typography variant="subtitle2">
         Time Left: {timeLeft}s
+      </Typography>
+      <Typography variant="subtitle2">
+        Clicks[Limit 10]: {clickCount}
       </Typography>
       <Grid container spacing={4} justifyContent="center">
         {displayedEmojis.map((emojiObj, index) => (
@@ -102,7 +111,7 @@ const EmojiGame: React.FC = () => {
         </Button>
       )}
       <Box sx={{ mt: 5 }}>
-        <Typography variant="subtitle2" >
+        <Typography variant="subtitle2">
           Game History (Last 3 Games)
         </Typography>
         <Table>
