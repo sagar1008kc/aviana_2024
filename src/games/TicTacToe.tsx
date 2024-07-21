@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Grid, Paper, Typography, Button, useTheme } from '@mui/material';
+import Confetti from 'react-confetti';
 
 const TicTacToe: React.FC = () => {
   const [board, setBoard] = useState(Array(9).fill(null));
   const [isONext, setIsONext] = useState(true);
   const [winnerHistory, setWinnerHistory] = useState<string[]>([]);
+  const [showConfetti, setShowConfetti] = useState(false);
   const theme = useTheme();
 
   const handleClick = (index: number) => {
@@ -83,6 +85,13 @@ const TicTacToe: React.FC = () => {
     } else if (winner) {
       const winnerText = winner === 'O' ? 'You (O)' : 'AI (X)';
       setWinnerHistory(prev => [winnerText, ...prev].slice(0, 2));
+      if (winner === 'O') {
+        setShowConfetti(true);
+        const confettiTimer = setTimeout(() => {
+          setShowConfetti(false);
+        }, 3000);
+        return () => clearTimeout(confettiTimer);
+      }
     }
   }, [isONext, board]);
 
@@ -92,13 +101,14 @@ const TicTacToe: React.FC = () => {
   const handleReset = () => {
     setBoard(Array(9).fill(null));
     setIsONext(true);
+    setShowConfetti(false);
   };
 
   return (
     <Box display="flex" flexDirection="column" alignItems="center">
-       <Typography variant="h4" align="center" fontFamily={'cursive'}>
-          Tic-Tac-Toe
-        </Typography>
+      <Typography variant="h4" align="center" fontFamily={'cursive'}>
+        Tic-Tac-Toe
+      </Typography>
       <Typography
         variant="h6"
         gutterBottom
@@ -146,6 +156,7 @@ const TicTacToe: React.FC = () => {
           </Typography>
         ))}
       </Box>
+      {showConfetti && <Confetti />}
     </Box>
   );
 };

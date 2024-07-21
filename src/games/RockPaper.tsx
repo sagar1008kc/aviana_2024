@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, Button, Typography, Grid, Paper, useMediaQuery, useTheme } from '@mui/material';
 import RockIcon from '../assets/rock.png';
 import PaperIcon from '../assets/paper.png';
 import ScissorIcon from '../assets/scissor.png';
+import Confetti from 'react-confetti';
 
 const choices = ['Rock', 'Paper', 'Scissors'];
 
@@ -54,6 +55,7 @@ const RockPaper: React.FC = () => {
   const [playerChoice, setPlayerChoice] = useState<string | null>(null);
   const [aiChoice, setAiChoice] = useState<string | null>(null);
   const [winner, setWinner] = useState<string | null>(null);
+  const [showConfetti, setShowConfetti] = useState<boolean>(false);
 
   const handlePlayerChoice = (choice: string) => {
     const aiChoice = choices[Math.floor(Math.random() * choices.length)];
@@ -67,10 +69,21 @@ const RockPaper: React.FC = () => {
     setPlayerChoice(null);
     setAiChoice(null);
     setWinner(null);
+    setShowConfetti(false);
   };
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
+  useEffect(() => {
+    if (winner === 'You') {
+      setShowConfetti(true);
+      const timer = setTimeout(() => {
+        setShowConfetti(false);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [winner]);
 
   return (
     <Box sx={{ textAlign: 'center'}}>
@@ -110,6 +123,7 @@ const RockPaper: React.FC = () => {
           </Button>
         </Paper>
       )}
+      {showConfetti && <Confetti />}
     </Box>
   );
 };
