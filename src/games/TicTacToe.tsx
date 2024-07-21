@@ -89,7 +89,7 @@ const TicTacToe: React.FC = () => {
         setShowConfetti(true);
         const confettiTimer = setTimeout(() => {
           setShowConfetti(false);
-        }, 3000);
+        }, 5000);
         return () => clearTimeout(confettiTimer);
       }
     }

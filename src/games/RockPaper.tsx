@@ -78,10 +78,10 @@ const RockPaper: React.FC = () => {
   useEffect(() => {
     if (winner === 'You') {
       setShowConfetti(true);
-      const timer = setTimeout(() => {
+      const confettiTimer = setTimeout(() => {
         setShowConfetti(false);
       }, 3000);
-      return () => clearTimeout(timer);
+      return () => clearTimeout(confettiTimer);
     }
   }, [winner]);
 
