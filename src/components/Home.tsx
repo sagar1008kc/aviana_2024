@@ -38,6 +38,8 @@ import HangmanIcon from '../assets/hangman.png';
 import ChessGame from '../games/ChessGame';
 import DigitalClock from './DigitalClock';
 import RatingComponent from './RatingComponent';
+import RockPaper from '../games/RockPaper';
+import RockPaperIcon from '../assets/rockpapers.png';
 const Home: React.FC = () => {
   const dispatch = useDispatch();
   const selectedGame = useSelector((state: RootState) => state.game.selectedGame);
@@ -74,7 +76,9 @@ const Home: React.FC = () => {
           return <EmojiGame />;
           case 'Game 5':
           return <Hangman />;
-            case 'Game 6':
+          case 'Game 6':
+            return <RockPaper />
+            case 'Game 10':
           return <Calculator />;
       case 'home':
         return <LandingPage />;
@@ -355,14 +359,22 @@ const Home: React.FC = () => {
                       {index === 0 ? (
                         <CardMedia
                           component="img"
-                          alt="Calculator"
+                          alt="Rock"
                           width="50"
                           height="50"
-                          image={CalculatorIcon}
-                          title="Calculator"
+                          image={RockPaperIcon}
+                          title="Rock"
                           sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
                         />
-                      ) : (
+                      ) : game === 'Game 10' ? (
+                        <CardMedia
+                          component="img"
+                          alt="Calculator"
+                          image={CalculatorIcon}
+                          title="Rock paper"
+                          sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
+                        />
+                      ): (
                         <Typography variant="body2" align="center">
                           {game}
                         </Typography>

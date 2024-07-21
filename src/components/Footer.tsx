@@ -17,7 +17,7 @@ const Footer: React.FC = () => {
           {'© '}
           {new Date().getFullYear()}
           {'.'}
-          <Link color="inherit" href="https://avianaa.com/">
+          <Link color="inherit" href="https://www.avianaa.com/">
             Avianaa.com
           </Link>{' '}
           All rights reserved.
