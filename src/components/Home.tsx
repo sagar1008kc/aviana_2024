@@ -40,12 +40,13 @@ import DigitalClock from './DigitalClock';
 import RatingComponent from './RatingComponent';
 import RockPaper from '../games/RockPaper';
 import RockPaperIcon from '../assets/rockpapers.png';
+import Product from './Product';
 const Home: React.FC = () => {
   const dispatch = useDispatch();
   const selectedGame = useSelector((state: RootState) => state.game.selectedGame);
   const leftGames = ['Game 1', 'Game 2', 'Game 3', 'Game 4', 'Game 5'];
   const rightGames = ['Game 6', 'Game 7', 'Game 8', 'Game 9', 'Game 10'];
-  const about = ['home', 'about', 'login'];
+  const about = ['home', 'about', 'product', 'login'];
   const borderGradient = 'linear-gradient(45deg, blue, black, red)';
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
@@ -82,6 +83,8 @@ const Home: React.FC = () => {
           return <Calculator />;
       case 'home':
         return <LandingPage />;
+        case 'product':
+        return <Product />;
       case 'about':
         return <About />;
       case 'login':
@@ -124,12 +127,22 @@ const Home: React.FC = () => {
             style={{ height: '60px', width: '60px', borderRadius: '50%' }}
             onClick={() => dispatch(selectGame('home'))}
           />
-          <Grid container justifyContent="center" spacing={2}>
+          <Grid container justifyContent="center" spacing={1} display='flex' flexDirection="row">
+          <Grid item>
+              <Button
+                variant="text"
+                onClick={() => dispatch(selectGame('product'))}
+                //size={isSmallScreen ? 'small' : 'medium'}
+                sx={{ cursor: 'pointer', fontSize: '12px'}}
+              >
+                Product
+              </Button>
+            </Grid>
             <Grid item>
               <Button
                 variant="text"
                 onClick={() => dispatch(selectGame('about'))}
-                size={isSmallScreen ? 'small' : 'medium'}
+                sx={{ cursor: 'pointer', fontSize: '12px'}}
               >
                 About
               </Button>
@@ -138,7 +151,7 @@ const Home: React.FC = () => {
               <Button
                 variant="text"
                 onClick={() => dispatch(selectGame('login'))}
-                size={isSmallScreen ? 'small' : 'medium'}
+                sx={{ cursor: 'pointer', fontSize: '12px'}}
               >
                 Login
               </Button>
