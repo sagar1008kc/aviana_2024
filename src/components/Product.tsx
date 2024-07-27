@@ -23,6 +23,9 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import ToyIcon from '../assets/toyIcon.png';
 import GameIcon from '../assets/gameIcon.png';
 import DressIcon from '../assets/dressIcon.png';
+import Dress1Icon from '../assets/dress1.png';
+import Dress2Icon from '../assets/dress2.png';
+import Toy1Iocn from '../assets/toy1.png';
 
 interface Product {
   id: number;
@@ -52,8 +55,29 @@ const products: Product[] = [
     name: 'Dress',
     description: 'Beautiful dress',
     price: 15.99,
+    icon: Dress1Icon
+  },
+  {
+    id: 4,
+    name: 'Dress',
+    description: 'Beautiful dress',
+    price: 15.99,
     icon: DressIcon
-  }
+  },
+  {
+    id: 5,
+    name: 'Dress',
+    description: 'Beautiful dress',
+    price: 15.99,
+    icon: Dress2Icon
+  },
+  {
+    id: 6,
+    name: 'Dress',
+    description: 'Beautiful dress',
+    price: 15.99,
+    icon: Toy1Iocn
+  },
 ];
 
 interface CartItem extends Product {
