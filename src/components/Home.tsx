@@ -17,6 +17,8 @@ import {
   Divider,
   Chip,
   CssBaseline,
+  AppBar,
+  Toolbar
 } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import TicTacToe from '../games/TicTacToe';
@@ -29,7 +31,7 @@ import About from './About';
 import LandingPage from './LandingPage';
 import Footer from './Footer';
 import Calculator from '../games/Calculator';
-import CalculatorIcon from '../assets/calculator.png'; // Correctly import the calculator image
+import CalculatorIcon from '../assets/calculator.png';
 import ChessIcon from '../assets/chess.png';
 import EmojiGame from '../games/EmojiGame';
 import EmojiIcon from '../assets/emojj.png';
@@ -41,6 +43,7 @@ import RatingComponent from './RatingComponent';
 import RockPaper from '../games/RockPaper';
 import RockPaperIcon from '../assets/rockpapers.png';
 import Product from './Product';
+
 const Home: React.FC = () => {
   const dispatch = useDispatch();
   const selectedGame = useSelector((state: RootState) => state.game.selectedGame);
@@ -69,21 +72,21 @@ const Home: React.FC = () => {
     switch (selectedGame) {
       case 'Game 1':
         return <TicTacToe />;
-        case 'Game 2':
-          return <MemoryGame />;
-        case 'Game 3':
+      case 'Game 2':
+        return <MemoryGame />;
+      case 'Game 3':
         return <ChessGame />;
-        case 'Game 4':
-          return <EmojiGame />;
-          case 'Game 5':
-          return <Hangman />;
-          case 'Game 6':
-            return <RockPaper />
-            case 'Game 10':
-          return <Calculator />;
+      case 'Game 4':
+        return <EmojiGame />;
+      case 'Game 5':
+        return <Hangman />;
+      case 'Game 6':
+        return <RockPaper />;
+      case 'Game 10':
+        return <Calculator />;
       case 'home':
         return <LandingPage />;
-        case 'product':
+      case 'product':
         return <Product />;
       case 'about':
         return <About />;
@@ -111,99 +114,95 @@ const Home: React.FC = () => {
 
   return (
     <ThemeProvider theme={themeMode}>
-      <Container maxWidth="lg" sx={{ height: '100%', backgroundColor: themeMode.palette.background.default }}>
-        <Box
-          sx={{
-            width: '100%',
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            padding: '5px',
-          }}
-        >
-          <img
-            src={AvianaIcon}
-            alt="Avianaa"
-            style={{ height: '60px', width: '60px', borderRadius: '50%' }}
-            onClick={() => dispatch(selectGame('home'))}
-          />
-          <Grid container justifyContent="center" spacing={1} display='flex' flexDirection="row">
-          <Grid item>
-              <Button
-                variant="text"
-                onClick={() => dispatch(selectGame('product'))}
-                //size={isSmallScreen ? 'small' : 'medium'}
-                sx={{ cursor: 'pointer', fontSize: '12px'}}
-              >
-                Product
-              </Button>
+      <CssBaseline />
+      <AppBar position="sticky" sx={{ backgroundColor: themeMode.palette.background.default, boxShadow: 'none' }}>
+        <Toolbar>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+            <img
+              src={AvianaIcon}
+              alt="Avianaa"
+              style={{ height: '60px', width: '60px', borderRadius: '50%' }}
+              onClick={() => dispatch(selectGame('home'))}
+            />
+            <Grid container justifyContent="center" display='flex' flexDirection="row">
+              <Grid item>
+                <Button
+                  variant="text"
+                  onClick={() => dispatch(selectGame('product'))}
+                  sx={{ cursor: 'pointer', fontSize: '12px', fontWeight:'bold', ml:'10px'}}
+                >
+                  Product
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button
+                  variant="text"
+                  onClick={() => dispatch(selectGame('about'))}
+                  sx={{ cursor: 'pointer', fontSize: '12px',fontWeight:'bold'}}
+                >
+                  About
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button
+                  variant="text"
+                  onClick={() => dispatch(selectGame('login'))}
+                  sx={{ cursor: 'pointer', fontSize: '12px', fontWeight:'bold'}}
+                >
+                  Login
+                </Button>
+              </Grid>
             </Grid>
-            <Grid item>
-              <Button
-                variant="text"
-                onClick={() => dispatch(selectGame('about'))}
-                sx={{ cursor: 'pointer', fontSize: '12px'}}
-              >
-                About
-              </Button>
-            </Grid>
-            <Grid item>
-              <Button
-                variant="text"
-                onClick={() => dispatch(selectGame('login'))}
-                sx={{ cursor: 'pointer', fontSize: '12px'}}
-              >
-                Login
-              </Button>
-            </Grid>
-          </Grid>
-          <FormControlLabel
-            control={
-              <Switch
-                checked={darkMode}
-                onChange={handleThemeToggle}
-                sx={{
-                  '& .MuiSwitch-switchBase.Mui-checked': {
-                    color: 'white',
-                  },
-                  '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-                    backgroundColor: '#f8f8f8',
-                  },
-                  '& .MuiSwitch-switchBase': {
-                    color: 'black',
-                  },
-                  '& .MuiSwitch-switchBase + .MuiSwitch-track': {
-                    backgroundColor: '#373840',
-                  },
-                }}
-              />
-            }
-            label={undefined}
-          />
-        </Box>
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={darkMode}
+                  onChange={handleThemeToggle}
+                  sx={{
+                    '& .MuiSwitch-switchBase.Mui-checked': {
+                      color: 'white',
+                    },
+                    '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+                      backgroundColor: '#f8f8f8',
+                    },
+                    '& .MuiSwitch-switchBase': {
+                      color: 'black',
+                    },
+                    '& .MuiSwitch-switchBase + .MuiSwitch-track': {
+                      backgroundColor: '#373840',
+                    },
+                  }}
+                />
+              }
+              label={undefined}
+            />
+          </Box>
+        </Toolbar>
+      </AppBar>
+
+      <Container maxWidth="lg" sx={{ height: '100%', backgroundColor: themeMode.palette.background.default, overflow: 'auto' }}>
         <Divider>
           <Chip label="GAMES" size="small" />
         </Divider>
-        <CssBaseline />
         <DigitalClock />
-        <Divider 
-            sx={{
-              height: 1.5, 
-              border: 'none',
-              backgroundImage: borderGradient,
-            }} 
-          />
+        <Divider
+          sx={{
+            height: 1.5,
+            border: 'none',
+            backgroundImage: borderGradient,
+          }}
+        />
         <Grid container spacing={1} sx={{ flex: 1 }} mt="8px">
           {isSmallScreen && (
-            <Grid item xs={12} >
-              <Box display="flex" justifyContent="center" >
+            <Grid item xs={12}>
+              <Box display="flex" justifyContent="center">
                 {leftGames.map((game, index) => (
                   <Card
                     key={game}
                     onClick={() => dispatch(selectGame(game))}
-                    sx={{ cursor: 'pointer', flex: 1, mr:'10px'}}
+                    sx={{ cursor: 'pointer', flex: 1, mr: '10px' }}
                   >
-                    <CardContent sx={{ p: '4px', height: '58px'}}>
+                    <CardContent sx={{ p: '4px', height: '58px' }}>
                       {index === 0 ? (
                         <CardMedia
                           component="img"
@@ -254,7 +253,7 @@ const Home: React.FC = () => {
                           title="Emoji game"
                           sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
                         />
-                      ) :(
+                      ) : (
                         <Typography variant="body2" align="center" pt="10px">
                           {game}
                         </Typography>
@@ -271,9 +270,9 @@ const Home: React.FC = () => {
                 <Card
                   key={game}
                   onClick={() => dispatch(selectGame(game))}
-                  sx={{ margin: '5px', cursor: 'pointer', height: '100px', width: '110px'}}
+                  sx={{ margin: '5px', cursor: 'pointer', height: '100px', width: '110px' }}
                 >
-                  <CardContent sx={{p:'5px', width:'100%'}}>
+                  <CardContent sx={{ p: '5px', width: '100%' }}>
                     {index === 0 ? (
                       <CardMedia
                         component="img"
@@ -306,7 +305,7 @@ const Home: React.FC = () => {
                         title="emoji"
                         sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
                       />
-                    ) :game === 'Game 5' ? (
+                    ) : game === 'Game 5' ? (
                       <CardMedia
                         component="img"
                         alt="Chase"
@@ -329,7 +328,7 @@ const Home: React.FC = () => {
             sm={8}
             sx={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
           >
-            <Card sx={{ width: '100%', minHeight:'38vh'}}>
+            <Card sx={{ width: '100%', minHeight: '38vh' }}>
               <CardContent>{renderGame()}</CardContent>
             </Card>
           </Grid>
@@ -339,26 +338,26 @@ const Home: React.FC = () => {
                 <Card
                   key={game}
                   onClick={() => dispatch(selectGame(game))}
-                  sx={{ marginBottom: '10px', cursor: 'pointer', height: '90px', width: '110px'}}
+                  sx={{ marginBottom: '10px', cursor: 'pointer', height: '90px', width: '110px' }}
                 >
-                  <CardContent sx={{ p: '4px', height: '80px', width:'105px'}}>
+                  <CardContent sx={{ p: '4px', height: '80px', width: '105px' }}>
                     {index === 0 ? (
                       <CardMedia
-                          component="img"
-                          alt="Rock"
-                          image={RockPaperIcon}
-                          title="Rock"
-                          sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
-                        />
-                      ) : game === 'Game 10' ? (
-                        <CardMedia
-                          component="img"
-                          alt="Calculator"
-                          image={CalculatorIcon}
-                          title="Rock paper"
-                          sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
-                        />
-                      ): (
+                        component="img"
+                        alt="Rock"
+                        image={RockPaperIcon}
+                        title="Rock"
+                        sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
+                      />
+                    ) : game === 'Game 10' ? (
+                      <CardMedia
+                        component="img"
+                        alt="Calculator"
+                        image={CalculatorIcon}
+                        title="Rock paper"
+                        sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
+                      />
+                    ) : (
                       <Typography variant="body1" align="center">
                         {game}
                       </Typography>
@@ -374,7 +373,7 @@ const Home: React.FC = () => {
                   <Card
                     key={game}
                     onClick={() => dispatch(selectGame(game))}
-                    sx={{ cursor: 'pointer', flex: 1, mr:'10px'}}
+                    sx={{ cursor: 'pointer', flex: 1, mr: '10px' }}
                   >
                     <CardContent sx={{ p: '4px', height: '58px' }}>
                       {index === 0 ? (
@@ -395,7 +394,7 @@ const Home: React.FC = () => {
                           title="Rock paper"
                           sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
                         />
-                      ): (
+                      ) : (
                         <Typography variant="body2" align="center">
                           {game}
                         </Typography>
@@ -406,9 +405,9 @@ const Home: React.FC = () => {
               </Box>
             </Grid>
           )}
-        </Grid> 
-      <RatingComponent />
-      <Divider />
+        </Grid>
+        <RatingComponent />
+        <Divider />
         <Footer />
       </Container>
     </ThemeProvider>

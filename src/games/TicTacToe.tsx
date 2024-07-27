@@ -1,5 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Grid, Paper, Typography, Button, useTheme } from '@mui/material';
+import {
+  Box,
+  Grid,
+  Paper,
+  Typography,
+  Button,
+  useTheme,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableRow,
+  TableHead
+} from '@mui/material';
 import Confetti from 'react-confetti';
 
 const TicTacToe: React.FC = () => {
@@ -30,7 +43,7 @@ const TicTacToe: React.FC = () => {
       [0, 4, 8],
       [2, 4, 6],
     ];
-    for (let i = 0; i < lines.length; i++) {
+    for (let i = 0; lines.length > i; i++) {
       const [a, b, c] = lines[i];
       if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
         return squares[a];
@@ -84,7 +97,7 @@ const TicTacToe: React.FC = () => {
       return () => clearTimeout(timer);
     } else if (winner) {
       const winnerText = winner === 'O' ? 'You (O)' : 'AI (X)';
-      setWinnerHistory(prev => [winnerText, ...prev].slice(0, 2));
+      setWinnerHistory(prev => [winnerText, ...prev].slice(0, 10));
       if (winner === 'O') {
         setShowConfetti(true);
         const confettiTimer = setTimeout(() => {
@@ -146,15 +159,34 @@ const TicTacToe: React.FC = () => {
         ))}
       </Grid>
       <Button variant="contained" color="error" onClick={handleReset} style={{ marginTop: '20px', width: '50%' }}>
-        Reset Game
+        Play Game
       </Button>
-      <Box mt={2}>
-        <Typography variant="subtitle2">Latest Winners:</Typography>
-        {winnerHistory.map((winner, index) => (
-          <Typography variant='subtitle2' key={index}>
-            {winner}
-          </Typography>
-        ))}
+      <Box mt={2} width="100%" maxWidth="400px">
+        <Typography variant="subtitle2" align="center">Latest Winners:</Typography>
+        <TableContainer component={Paper}>
+          <Table size="small" aria-label="a dense table">
+            <TableHead>
+              <TableRow>
+                {[...Array(5)].map((_, index) => (
+                  <TableCell key={index} align="center"></TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {[0, 1].map(row => (
+                <TableRow key={row}>
+                  {winnerHistory.slice(row * 5, row * 5 + 5).map((winner, index) => (
+                    <TableCell key={index} align="center" >
+                      <Typography variant='subtitle2'>
+                        {winner}
+                      </Typography>
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </Box>
       {showConfetti && <Confetti />}
     </Box>
