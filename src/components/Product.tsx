@@ -29,7 +29,7 @@ interface Product {
   name: string;
   description: string;
   price: number;
-  icon: any;
+  icon: string;
 }
 
 const products: Product[] = [
@@ -56,13 +56,26 @@ const products: Product[] = [
   }
 ];
 
+interface CartItem extends Product {
+  quantity: number;
+}
+
 const Product: React.FC = () => {
-  const [cart, setCart] = useState<Product[]>([]);
+  const [cart, setCart] = useState<CartItem[]>([]);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [checkoutOpen, setCheckoutOpen] = useState(false);
 
   const addToCart = (product: Product) => {
-    setCart([...cart, product]);
+    setCart((prevCart) => {
+      const existingItem = prevCart.find((item) => item.id === product.id);
+      if (existingItem) {
+        return prevCart.map((item) =>
+          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+        );
+      } else {
+        return [...prevCart, { ...product, quantity: 1 }];
+      }
+    });
   };
 
   const toggleDrawer = (open: boolean) => () => {
@@ -73,16 +86,23 @@ const Product: React.FC = () => {
     setCheckoutOpen(true);
   };
 
+  const handlePayment = (event: React.FormEvent) => {
+    event.preventDefault();
+    // Implement payment logic here
+  };
+
+  const totalAmount = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+
   return (
     <>
       <CssBaseline />
       <AppBar position="sticky">
         <Toolbar>
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            Online Store
+            Avianaa Store
           </Typography>
           <IconButton color="inherit" onClick={toggleDrawer(true)}>
-            <Badge badgeContent={cart.length} color="secondary">
+            <Badge badgeContent={cart.reduce((sum, item) => sum + item.quantity, 0)} color="secondary">
               <ShoppingCartIcon />
             </Badge>
           </IconButton>
@@ -94,8 +114,8 @@ const Product: React.FC = () => {
           {cart.map((product, index) => (
             <ListItem key={index}>
               <ListItemText
-                primary={product.name}
-                secondary={`$${product.price.toFixed(2)}`}
+                primary={`${product.name} (${product.quantity})`}
+                secondary={`$${(product.price * product.quantity).toFixed(2)}`}
               />
               <ListItemSecondaryAction>
                 <Button
@@ -112,35 +132,42 @@ const Product: React.FC = () => {
         </List>
         {cart.length > 0 && (
           <Box sx={{ padding: 2 }}>
+            <Typography variant="h6">Total: ${totalAmount.toFixed(2)}</Typography>
             <Button
               variant="contained"
               color="primary"
               onClick={handleCheckout}
               fullWidth
+              sx={{ marginTop: 2 }}
             >
               Checkout
             </Button>
             {checkoutOpen && (
-              <Box mt={2}>
+              <Box component="form" onSubmit={handlePayment} mt={2}>
                 <TextField
                   label="Credit/Debit Card Number"
                   variant="outlined"
                   fullWidth
                   margin="normal"
+                  required
                 />
                 <TextField
                   label="Expiry Date"
                   variant="outlined"
                   fullWidth
                   margin="normal"
+                  required
                 />
                 <TextField
                   label="CVV"
                   variant="outlined"
                   fullWidth
                   margin="normal"
+                  required
+                  inputProps={{ maxLength: 4, pattern: "[0-9]{3,4}" }}
                 />
                 <Button
+                  type="submit"
                   variant="contained"
                   color="secondary"
                   fullWidth
@@ -160,15 +187,15 @@ const Product: React.FC = () => {
             <Card>
               <CardMedia
                 component="img"
-                height="140"
                 image={product.icon}
                 alt={product.name}
+                sx={{ width: '100%', height: 'auto', aspectRatio: '1/1' }}
               />
               <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
+                <Typography gutterBottom variant="h6" component="div">
                   {product.name}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography variant="body2" color="text.secondary" sx={{ fontSize: { xs: 'subtitle2', sm: 'body2' } }}>
                   {product.description}
                 </Typography>
                 <Typography variant="h6">
