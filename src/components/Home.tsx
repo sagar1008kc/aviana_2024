@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, selectGame } from '../store';
+import { useNavigate } from 'react-router-dom';
 import {
   Container,
   Box,
@@ -46,6 +47,7 @@ import Product from './Product';
 
 const Home: React.FC = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const selectedGame = useSelector((state: RootState) => state.game.selectedGame);
   const leftGames = ['Game 1', 'Game 2', 'Game 3', 'Game 4', 'Game 5'];
   const rightGames = ['Game 6', 'Game 7', 'Game 8', 'Game 9', 'Game 10'];
@@ -66,6 +68,10 @@ const Home: React.FC = () => {
 
   const handleThemeToggle = () => {
     setDarkMode(!darkMode);
+  };
+
+  const handleNavigation = (path: string) => {
+    navigate(path);
   };
 
   const renderGame = () => {
@@ -122,13 +128,13 @@ const Home: React.FC = () => {
               src={AvianaIcon}
               alt="Avianaa"
               style={{ height: '60px', width: '60px', borderRadius: '50%' }}
-              onClick={() => dispatch(selectGame('home'))}
+              onClick={() => handleNavigation('/')}
             />
             <Grid container justifyContent="center" display='flex' flexDirection="row">
               <Grid item>
                 <Button
                   variant="text"
-                  onClick={() => dispatch(selectGame('product'))}
+                  onClick={() => handleNavigation('/product')}
                   sx={{ cursor: 'pointer', fontSize: '12px', fontWeight:'bold', ml:'10px'}}
                 >
                   Product
@@ -137,7 +143,7 @@ const Home: React.FC = () => {
               <Grid item>
                 <Button
                   variant="text"
-                  onClick={() => dispatch(selectGame('about'))}
+                  onClick={() => handleNavigation('/about')}
                   sx={{ cursor: 'pointer', fontSize: '12px',fontWeight:'bold'}}
                 >
                   About
@@ -146,7 +152,7 @@ const Home: React.FC = () => {
               <Grid item>
                 <Button
                   variant="text"
-                  onClick={() => dispatch(selectGame('login'))}
+                  onClick={() => handleNavigation('/login')}
                   sx={{ cursor: 'pointer', fontSize: '12px', fontWeight:'bold'}}
                 >
                   Login

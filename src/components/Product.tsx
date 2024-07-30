@@ -20,12 +20,15 @@ import {
   TextField
 } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import CloseIcon from '@mui/icons-material/Close';
+import PayPalIcon from '../assets/paypal.png';
 import ToyIcon from '../assets/toyIcon.png';
 import GameIcon from '../assets/gameIcon.png';
 import DressIcon from '../assets/dressIcon.png';
 import Dress1Icon from '../assets/dress1.png';
 import Dress2Icon from '../assets/dress2.png';
 import Toy1Iocn from '../assets/toy1.png';
+import { useNavigate } from 'react-router-dom';
 
 interface Product {
   id: number;
@@ -73,8 +76,8 @@ const products: Product[] = [
   },
   {
     id: 6,
-    name: 'Dress',
-    description: 'Beautiful dress',
+    name: 'Toy',
+    description: 'Beautiful tyo',
     price: 15.99,
     icon: Toy1Iocn
   },
@@ -88,6 +91,7 @@ const Product: React.FC = () => {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [checkoutOpen, setCheckoutOpen] = useState(false);
+  const navigate = useNavigate();
 
   const addToCart = (product: Product) => {
     setCart((prevCart) => {
@@ -100,6 +104,7 @@ const Product: React.FC = () => {
         return [...prevCart, { ...product, quantity: 1 }];
       }
     });
+    setCheckoutOpen(true);
   };
 
   const toggleDrawer = (open: boolean) => () => {
@@ -113,6 +118,13 @@ const Product: React.FC = () => {
   const handlePayment = (event: React.FormEvent) => {
     event.preventDefault();
     // Implement payment logic here
+    alert('Payment processed successfully!');
+    navigate('/');
+  };
+
+  const handleCloseCheckout = () => {
+    setCheckoutOpen(false);
+    navigate('/');
   };
 
   const totalAmount = cart.reduce((total, item) => total + item.price * item.quantity, 0);
@@ -135,6 +147,14 @@ const Product: React.FC = () => {
 
       <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer(false)}>
         <List sx={{ width: 300 }}>
+          <ListItem>
+            <ListItemText primary="Your Cart" />
+            <ListItemSecondaryAction>
+              <IconButton onClick={() => setDrawerOpen(false)}>
+                <CloseIcon/>
+              </IconButton>
+            </ListItemSecondaryAction>
+          </ListItem>
           {cart.map((product, index) => (
             <ListItem key={index}>
               <ListItemText
@@ -168,19 +188,26 @@ const Product: React.FC = () => {
             </Button>
             {checkoutOpen && (
               <Box component="form" onSubmit={handlePayment} mt={2}>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <Typography variant="h6">Checkout</Typography>
+                  <IconButton onClick={handleCloseCheckout}>
+                  </IconButton>
+                </Box>
                 <TextField
                   label="Credit/Debit Card Number"
                   variant="outlined"
                   fullWidth
                   margin="normal"
                   required
+                  inputProps={{ pattern: "\\d{16}", title: "Credit/Debit Card Number should be 16 digits" }}
                 />
                 <TextField
-                  label="Expiry Date"
+                  label="Expiry Date (MM/YY)"
                   variant="outlined"
                   fullWidth
                   margin="normal"
                   required
+                  inputProps={{ pattern: "(0[1-9]|1[0-2])/[0-9]{2}", title: "Expiry date format should be MM/YY" }}
                 />
                 <TextField
                   label="CVV"
@@ -188,7 +215,7 @@ const Product: React.FC = () => {
                   fullWidth
                   margin="normal"
                   required
-                  inputProps={{ maxLength: 4, pattern: "[0-9]{3,4}" }}
+                  inputProps={{ maxLength: 4, pattern: "[0-9]{3,4}", title: "CVV should be 3 or 4 digits" }}
                 />
                 <Button
                   type="submit"
@@ -198,6 +225,15 @@ const Product: React.FC = () => {
                   sx={{ marginTop: 2 }}
                 >
                   Pay Now
+                </Button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                  sx={{ marginTop: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                >
+                  <img src={PayPalIcon} alt="PayPal" style={{ width: '20px', marginRight: '8px' }} />
+                  Pay with PayPal
                 </Button>
               </Box>
             )}
