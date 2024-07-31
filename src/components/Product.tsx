@@ -17,10 +17,12 @@ import {
   ListItemSecondaryAction,
   CssBaseline,
   Box,
-  TextField
+  TextField,
+  Divider
 } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import CloseIcon from '@mui/icons-material/Close';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import PayPalIcon from '../assets/paypal.png';
 import ToyIcon from '../assets/toyIcon.png';
 import GameIcon from '../assets/gameIcon.png';
@@ -48,7 +50,7 @@ const products: Product[] = [
   },
   {
     id: 2,
-    name: 'Tyocar',
+    name: 'Toycar',
     description: 'A beautiful toycar.',
     price: 15.99,
     icon: ToyIcon
@@ -77,7 +79,7 @@ const products: Product[] = [
   {
     id: 6,
     name: 'Toy',
-    description: 'Beautiful tyo',
+    description: 'Beautiful ToY',
     price: 15.99,
     icon: Toy1Iocn
   },
@@ -104,7 +106,6 @@ const Product: React.FC = () => {
         return [...prevCart, { ...product, quantity: 1 }];
       }
     });
-    setCheckoutOpen(true);
   };
 
   const toggleDrawer = (open: boolean) => () => {
@@ -132,8 +133,11 @@ const Product: React.FC = () => {
   return (
     <>
       <CssBaseline />
-      <AppBar position="sticky">
+      <AppBar position="sticky" sx={{ backgroundColor: 'darkslateblue' }}>
         <Toolbar>
+          <IconButton color="inherit" onClick={() => navigate('/')}>
+            <ArrowBackIcon />
+          </IconButton>
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
             Avianaa Store
           </Typography>
@@ -146,17 +150,23 @@ const Product: React.FC = () => {
       </AppBar>
 
       <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer(false)}>
-        <List sx={{ width: 300 }}>
+        <List sx={{position:'relative'}}>
           <ListItem>
             <ListItemText primary="Your Cart" />
             <ListItemSecondaryAction>
               <IconButton onClick={() => setDrawerOpen(false)}>
-                <CloseIcon/>
+                <CloseIcon />
               </IconButton>
             </ListItemSecondaryAction>
           </ListItem>
           {cart.map((product, index) => (
             <ListItem key={index}>
+              <CardMedia
+                component="img"
+                image={product.icon}
+                alt={product.name}
+                sx={{ width: 50, height: 50, marginRight: 2 }}
+              />
               <ListItemText
                 primary={`${product.name} (${product.quantity})`}
                 secondary={`$${(product.price * product.quantity).toFixed(2)}`}
@@ -166,7 +176,7 @@ const Product: React.FC = () => {
                   onClick={() => {
                     setCart(cart.filter((_, i) => i !== index));
                   }}
-                  sx={{ padding: 1 }}
+                  sx={{ padding: 1, color: 'red' }}
                 >
                   Remove
                 </Button>
@@ -176,7 +186,7 @@ const Product: React.FC = () => {
         </List>
         {cart.length > 0 && (
           <Box sx={{ padding: 2 }}>
-            <Typography variant="h6">Total: ${totalAmount.toFixed(2)}</Typography>
+            <Typography variant="h6" border="1px dotted grey" p="10px">Total: ${totalAmount.toFixed(2)}</Typography>
             <Button
               variant="contained"
               color="primary"
@@ -190,8 +200,6 @@ const Product: React.FC = () => {
               <Box component="form" onSubmit={handlePayment} mt={2}>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <Typography variant="h6">Checkout</Typography>
-                  <IconButton onClick={handleCloseCheckout}>
-                  </IconButton>
                 </Box>
                 <TextField
                   label="Credit/Debit Card Number"
@@ -251,21 +259,23 @@ const Product: React.FC = () => {
                 alt={product.name}
                 sx={{ width: '100%', height: 'auto', aspectRatio: '1/1' }}
               />
-              <CardContent>
-                <Typography gutterBottom variant="h6" component="div">
-                  {product.name}
-                </Typography>
-                <Typography variant="body2" color="text.secondary" sx={{ fontSize: { xs: 'subtitle2', sm: 'body2' } }}>
-                  {product.description}
-                </Typography>
-                <Typography variant="h6">
-                  ${product.price.toFixed(2)}
-                </Typography>
+              <CardContent sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <Box>
+                  <Typography gutterBottom variant="h6" component="div">
+                    {product.name}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary" sx={{ fontSize: { xs: 'subtitle2', sm: 'body2' } }}>
+                    {product.description}
+                  </Typography>
+                  <Typography variant="h6">
+                    ${product.price.toFixed(2)}
+                  </Typography>
+                </Box>
                 <Button
                   variant="contained"
                   color="primary"
                   onClick={() => addToCart(product)}
-                  sx={{ marginTop: 2 }}
+                  sx={{ marginTop: 2, marginLeft: 2, textTransform: 'none' }}
                 >
                   Add to Cart
                 </Button>
