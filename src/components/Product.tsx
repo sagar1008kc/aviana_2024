@@ -150,7 +150,7 @@ const Product: React.FC = () => {
       </AppBar>
 
       <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer(false)}>
-        <List sx={{position:'relative'}}>
+        <List sx={{position:'relative', minWidth: 400}}>
           <ListItem>
             <ListItemText primary="Your Cart" />
             <ListItemSecondaryAction>
@@ -192,14 +192,14 @@ const Product: React.FC = () => {
               color="primary"
               onClick={handleCheckout}
               fullWidth
-              sx={{ marginTop: 2 }}
+              sx={{ marginTop: 2, width: 100, textAlign: 'center'}}
             >
               Checkout
             </Button>
             {checkoutOpen && (
-              <Box component="form" onSubmit={handlePayment} mt={2}>
+              <Box component="form" onSubmit={handlePayment} m={2} marginInline={6}>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <Typography variant="h6">Checkout</Typography>
+                  <Typography variant="subtitle1"> Please checkout with Credit/Debit card information below:</Typography>
                 </Box>
                 <TextField
                   label="Credit/Debit Card Number"
@@ -228,19 +228,20 @@ const Product: React.FC = () => {
                 <Button
                   type="submit"
                   variant="contained"
-                  color="secondary"
+                  color="success"
                   fullWidth
                   sx={{ marginTop: 2 }}
                 >
                   Pay Now
                 </Button>
+                <Typography variant='h6' textAlign='center' m='2'>OR</Typography>
                 <Button
                   variant="contained"
-                  color="primary"
+                  color="info"
                   fullWidth
-                  sx={{ marginTop: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                  sx={{display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                 >
-                  <img src={PayPalIcon} alt="PayPal" style={{ width: '20px', marginRight: '8px' }} />
+                  <img src={PayPalIcon} alt="PayPal" style={{ width: '40px', marginRight: '8px' }} />
                   Pay with PayPal
                 </Button>
               </Box>
