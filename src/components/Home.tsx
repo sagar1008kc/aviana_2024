@@ -92,8 +92,6 @@ const Home: React.FC = () => {
         return <Calculator />;
       case 'home':
         return <LandingPage />;
-      case 'product':
-        return <Product />;
       case 'about':
         return <About />;
       case 'login':
@@ -128,7 +126,7 @@ const Home: React.FC = () => {
               src={AvianaIcon}
               alt="Avianaa"
               style={{ height: '60px', width: '60px', borderRadius: '50%' }}
-              onClick={() => handleNavigation('/')}
+              onClick={() => dispatch(selectGame('home'))}
             />
             <Grid container justifyContent="center" display='flex' flexDirection="row">
               <Grid item>
@@ -143,7 +141,7 @@ const Home: React.FC = () => {
               <Grid item>
                 <Button
                   variant="text"
-                  onClick={() => handleNavigation('/about')}
+                  onClick={() => dispatch(selectGame('about'))}
                   sx={{ cursor: 'pointer', fontSize: '12px',fontWeight:'bold'}}
                 >
                   About
@@ -152,7 +150,7 @@ const Home: React.FC = () => {
               <Grid item>
                 <Button
                   variant="text"
-                  onClick={() => handleNavigation('/login')}
+                  onClick={() => dispatch(selectGame('login'))}
                   sx={{ cursor: 'pointer', fontSize: '12px', fontWeight:'bold'}}
                 >
                   Login

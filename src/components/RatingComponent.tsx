@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Stack, Rating, Typography, Box, Fab, LinearProgress, Divider } from '@mui/material';
+import { Stack, Rating, Typography, Box, Fab, Divider } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
 const RatingComponent: React.FC = () => {
@@ -69,7 +69,7 @@ const RatingComponent: React.FC = () => {
       }}
     >
     <Box sx={{ width: '100%' , pb:'10px'}}>
-      <LinearProgress variant="buffer" value={progress} valueBuffer={buffer} />
+    <Divider />
     </Box>
     <FavoriteIcon sx={{ m: 1 }} />
     <Typography variant='body1' textTransform="capitalize">Please rate our app</Typography>
