@@ -6,12 +6,7 @@ import {
   Typography,
   Button,
   useTheme,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableRow,
-  TableHead
+  Snackbar,
 } from '@mui/material';
 import Confetti from 'react-confetti';
 
@@ -20,6 +15,8 @@ const TicTacToe: React.FC = () => {
   const [isONext, setIsONext] = useState(true);
   const [winnerHistory, setWinnerHistory] = useState<string[]>([]);
   const [showConfetti, setShowConfetti] = useState(false);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [latestWinner, setLatestWinner] = useState('');
   const theme = useTheme();
 
   const handleClick = (index: number) => {
@@ -43,7 +40,7 @@ const TicTacToe: React.FC = () => {
       [0, 4, 8],
       [2, 4, 6],
     ];
-    for (let i = 0; lines.length > i; i++) {
+    for (let i = 0; i < lines.length; i++) {
       const [a, b, c] = lines[i];
       if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
         return squares[a];
@@ -97,12 +94,19 @@ const TicTacToe: React.FC = () => {
       return () => clearTimeout(timer);
     } else if (winner) {
       const winnerText = winner === 'O' ? 'You (O)' : 'AI (X)';
-      setWinnerHistory(prev => [winnerText, ...prev].slice(0, 10));
+      setWinnerHistory(prev => {
+        const newHistory = [winnerText, ...prev].slice(0, 10);
+        if (newHistory.length === 10) {
+          setLatestWinner(winnerText);
+          setSnackbarOpen(true);
+        }
+        return newHistory;
+      });
       if (winner === 'O') {
         setShowConfetti(true);
         const confettiTimer = setTimeout(() => {
           setShowConfetti(false);
-        }, 5000);
+        }, 2000); // Show confetti for 5 seconds
         return () => clearTimeout(confettiTimer);
       }
     }
@@ -115,7 +119,22 @@ const TicTacToe: React.FC = () => {
     setBoard(Array(9).fill(null));
     setIsONext(true);
     setShowConfetti(false);
+    setWinnerHistory([]);
+    setSnackbarOpen(false);
   };
+
+  const calculateWinPercentages = () => {
+    const totalGames = winnerHistory.slice(0, 10).length;
+    const youWins = winnerHistory.slice(0, 10).filter(winner => winner === 'You (O)').length;
+    const aiWins = winnerHistory.slice(0, 10).filter(winner => winner === 'AI (X)').length;
+
+    const youPercentage = totalGames === 0 ? 0 : (youWins / 10) * 100;
+    const aiPercentage = totalGames === 0 ? 0 : (aiWins / 10) * 100;
+
+    return { youPercentage, aiPercentage };
+  };
+
+  const { youPercentage, aiPercentage } = calculateWinPercentages();
 
   return (
     <Box display="flex" flexDirection="column" alignItems="center">
@@ -158,37 +177,41 @@ const TicTacToe: React.FC = () => {
           </Grid>
         ))}
       </Grid>
-      <Button variant="contained" color="error" onClick={handleReset} style={{ marginTop: '20px', width: '50%' }}>
-        Play Game
+      <Button variant="contained" color="error" onClick={winnerHistory.length === 10 ? handleReset : () => setBoard(Array(9).fill(null))} style={{ marginTop: '20px', width: '50%' }}>
+        {winnerHistory.length === 10 ? 'Reset' : 'Play Game'}
       </Button>
       <Box mt={2} width="100%" maxWidth="400px">
-        <Typography variant="subtitle2" align="center">Latest Winners:</Typography>
-        <TableContainer component={Paper}>
-          <Table size="small" aria-label="a dense table">
-            <TableHead>
-              <TableRow>
-                {[...Array(5)].map((_, index) => (
-                  <TableCell key={index} align="center"></TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {[0, 1].map(row => (
-                <TableRow key={row}>
-                  {winnerHistory.slice(row * 5, row * 5 + 5).map((winner, index) => (
-                    <TableCell key={index} align="center" >
-                      <Typography variant='subtitle2'>
-                        {winner}
-                      </Typography>
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+        <Typography variant="subtitle2" align="center">Win Percentages:</Typography>
+        <Box position="relative" width="100%" height={20} mt={1} bgcolor="lightgrey" borderRadius={5}>
+          <Box
+            position="absolute"
+            left={0}
+            height="100%"
+            width={`${youPercentage}%`}
+            bgcolor="green"
+            borderRadius={5}
+          />
+          <Box
+            position="absolute"
+            right={0}
+            height="100%"
+            width={`${aiPercentage}%`}
+            bgcolor="red"
+            borderRadius={5}
+          />
+        </Box>
+        <Box display="flex" justifyContent="space-between" mt={1}>
+          <Typography variant="body2" color="green">You (O): {youPercentage.toFixed(2)}%</Typography>
+          <Typography variant="body2" color="red">AI (X): {aiPercentage.toFixed(2)}%</Typography>
+        </Box>
       </Box>
       {showConfetti && <Confetti />}
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={6000}
+        onClose={() => setSnackbarOpen(false)}
+        message={`Winner of the last 10 games is: ${latestWinner}`}
+      />
     </Box>
   );
 };

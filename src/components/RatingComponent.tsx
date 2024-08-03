@@ -5,9 +5,6 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 const RatingComponent: React.FC = () => {
   const [value, setValue] = useState<number | null>(0);
   const [message, setMessage] = useState<string>("");
-  const [progress, setProgress] = React.useState(0);
-  const [buffer, setBuffer] = React.useState(10);
-  const gradientColor = 'linear-gradient(90deg, red, blue, green, purple)';
 
   const handleRatingChange = (event: React.ChangeEvent<{}>, newValue: number | null) => {
     setValue(newValue);
@@ -32,30 +29,6 @@ const RatingComponent: React.FC = () => {
         setMessage("");
     }
   };
-  const progressRef = React.useRef(() => {});
-  React.useEffect(() => {
-    progressRef.current = () => {
-      if (progress > 100) {
-        setProgress(0);
-        setBuffer(10);
-      } else {
-        const diff = Math.random() * 10;
-        const diff2 = Math.random() * 10;
-        setProgress(progress + diff);
-        setBuffer(progress + diff + diff2);
-      }
-    };
-  });
-
-  React.useEffect(() => {
-    const timer = setInterval(() => {
-      progressRef.current();
-    }, 500);
-
-    return () => {
-      clearInterval(timer);
-    };
-  }, []);
 
   return (
     <Box
@@ -63,36 +36,32 @@ const RatingComponent: React.FC = () => {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        mt: 1,
-        p: 2,
-        borderRadius: 2,
+        maxWidth: 800,
+        mx: 'auto',
+        mb: '12px',
       }}
     >
-    <Box sx={{ width: '100%' , pb:'10px'}}>
-    <Divider />
-    </Box>
-    <FavoriteIcon sx={{ m: 1 }} />
-    <Typography variant='body1' textTransform="capitalize">Please rate our app</Typography>
-    <Box sx={{ '& > :not(style)': { m: 1 }, display: 'flex'}}>
-      <Fab aria-label="like" variant="extended">
-      <Stack spacing={2}>
-        <Rating
-          name="size-small"
-          value={value}
-          onChange={handleRatingChange}
-          size="large"
-        />
-      </Stack>
-      </Fab>
-    </Box> 
-      
+      <Box sx={{ width: '100%', pb: '10px' }}>
+        <Divider />
+      </Box>
+      <FavoriteIcon sx={{ m: 1, color: 'purple' }} />
+      <Typography variant='body1' textTransform="capitalize" sx={{ mb: 2 }}>
+        Please rate our app
+      </Typography>
+          <Stack >
+            <Rating
+              name="app-rating"
+              value={value}
+              onChange={handleRatingChange}
+              size="large"
+            />
+          </Stack>
       {message && (
-        <Typography variant="body1" sx={{ mt: 2 }}>
+        <Typography variant="body1" sx={{ mt: 2, textAlign: 'center' }}>
           {message}
         </Typography>
       )}
     </Box>
-    
   );
 };
 
