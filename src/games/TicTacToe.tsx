@@ -181,7 +181,7 @@ const TicTacToe: React.FC = () => {
         {winnerHistory.length === 10 ? 'Reset' : 'Play Game'}
       </Button>
       <Box mt={2} width="100%" maxWidth="400px">
-        <Typography variant="subtitle2" align="center">Win Percentages:</Typography>
+        <Typography variant="subtitle2" align="center">Can you win 10 game?</Typography>
         <Box position="relative" width="100%" height={20} mt={1} bgcolor="lightgrey" borderRadius={5}>
           <Box
             position="absolute"
