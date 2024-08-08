@@ -139,7 +139,7 @@ const Product: React.FC = () => {
             <ArrowBackIcon />
           </IconButton>
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            Avianaa Store
+            Avianaa Online Store <i>--in progress</i>
           </Typography>
           <IconButton color="inherit" onClick={toggleDrawer(true)}>
             <Badge badgeContent={cart.reduce((sum, item) => sum + item.quantity, 0)} color="secondary">

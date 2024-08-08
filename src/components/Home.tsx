@@ -43,7 +43,8 @@ import DigitalClock from './DigitalClock';
 import RatingComponent from './RatingComponent';
 import RockPaper from '../games/RockPaper';
 import RockPaperIcon from '../assets/rockpapers.png';
-import Product from './Product';
+import ChattingIcon from '../assets/chattingIcon.png';
+import ChattingGame from '../games/ChattingGame';
 
 const Home: React.FC = () => {
   const dispatch = useDispatch();
@@ -86,8 +87,10 @@ const Home: React.FC = () => {
         return <EmojiGame />;
       case 'Game 5':
         return <Hangman />;
-      case 'Game 6':
-        return <RockPaper />;
+        case 'Game 6':
+          return <RockPaper />;
+      case 'Game 7':
+        return <ChattingGame />;
       case 'Game 10':
         return <Calculator />;
       case 'home':
@@ -353,6 +356,14 @@ const Home: React.FC = () => {
                         title="Rock"
                         sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
                       />
+                    ) : game === 'Game 7' ? (
+                      <CardMedia
+                        component="img"
+                        alt="Calculator"
+                        image={ChattingIcon}
+                        title="Rock paper"
+                        sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
+                      />
                     ) : game === 'Game 10' ? (
                       <CardMedia
                         component="img"
@@ -361,7 +372,7 @@ const Home: React.FC = () => {
                         title="Rock paper"
                         sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
                       />
-                    ) : (
+                    ) :(
                       <Typography variant="body1" align="center">
                         {game}
                       </Typography>
@@ -388,6 +399,14 @@ const Home: React.FC = () => {
                           height="50"
                           image={RockPaperIcon}
                           title="Rock"
+                          sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
+                        />
+                      ) : game === 'Game 7' ? (
+                        <CardMedia
+                          component="img"
+                          alt="Calculator"
+                          image={ChattingIcon}
+                          title="Rock paper"
                           sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
                         />
                       ) : game === 'Game 10' ? (
