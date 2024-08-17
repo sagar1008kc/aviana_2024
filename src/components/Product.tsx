@@ -25,12 +25,6 @@ import CloseIcon from '@mui/icons-material/Close';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import PayPalIcon from '../assets/paypal.png';
 import ComingSoonIcon from '../assets/comingIcon.png';
-import ToyIcon from '../assets/toyIcon.png';
-import GameIcon from '../assets/gameIcon.png';
-import DressIcon from '../assets/dressIcon.png';
-import Dress1Icon from '../assets/dress1.png';
-import Dress2Icon from '../assets/dress2.png';
-import Toy1Iocn from '../assets/toy1.png';
 import { useNavigate } from 'react-router-dom';
 
 interface Product {
