@@ -43,7 +43,7 @@ import DigitalClock from './DigitalClock';
 import RatingComponent from './RatingComponent';
 import RockPaper from '../games/RockPaper';
 import RockPaperIcon from '../assets/rockpapers.png';
-import ChattingIcon from '../assets/chattingIcon.png';
+import WordHintIcon from '../assets/wordHint.png';
 import ChattingGame from '../games/ChattingGame';
 
 const Home: React.FC = () => {
@@ -360,7 +360,7 @@ const Home: React.FC = () => {
                       <CardMedia
                         component="img"
                         alt="Calculator"
-                        image={ChattingIcon}
+                        image={WordHintIcon}
                         title="Rock paper"
                         sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
                       />
@@ -405,7 +405,7 @@ const Home: React.FC = () => {
                         <CardMedia
                           component="img"
                           alt="Calculator"
-                          image={ChattingIcon}
+                          image={WordHintIcon}
                           title="Rock paper"
                           sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
                         />

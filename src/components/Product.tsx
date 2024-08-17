@@ -24,6 +24,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import CloseIcon from '@mui/icons-material/Close';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import PayPalIcon from '../assets/paypal.png';
+import ComingSoonIcon from '../assets/comingIcon.png';
 import ToyIcon from '../assets/toyIcon.png';
 import GameIcon from '../assets/gameIcon.png';
 import DressIcon from '../assets/dressIcon.png';
@@ -44,44 +45,44 @@ const products: Product[] = [
   {
     id: 1,
     name: 'Video Game',
-    description: 'wow, nice video game!.',
+    description: 'Description...',
     price: 10.99,
-    icon: GameIcon
+    icon: ComingSoonIcon
   },
   {
     id: 2,
     name: 'Toycar',
-    description: 'A beautiful toycar.',
+    description: 'Description..',
     price: 15.99,
-    icon: ToyIcon
+    icon: ComingSoonIcon
   },
   {
     id: 3,
     name: 'Dress',
-    description: 'Beautiful dress',
+    description: 'Description..',
     price: 15.99,
-    icon: Dress1Icon
+    icon: ComingSoonIcon
   },
   {
     id: 4,
     name: 'Dress',
-    description: 'Beautiful dress',
+    description: 'Description..',
     price: 15.99,
-    icon: DressIcon
+    icon: ComingSoonIcon
   },
   {
     id: 5,
     name: 'Dress',
-    description: 'Beautiful dress',
+    description: 'Description..',
     price: 15.99,
-    icon: Dress2Icon
+    icon: ComingSoonIcon
   },
   {
     id: 6,
     name: 'Toy',
-    description: 'Beautiful ToY',
+    description: 'Description..',
     price: 15.99,
-    icon: Toy1Iocn
+    icon: ComingSoonIcon
   },
 ];
 

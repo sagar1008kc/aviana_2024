@@ -58,7 +58,7 @@ const ChattingGame: React.FC = () => {
   return (
   <>
       <Typography variant="h4" gutterBottom fontFamily={'fantasy'}>
-        Funny Chatting Game
+        Word Guessing Game
       </Typography>
       <Paper elevation={3} style={{ padding: '20px', textAlign: 'center', width: '100%' }}>
         <List>
