@@ -45,6 +45,10 @@ import RockPaper from '../games/RockPaper';
 import RockPaperIcon from '../assets/rockpapers.png';
 import WordHintIcon from '../assets/wordHint.png';
 import ChattingGame from '../games/ChattingGame';
+import Trivia from '../games/Trivia';
+import TriviaIcon from '../assets/trivia.png';
+import Survey from '../games/Survey';
+import SurveyIcon from '../assets/survey.png';
 
 const Home: React.FC = () => {
   const dispatch = useDispatch();
@@ -82,7 +86,7 @@ const Home: React.FC = () => {
       case 'Game 2':
         return <MemoryGame />;
       case 'Game 3':
-        return <ChessGame />;
+        return <Trivia />;
       case 'Game 4':
         return <EmojiGame />;
       case 'Game 5':
@@ -91,8 +95,12 @@ const Home: React.FC = () => {
           return <RockPaper />;
       case 'Game 7':
         return <ChattingGame />;
+      case 'Game 8':
+          return <ChessGame />;
+        case 'Game 9':
+            return <Calculator />;
       case 'Game 10':
-        return <Calculator />;
+        return <Survey />;
       case 'home':
         return <LandingPage />;
       case 'about':
@@ -235,9 +243,9 @@ const Home: React.FC = () => {
                           component="img"
                           width="50"
                           height="50"
-                          alt="chess"
-                          image={ChessIcon}
-                          title="Chess Game"
+                          alt="trivia"
+                          image={TriviaIcon}
+                          title="Trivia Game"
                           sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
                         />
                       ) : game === 'Game 4' ? (
@@ -299,9 +307,9 @@ const Home: React.FC = () => {
                     ) : game === 'Game 3' ? (
                       <CardMedia
                         component="img"
-                        alt="Chase"
-                        image={ChessIcon}
-                        title="Memory Game"
+                        alt="trivia"
+                        image={TriviaIcon}
+                        title="Trivia Game"
                         sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
                       />
                     ) : game === 'Game 4' ? (
@@ -359,17 +367,33 @@ const Home: React.FC = () => {
                     ) : game === 'Game 7' ? (
                       <CardMedia
                         component="img"
-                        alt="Calculator"
+                        alt="wordhint"
                         image={WordHintIcon}
                         title="Rock paper"
+                        sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
+                      />
+                    ) : game === 'Game 8' ? (
+                      <CardMedia
+                        component="img"
+                        alt="chess"
+                        image={ChessIcon}
+                        title="ChessIcon"
+                        sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
+                      />
+                    ) : game === 'Game 9' ? (
+                      <CardMedia
+                        component="img"
+                        alt="Calculator"
+                        image={CalculatorIcon}
+                        title="Calculator"
                         sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
                       />
                     ) : game === 'Game 10' ? (
                       <CardMedia
                         component="img"
-                        alt="Calculator"
-                        image={CalculatorIcon}
-                        title="Rock paper"
+                        alt="survey"
+                        image={SurveyIcon}
+                        title="Survey"
                         sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
                       />
                     ) :(
@@ -409,11 +433,27 @@ const Home: React.FC = () => {
                           title="Rock paper"
                           sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
                         />
-                      ) : game === 'Game 10' ? (
+                      ) : game === 'Game 8' ? (
+                        <CardMedia
+                          component="img"
+                          alt="Chese"
+                          image={ChessIcon}
+                          title="Chess"
+                          sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
+                        />
+                      ) : game === 'Game 9' ? (
                         <CardMedia
                           component="img"
                           alt="Calculator"
                           image={CalculatorIcon}
+                          title="Rock paper"
+                          sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
+                        />
+                      ) : game === 'Game 10' ? (
+                        <CardMedia
+                          component="img"
+                          alt="survey"
+                          image={SurveyIcon}
                           title="Rock paper"
                           sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
                         />

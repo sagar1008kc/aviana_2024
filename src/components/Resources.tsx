@@ -2,6 +2,7 @@ import React from 'react';
 import { Grid, Typography, Card, CardContent, Button, IconButton, Container, CardMedia } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from 'react-router-dom';
+import CodeGame from '../games/CodeGame';
 
 const Resources: React.FC = () => {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ const Resources: React.FC = () => {
       <Typography variant="h3" align="center" gutterBottom>
         Resources and Tutorials
       </Typography>
-
+<CodeGame />
       <Typography variant="h6" align="center" color="textSecondary" paragraph>
         Explore our collection of resources and tutorials to enhance your learning experience.
       </Typography>
