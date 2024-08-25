@@ -199,7 +199,7 @@ const Survey: React.FC = () => {
       {questions.map((question) => (
         <Paper
           elevation={3}
-          sx={{ padding: '12px', marginBottom: '16px' }}
+          sx={{ padding: '12px', marginBottom: '17px' }}
           key={question.id}
         >
           <FormControl component="fieldset" fullWidth>
