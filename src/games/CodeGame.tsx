@@ -97,8 +97,8 @@ const CodeGame: React.FC = () => {
 
   return (
     <Box p={4}>
-      <Typography variant="h3" gutterBottom>
-        Learn React & TypeScript
+      <Typography variant="h4" gutterBottom>
+        Learn React & Redux
       </Typography>
       <Typography variant="h5" gutterBottom>
         {currentLevel.title}

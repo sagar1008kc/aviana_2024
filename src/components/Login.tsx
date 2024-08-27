@@ -3,7 +3,8 @@ import { TextField, Button, Grid, Container, Typography, Snackbar, Alert, Box } 
 import { useNavigate } from 'react-router-dom';
 
 const Login: React.FC = () => {
-  const [name, setName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -11,19 +12,47 @@ const Login: React.FC = () => {
   const [snackbarSeverity, setSnackbarSeverity] = useState<'success' | 'error'>('success');
   const navigate = useNavigate();
 
+  // Email validation regex
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const formatPhoneNumber = (value: string) => {
+    // Remove all non-numeric characters
+    const cleaned = value.replace(/\D/g, '');
+    // Format as (XXX)-(XXX)-(XXXX)
+    const match = cleaned.match(/^(\d{0,3})(\d{0,3})(\d{0,4})$/);
+    if (match) {
+      return `${match[1]}${match[2] ? '-' : ''}${match[2]}${match[3] ? '-' : ''}${match[3]}`;
+    }
+    return value;
+  };
+
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // Simple form validation
-    if (name && email && phone) {
+    // Form validation for email and phone
+    if (!emailRegex.test(email)) {
+      setSnackbarMessage('Please enter a valid email address.');
+      setSnackbarSeverity('error');
+      setSnackbarOpen(true);
+      return;
+    }
+
+    if (phone.length < 12) {
+      setSnackbarMessage('Please enter a valid phone number.');
+      setSnackbarSeverity('error');
+      setSnackbarOpen(true);
+      return;
+    }
+
+    if (firstName && lastName && email && phone) {
       // Success case
       setSnackbarMessage('Login successful!');
       setSnackbarSeverity('success');
       setSnackbarOpen(true);
 
-      // After a delay, redirect the user to /resource
+      // Redirect to resources page with firstName and lastName as state
       setTimeout(() => {
-        navigate('/resources');
+        navigate('/resources', { state: { firstName, lastName } });
       }, 1500);
     } else {
       // Failure case
@@ -52,11 +81,21 @@ const Login: React.FC = () => {
         <form onSubmit={handleLogin} style={{ width: '100%' }}>
           <TextField
             fullWidth
-            label="Name"
+            label="First Name"
             variant="outlined"
             margin="normal"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            required
+          />
+          <TextField
+            fullWidth
+            label="Last Name"
+            variant="outlined"
+            margin="normal"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            required
           />
           <TextField
             fullWidth
@@ -66,6 +105,7 @@ const Login: React.FC = () => {
             margin="normal"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
           <TextField
             fullWidth
@@ -73,7 +113,10 @@ const Login: React.FC = () => {
             variant="outlined"
             margin="normal"
             value={phone}
-            onChange={(e) => setPhone(e.target.value)}
+            onChange={(e) => setPhone(formatPhoneNumber(e.target.value))}
+            placeholder="123-456-7890"
+            inputProps={{ maxLength: 12 }}
+            required
           />
           <Button
             type="submit"
@@ -84,21 +127,6 @@ const Login: React.FC = () => {
           >
             Login
           </Button>
-        <Box>
-          <Typography >
-OR
-          </Typography>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="error"
-            style={{ marginTop: '16px' }}
-          >
-            Google Login
-          </Button>
-          </Box>
-          
         </form>
 
         {/* Snackbar for success/failure messages */}

@@ -1,11 +1,15 @@
 import React from 'react';
-import { Grid, Typography, Card, CardContent, Button, IconButton, Container, CardMedia } from '@mui/material';
+import { Grid, Typography, Card, CardContent, Button, IconButton, Container, CardMedia, Box, Divider } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import CodeGame from '../games/CodeGame';
 
 const Resources: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Access firstName and lastName from the state passed via navigate
+  const { firstName, lastName } = location.state || { firstName: 'Guest', lastName: '' };
 
   const handleBackClick = () => {
     navigate('/');
@@ -23,11 +27,21 @@ const Resources: React.FC = () => {
       </IconButton>
 
       {/* Header */}
-      <Typography variant="h3" align="center" gutterBottom>
+      <Box sx={{backgroundColor: 'lightgrey', p: 4, borderRadius:'15px'}}>
+      <Typography variant="h5" align="center" gutterBottom>
+        Hello, {firstName} {lastName} !
+      </Typography>
+      <Typography variant='subtitle1'>Welcome to the Resources and Tutorials page! Here, you’ll find a curated selection of articles, guides, and tools designed to help you deepen your knowledge and enhance your skills. Dive in and explore the best resources tailored to support your learning journey</Typography>
+      
+      </Box>
+     
+      <Typography variant="h5" align="center" marginBlock="20px">
         Resources and Tutorials
       </Typography>
-<CodeGame />
-      <Typography variant="h6" align="center" color="textSecondary" paragraph>
+      <Divider ></Divider>
+      <CodeGame />
+      <Typography> In progress..</Typography>
+      <Typography variant="subtitle1" align="center" color="textSecondary" paragraph>
         Explore our collection of resources and tutorials to enhance your learning experience.
       </Typography>
 
@@ -64,130 +78,8 @@ const Resources: React.FC = () => {
             </CardContent>
           </Card>
         </Grid>
-
-        {/* Resource Card 2 */}
-        <Grid item xs={12} sm={6} md={4}>
-          <Card>
-            <CardMedia
-              component="img"
-              height="140"
-              image="https://mui.com/static/logo.png"
-              alt="Material UI Official Documentation"
-            />
-            <CardContent>
-              <Typography variant="h5" component="h2" gutterBottom>
-                Material UI Documentation
-              </Typography>
-              <Typography variant="body2" color="textSecondary">
-                Material UI's comprehensive guide to building beautiful UIs with React using the Material Design framework.
-              </Typography>
-              <Button
-                variant="contained"
-                color="primary"
-                style={{ marginTop: '16px' }}
-                href="https://mui.com/getting-started/installation/"
-                target="_blank"
-              >
-                Visit
-              </Button>
-            </CardContent>
-          </Card>
-        </Grid>
-
-        {/* Resource Card 3 */}
-        <Grid item xs={12} sm={6} md={4}>
-          <Card>
-            <CardMedia
-              component="img"
-              height="140"
-              image=""
-              alt="Frontend Masters"
-            />
-            <CardContent>
-              <Typography variant="h5" component="h2" gutterBottom>
-                Frontend Masters
-              </Typography>
-              <Typography variant="body2" color="textSecondary">
-                Frontend Masters offers premium courses on front-end development, including React, JavaScript, and more.
-              </Typography>
-              <Button
-                variant="contained"
-                color="primary"
-                style={{ marginTop: '16px' }}
-                href="https:/"
-                target="_blank"
-              >
-                Visit
-              </Button>
-            </CardContent>
-          </Card>
-        </Grid>
-      </Grid>
-
-      {/* YouTube Videos Section */}
-      <Typography variant="h4" gutterBottom>
-        YouTube Tutorials
-      </Typography>
-      <Grid container spacing={4} justifyContent="center">
-        {/* YouTube Video 1 */}
-        <Grid item xs={12} sm={6} md={4}>
-          <Card>
-            <CardMedia
-              component="iframe"
-              height="250"
-              src=""
-              title="React JS Crash Course"
-            />
-            <CardContent>
-              <Typography variant="h5" component="h2" gutterBottom>
-                React JS Crash Course
-              </Typography>
-              <Typography variant="body2" color="textSecondary">
-                A complete beginner's guide to learning React.js, featuring practical examples and real-world projects.
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-
-        {/* YouTube Video 2 */}
-        <Grid item xs={12} sm={6} md={4}>
-          <Card>
-            <CardMedia
-              component="iframe"
-              height="250"
-              src=""
-              title="Material UI Tutorial"
-            />
-            <CardContent>
-              <Typography variant="h5" component="h2" gutterBottom>
-                Material UI Tutorial
-              </Typography>
-              <Typography variant="body2" color="textSecondary">
-                Learn how to style React applications using Material UI, one of the most popular UI libraries for React.
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-
-        {/* YouTube Video 3 */}
-        <Grid item xs={12} sm={6} md={4}>
-          <Card>
-            <CardMedia
-              component="iframe"
-              height="250"
-              src=""
-              title="Complete React Developer in 2024"
-            />
-            <CardContent>
-              <Typography variant="h5" component="h2" gutterBottom>
-                Complete React Developer in 2023
-              </Typography>
-              <Typography variant="body2" color="textSecondary">
-                Master React in 2023 by following this comprehensive and advanced tutorial, covering all modern React features.
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
+        {/* Other resource cards */}
+        {/* Add the rest of the resource cards here */}
       </Grid>
     </Container>
   );
