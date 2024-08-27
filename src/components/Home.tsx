@@ -19,7 +19,8 @@ import {
   Chip,
   CssBaseline,
   AppBar,
-  Toolbar
+  Toolbar,
+  Paper
 } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import TicTacToe from '../games/TicTacToe';
@@ -49,6 +50,8 @@ import Trivia from '../games/Trivia';
 import TriviaIcon from '../assets/trivia.png';
 import Survey from '../games/Survey';
 import SurveyIcon from '../assets/survey.png';
+import AIPuzzleMaster from '../games/AiPuzzleMaster';
+import AiPuzzleIcon from '../assets/aipuzzle.png'
 
 const Home: React.FC = () => {
   const dispatch = useDispatch();
@@ -56,7 +59,7 @@ const Home: React.FC = () => {
   const selectedGame = useSelector((state: RootState) => state.game.selectedGame);
   const leftGames = ['Game 1', 'Game 2', 'Game 3', 'Game 4', 'Game 5'];
   const rightGames = ['Game 6', 'Game 7', 'Game 8', 'Game 9', 'Game 10'];
-  const about = ['home', 'about', 'product', 'login'];
+  const about = ['home', 'about', 'product', 'login', 'calculator'];
   const borderGradient = 'linear-gradient(45deg, blue, black, red)';
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
@@ -92,13 +95,13 @@ const Home: React.FC = () => {
       case 'Game 5':
         return <Hangman />;
         case 'Game 6':
-          return <RockPaper />;
+          return <AIPuzzleMaster />;
       case 'Game 7':
         return <ChattingGame />;
       case 'Game 8':
           return <ChessGame />;
         case 'Game 9':
-            return <Calculator />;
+            return <RockPaper />;
       case 'Game 10':
         return <Survey />;
       case 'home':
@@ -107,6 +110,8 @@ const Home: React.FC = () => {
         return <About />;
       case 'login':
         return <LoginPage />;
+        case 'calculator':
+        return <Calculator />;
       default:
         return (
           <Typography variant="h2" align="center">
@@ -359,9 +364,9 @@ const Home: React.FC = () => {
                     {index === 0 ? (
                       <CardMedia
                         component="img"
-                        alt="Rock"
-                        image={RockPaperIcon}
-                        title="Rock"
+                        alt="ai"
+                        image={AiPuzzleIcon}
+                        title="ai"
                         sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
                       />
                     ) : game === 'Game 7' ? (
@@ -369,7 +374,7 @@ const Home: React.FC = () => {
                         component="img"
                         alt="wordhint"
                         image={WordHintIcon}
-                        title="Rock paper"
+                        title="word count"
                         sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
                       />
                     ) : game === 'Game 8' ? (
@@ -383,9 +388,9 @@ const Home: React.FC = () => {
                     ) : game === 'Game 9' ? (
                       <CardMedia
                         component="img"
-                        alt="Calculator"
-                        image={CalculatorIcon}
-                        title="Calculator"
+                        alt="rockpaper"
+                        image={RockPaperIcon}
+                        title="Rock paper"
                         sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
                       />
                     ) : game === 'Game 10' ? (
@@ -418,17 +423,17 @@ const Home: React.FC = () => {
                       {index === 0 ? (
                         <CardMedia
                           component="img"
-                          alt="Rock"
+                          alt="ai"
                           width="50"
                           height="50"
-                          image={RockPaperIcon}
-                          title="Rock"
+                          image={AiPuzzleIcon}
+                          title="ai"
                           sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
                         />
                       ) : game === 'Game 7' ? (
                         <CardMedia
                           component="img"
-                          alt="Calculator"
+                          alt="word"
                           image={WordHintIcon}
                           title="Rock paper"
                           sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
@@ -444,8 +449,8 @@ const Home: React.FC = () => {
                       ) : game === 'Game 9' ? (
                         <CardMedia
                           component="img"
-                          alt="Calculator"
-                          image={CalculatorIcon}
+                          alt="rock"
+                          image={RockPaperIcon}
                           title="Rock paper"
                           sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
                         />
@@ -469,6 +474,24 @@ const Home: React.FC = () => {
             </Grid>
           )}
         </Grid>
+        <Divider />
+             <Box sx={{m: 2, alignContent: 'center'}}>
+             <Typography textAlign='center'>Extra Project:</Typography>
+                <Button
+                  variant="text"
+                  onClick={() => dispatch(selectGame('calculator'))}
+                  sx={{ cursor: 'pointer', fontSize: '12px',fontWeight:'bold'}}
+                >
+                  Calculator
+                </Button>
+                <Button
+                  variant="text"
+                  onClick={() => dispatch(selectGame('calculator'))}
+                  sx={{ cursor: 'pointer', fontSize: '12px',fontWeight:'bold'}}
+                >
+                  More coming soon...
+                </Button>
+              </Box>
         <RatingComponent />
         <Divider />
         <Footer />
