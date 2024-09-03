@@ -65,7 +65,7 @@ const AIPuzzleMaster: React.FC = () => {
         </Typography>
         <Divider />
         <Typography variant="h6" gutterBottom >
-          <i>Solve the puzzle::</i> <b>{puzzle.question}</b>
+          Solve the puzzle :<b>{puzzle.question}</b>
         </Typography>
         <TextField
           label="Your Answer"

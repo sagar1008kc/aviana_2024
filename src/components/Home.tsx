@@ -33,13 +33,11 @@ import About from './About';
 import LandingPage from './LandingPage';
 import Footer from './Footer';
 import Calculator from '../games/Calculator';
-import CalculatorIcon from '../assets/calculator.png';
-import ChessIcon from '../assets/chess.png';
+import SpinnerIcon from '../assets/spinner.png';
 import EmojiGame from '../games/EmojiGame';
 import EmojiIcon from '../assets/emojj.png';
 import Hangman from '../games/HangMan';
 import HangmanIcon from '../assets/hangman.png';
-import ChessGame from '../games/ChessGame';
 import DigitalClock from './DigitalClock';
 import RatingComponent from './RatingComponent';
 import RockPaper from '../games/RockPaper';
@@ -52,6 +50,7 @@ import Survey from '../games/Survey';
 import SurveyIcon from '../assets/survey.png';
 import AIPuzzleMaster from '../games/AiPuzzleMaster';
 import AiPuzzleIcon from '../assets/aipuzzle.png'
+import SpinnerGame from '../games/SpinnerGame';
 
 const Home: React.FC = () => {
   const dispatch = useDispatch();
@@ -99,7 +98,7 @@ const Home: React.FC = () => {
       case 'Game 7':
         return <ChattingGame />;
       case 'Game 8':
-          return <ChessGame />;
+          return <SpinnerGame />;
         case 'Game 9':
             return <RockPaper />;
       case 'Game 10':
@@ -258,7 +257,7 @@ const Home: React.FC = () => {
                           component="img"
                           width="50"
                           height="50"
-                          alt="chess"
+                          alt="spinner"
                           image={EmojiIcon}
                           title="Emoji game"
                           sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
@@ -380,9 +379,9 @@ const Home: React.FC = () => {
                     ) : game === 'Game 8' ? (
                       <CardMedia
                         component="img"
-                        alt="chess"
-                        image={ChessIcon}
-                        title="ChessIcon"
+                        alt="spinner"
+                        image={SpinnerIcon}
+                        title="spinner"
                         sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
                       />
                     ) : game === 'Game 9' ? (
@@ -442,8 +441,8 @@ const Home: React.FC = () => {
                         <CardMedia
                           component="img"
                           alt="Chese"
-                          image={ChessIcon}
-                          title="Chess"
+                          image={SpinnerIcon}
+                          title="spinner"
                           sx={game === selectedGame ? { ...gameCardStyles, ...selectedGameCardStyles } : gameCardStyles}
                         />
                       ) : game === 'Game 9' ? (

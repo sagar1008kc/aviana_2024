@@ -35,7 +35,7 @@ const About: React.FC = () => {
           <p>Sagar Khatri</p>
           <span>Software Engineer | AI & Cloud Enthusiast</span>
         </AccordionDetails>
-        <Box paddingInline={2} paddingBottom={2}>
+        <Box paddingInline={1} paddingBottom={1}>
         <a href="https://skcreation.org/">
         <Button> SKcreation.ORG</Button>
            
@@ -47,12 +47,11 @@ const About: React.FC = () => {
         </Accordion>
      </Box>
       </Box>
-
-          <Typography variant='h4' component='h3' gutterBottom textAlign='center' fontFamily={'fantasy'}>
+          <Typography variant='h4' component='h4' gutterBottom textAlign='center' fontFamily={'cursive'} >
             About Our App
           </Typography>
           <Typography variant="body1" paragraph>
-            Welcome to our application! Our react/redux app features a collection of cool games designed to enhance your critical thinking and problem-solving skills. Each game is crafted to challenge your mind and help you learn React by developing engaging and interactive gameplay experiences.
+            Welcome to our application! Our app features a collection of cool games designed to enhance your critical thinking and problem-solving skills. Each game is crafted to challenge your mind and help you learn React by developing engaging and interactive gameplay experiences.
           </Typography>
           <Typography variant="body1" paragraph>
             Our primary goal is to create a fun and educational platform where users can improve their cognitive abilities while learning modern web development techniques. Whether you're a seasoned developer or just starting, our games offer a unique way to practice and enhance your React skills.
