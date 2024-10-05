@@ -29,7 +29,6 @@ import TicTacToeIcon from '../assets/ticTacToe.png';
 import MemoryCardIcon from '../assets/memoryCard.png';
 import AvianaIcon from '../assets/avianaa.png';
 import LoginPage from './Login';
-import About from './About';
 import LandingPage from './LandingPage';
 import Footer from './Footer';
 import Calculator from '../games/Calculator';
@@ -58,7 +57,7 @@ const Home: React.FC = () => {
   const selectedGame = useSelector((state: RootState) => state.game.selectedGame);
   const leftGames = ['Game 1', 'Game 2', 'Game 3', 'Game 4', 'Game 5'];
   const rightGames = ['Game 6', 'Game 7', 'Game 8', 'Game 9', 'Game 10'];
-  const about = ['home', 'about', 'product', 'login', 'calculator'];
+  //const about = ['home', 'about', 'product', 'login', 'calculator'];
   const borderGradient = 'linear-gradient(45deg, blue, black, red)';
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
@@ -105,8 +104,6 @@ const Home: React.FC = () => {
         return <Survey />;
       case 'home':
         return <LandingPage />;
-      case 'about':
-        return <About />;
       case 'login':
         return <LoginPage />;
         case 'calculator':
@@ -156,10 +153,10 @@ const Home: React.FC = () => {
               <Grid item>
                 <Button
                   variant="text"
-                  onClick={() => dispatch(selectGame('about'))}
-                  sx={{ cursor: 'pointer', fontSize: '12px',fontWeight:'bold'}}
+                  onClick={() => handleNavigation('/portfolio')}
+                  sx={{ cursor: 'pointer', fontSize: '12px', fontWeight:'bold', ml:'10px'}}
                 >
-                  About
+                  Portfolio
                 </Button>
               </Grid>
               <Grid item>
