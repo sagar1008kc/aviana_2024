@@ -64,8 +64,8 @@ const Portfolio: React.FC = () => {
   return (
     <Container maxWidth="md">
       <StyledPaper>
-        <Box display="flex" alignItems="center" flexDirection="column" mb={4}>
-          <Typography variant="h4" component="h1" gutterBottom sx={{ fontWeight: 'bold', color: '#854242' }}>
+        <Box display="flex" alignItems="center" flexDirection="column" mb={3}>
+          <Typography variant="h4" component="h1" gutterBottom sx={{ fontWeight: 'bold', color: 'grey' }}>
             About Me
           </Typography>
           <Typography variant="body1" color="textSecondary" paragraph>
@@ -81,7 +81,7 @@ const Portfolio: React.FC = () => {
             <div
               className="badge-base LI-profile-badge"
               data-locale="en_US"
-              data-size="medium"
+              data-size="large"
               data-theme="dark"
               data-type="VERTICAL"
               data-vanity="s777k"
@@ -99,30 +99,48 @@ const Portfolio: React.FC = () => {
         </Box>
         <Divider />
 
-        {/* Tech Stack */}
-        <SectionContainer>
+               {/* Tech Stack */}
+               <SectionContainer>
           <Typography variant="h5" component="h2" gutterBottom sx={{ fontWeight: 'bold', color: 'grey' }}>
             Technology Stack
           </Typography>
           <Grid container spacing={2}>
             <Grid item xs={12} md={6}>
-              <SkillProgress skill="JavaScript" value={90} />
-              <SkillProgress skill="React" value={85} />
+              <Typography variant="h6" sx={{ fontWeight: 'bold', color: '#00796b' }}>
+                Frontend Development
+              </Typography>
+              <SkillProgress skill="JavaScript" value={85} />
+              <SkillProgress skill="TypeScript" value={90} />
+              <SkillProgress skill="React" value={90} />
               <SkillProgress skill="Redux" value={80} />
-              <SkillProgress skill="Next.js" value={75} />
-              <SkillProgress skill="HTML" value={95} />
-              <SkillProgress skill="CSS" value={90} />
+              <SkillProgress skill="Angular" value={95} />
+              <SkillProgress skill="NextJs" value={95} />
+              <SkillProgress skill="HTML, CSS, MUI, PrimeReact" value={95} />
             </Grid>
             <Grid item xs={12} md={6}>
-              <SkillProgress skill="MUI" value={80} />
-              <SkillProgress skill="PrimeReact" value={70} />
-              <SkillProgress skill="Angular" value={70} />
-              <SkillProgress skill="Database: SQL/No-SQL" value={80} />
-              <SkillProgress skill="Java" value={90} />
-              <SkillProgress skill="Python" value={90} />
+              <Typography variant="h6" sx={{ fontWeight: 'bold', color: '#00796b' }}>
+                Backend Development
+              </Typography>
+              <SkillProgress skill="Java" value={70} />
+              <SkillProgress skill="Spring Boot" value={75} />
+              <SkillProgress skill="Cosmos DB" value={70} />
+              <SkillProgress skill="SQL" value={90} />
+              <SkillProgress skill="Python" value={80} />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Typography variant="h6" sx={{ fontWeight: 'bold', color: '#00796b' }}>
+                Cloud: DevOps & Automation
+              </Typography>
+              <SkillProgress skill="Azure DevOps" value={85} />
+              <SkillProgress skill="Azure API Management" value={80} />
+              <SkillProgress skill="Automation with Azure DevOps" value={85} />
+              <SkillProgress skill="Google Cloud Platform (GCP)" value={80} />
+              <SkillProgress skill="AWS Cloud" value={80} />
+              <SkillProgress skill="CI/CD Pipelines" value={80} />
             </Grid>
           </Grid>
         </SectionContainer>
+
 
         <Divider />
 
@@ -148,6 +166,22 @@ const Portfolio: React.FC = () => {
               <SkillProgress skill="Incident Response and Forensics" value={75} />
             </Grid>
           </Grid>
+          <Grid item xs={12} md={6}>
+              <Typography variant="h6" sx={{ fontWeight: 'bold', color: '#00796b' }}>
+                Security Tools
+              </Typography>
+              <SkillProgress skill="CrowdStrike (EDR)" value={80} />
+              <SkillProgress skill="Palo Alto" value={75} />
+              <SkillProgress skill="Cisco Email Appliance" value={75} />
+              <SkillProgress skill="Jamf (Mobile Device Management)" value={75} />
+              <SkillProgress skill="Google Admin Console" value={70} />
+              <SkillProgress skill="Burp Suite" value={75} />
+              <SkillProgress skill="AWS Security Hub" value={75} />
+              <SkillProgress skill="Azure Security Center" value={77} />
+              <SkillProgress skill="Google Cloud Security Command Center (SCC)" value={70} />
+              <SkillProgress skill="Kali Linux" value={75} />
+            </Grid>
+          
         </SectionContainer>
 
         <Divider />
