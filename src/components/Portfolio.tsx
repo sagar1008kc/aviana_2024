@@ -127,18 +127,22 @@ const Portfolio: React.FC = () => {
               <SkillProgress skill="SQL" value={90} />
               <SkillProgress skill="Python" value={80} />
             </Grid>
-            <Grid item xs={12} md={6}>
+            </Grid>
               <Typography variant="h6" sx={{ fontWeight: 'bold', color: '#00796b' }}>
                 Cloud: DevOps & Automation
               </Typography>
+              <Grid container spacing={2}>
+              <Grid item xs={12} md={6}>
               <SkillProgress skill="Azure DevOps" value={85} />
               <SkillProgress skill="Azure API Management" value={80} />
               <SkillProgress skill="Automation with Azure DevOps" value={85} />
+            </Grid>
+              <Grid item xs={12} md={6}>
               <SkillProgress skill="Google Cloud Platform (GCP)" value={80} />
               <SkillProgress skill="AWS Cloud" value={80} />
               <SkillProgress skill="CI/CD Pipelines" value={80} />
+                </Grid>
             </Grid>
-          </Grid>
         </SectionContainer>
 
 
@@ -155,31 +159,38 @@ const Portfolio: React.FC = () => {
           <Grid container spacing={2}>
             <Grid item xs={12} md={6}>
               <SkillProgress skill="SIEM (Security Information and Event Management)" value={80} />
-              <SkillProgress skill="GRC (Governance, Risk, Compliance)" value={75} />
+              <SkillProgress skill="GRC(Governance, Risk, Compliance) Management" value={75} />
               <SkillProgress skill="Cloud Security (AWS, Azure, Google Cloud)" value={85} />
               <SkillProgress skill="Application Security" value={80} />
+              
             </Grid>
             <Grid item xs={12} md={6}>
-              <SkillProgress skill="Network Security" value={70} />
+              <SkillProgress skill="Vulnerability Management" value={70} />
               <SkillProgress skill="Endpoint Detection and Response (EDR)" value={80} />
               <SkillProgress skill="Identity and Access Management (IAM)" value={85} />
               <SkillProgress skill="Incident Response and Forensics" value={75} />
             </Grid>
           </Grid>
-          <Grid item xs={12} md={6}>
-              <Typography variant="h6" sx={{ fontWeight: 'bold', color: '#00796b' }}>
+          
+              <Typography variant="h6" sx={{ fontWeight: 'bold', color: '#00796b', mb:'15px'}}>
                 Security Tools
               </Typography>
+              <Grid container spacing={2}>
+              <Grid item xs={12} md={6}>
               <SkillProgress skill="CrowdStrike (EDR)" value={80} />
               <SkillProgress skill="Palo Alto" value={75} />
               <SkillProgress skill="Cisco Email Appliance" value={75} />
               <SkillProgress skill="Jamf (Mobile Device Management)" value={75} />
               <SkillProgress skill="Google Admin Console" value={70} />
+              </Grid>
+             
+              <Grid item xs={12} md={6}>
               <SkillProgress skill="Burp Suite" value={75} />
               <SkillProgress skill="AWS Security Hub" value={75} />
               <SkillProgress skill="Azure Security Center" value={77} />
               <SkillProgress skill="Google Cloud Security Command Center (SCC)" value={70} />
               <SkillProgress skill="Kali Linux" value={75} />
+              </Grid>
             </Grid>
           
         </SectionContainer>
@@ -190,8 +201,8 @@ const Portfolio: React.FC = () => {
         <CertificationSection>
           <CertificationTitle variant="h5">Certifications</CertificationTitle>
           <CertificationItem>CompTIA CSAP (Security Analytics Professional)</CertificationItem>
+          <CertificationItem>CompTIA Cyber Security Analytices+</CertificationItem>
           <CertificationItem>CompTIA Security+</CertificationItem>
-          <CertificationItem>CompTIA CySA+</CertificationItem>
           <CertificationItem>Google Cloud Certified Professional Cloud Architect</CertificationItem>
           <CertificationItem>Microsoft Certified Azure DevOps Engineer Expert</CertificationItem>
           <CertificationItem>Microsoft Certified Azure Developer</CertificationItem>
