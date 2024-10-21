@@ -1,19 +1,23 @@
 import React, { useEffect } from 'react';
-import { Container, Box, Typography, Paper, LinearProgress, Grid, Divider, Button } from '@mui/material';
+import { Container, Box, Typography, Paper, LinearProgress, Grid, Divider, Button, Avatar } from '@mui/material';
 import { styled } from '@mui/system';
 import { useNavigate } from 'react-router-dom';
+import SagarIcon from '../assets/sagar.png';
 
-// Styled components for enhanced design
-const SectionContainer = styled(Box)(({ theme }) => ({
+// Styled components for enhanced design with dynamic background color
+const SectionContainer = styled(Box)<{ bgcolor?: string }>(({ theme, bgcolor }) => ({
   marginTop: theme.spacing(6),
   marginBottom: theme.spacing(6),
+  padding: theme.spacing(4),
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: bgcolor || '#f2f3f4',
+  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
 }));
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(4),
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: '#f2f3f4',
-  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
+  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.2)',
 }));
 
 const CertificationSection = styled(Box)(({ theme }) => ({
@@ -62,45 +66,68 @@ const Portfolio: React.FC = () => {
   }, []);
 
   return (
-    <Container maxWidth="md">
+    <Container>
       <StyledPaper>
-        <Box display="flex" alignItems="center" flexDirection="column" mb={3}>
-          <Typography variant="h4" component="h1" gutterBottom sx={{ fontWeight: 'bold', color: 'grey' }}>
-            About Me
-          </Typography>
-          <Typography variant="body1" color="textSecondary" paragraph>
-            Hello, I’m Sagar, a highly driven and tech-forward professional with a deep-rooted passion for continuous
-            learning and advanced problem-solving. I specialize in staying at the cutting edge of technological trends and
-            translating my expertise into innovative, scalable solutions. My focus spans across software engineering and
-            cybersecurity, where I aim to deliver impactful results that optimize processes and enhance system integrity.
-            With an insatiable curiosity and a commitment to professional growth, I’m always exploring new technologies and
-            methodologies to maintain a competitive edge in the rapidly evolving tech landscape.
-          </Typography>
-          <Box mt={3}>
-            {/* LinkedIn Badge */}
-            <div
-              className="badge-base LI-profile-badge"
-              data-locale="en_US"
-              data-size="large"
-              data-theme="dark"
-              data-type="VERTICAL"
-              data-vanity="s777k"
-              data-version="v1"
-            >
-              <a className="badge-base__link LI-simple-link" href="https://www.linkedin.com/in/s777k?trk=profile-badge"></a>
-            </div>
+        {/* About Me Section */}
+        <SectionContainer bgcolor="#e0f7fa">
+          <Grid container spacing={2} alignItems="center" sx={{p: 0}}>
+            {/* Sagar's Image */}
+            <Grid item xs={12} md={4}>
+              <Avatar
+                src={SagarIcon}
+                alt="Sagar Khatri"
+                sx={{
+                  width: 150,
+                  height: 150,
+                  margin: 'auto',
+                  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)',
+                  border: '4px solid #00796b',
+                }}
+              />
+                     <Box mt={3}>
+                <div
+                  className="badge-base LI-profile-badge"
+                  data-locale="en_US"
+                  data-size="small"
+                  data-theme="dark"
+                  data-type="VERTICAL"
+                  data-vanity="s777k"
+                  data-version="v1"
+                >
+                  <a className="badge-base__link LI-simple-link" href="https://www.linkedin.com/in/s777k?trk=profile-badge"></a>
+                </div>
+              </Box>
+            </Grid>
+
+            {/* About Me Content */}
+            <Grid item xs={12} md={8}>
+              <Typography variant="h4" component="h1" gutterBottom sx={{ fontWeight: 'bold',color: 'gray', fontFamily: 'cursive'}}>Sagar Khatri</Typography>
+              <Typography variant="h6" component="h1" gutterBottom sx={{ fontWeight: 'bold', color: 'grey' }}>
+                 - Full-Stack Engineer, Cybersecurity Specialist & AI Enthusiast
+              </Typography>
+              <Typography variant="body1" color="textSecondary" paragraph>
+                Hello, I’m Sagar, a dedicated Full-Stack Engineer with expertise in software development and a strong focus on implementing cutting-edge solutions across diverse technological domains. I have extensive experience in building scalable, high-performing applications, while also ensuring robust cybersecurity measures to protect system integrity and data privacy.
+              </Typography>
+              <Typography variant="body1" color="textSecondary" paragraph>
+                As an AI enthusiast and a tech-savvy professional, I stay up-to-date with the latest technological advancements and continuously explore how AI can transform and optimize business processes. My work ethos revolves around innovation, problem-solving, and continuous learning, enabling me to deliver impactful results that not only meet business needs but also anticipate future demands in a rapidly evolving digital landscape.
+              </Typography>
+              <Typography variant="body1" color="textSecondary" paragraph>
+                With a passion for transforming ideas into reality, I’m always eager to embrace new challenges and collaborate on projects that push the boundaries of what's possible in technology.
+              </Typography>
+              {/* LinkedIn Badge */}
+            </Grid>
+          </Grid>
+          <Box display="flex" justifyContent="center" m={2}>
+            <Button variant="contained" color="primary" onClick={() => navigate('/')}>
+              Go to Home Page
+            </Button>
           </Box>
-        </Box>
-        {/* Go to Home Button - Bottom Center */}
-        <Box display="flex" justifyContent="center" m={2}>
-            <Button onClick={() => navigate('/')}>
-            Go to Home Page
-          </Button>
-        </Box>
+        </SectionContainer>
+
         <Divider />
 
-               {/* Tech Stack */}
-               <SectionContainer>
+        {/* Technology Stack Section */}
+        <SectionContainer bgcolor="#f1f8e9">
           <Typography variant="h5" component="h2" gutterBottom sx={{ fontWeight: 'bold', color: 'grey' }}>
             Technology Stack
           </Typography>
@@ -127,29 +154,12 @@ const Portfolio: React.FC = () => {
               <SkillProgress skill="SQL" value={90} />
               <SkillProgress skill="Python" value={80} />
             </Grid>
-            </Grid>
-              <Typography variant="h6" sx={{ fontWeight: 'bold', color: '#00796b' }}>
-                Cloud: DevOps & Automation
-              </Typography>
-              <Grid container spacing={2}>
-              <Grid item xs={12} md={6}>
-              <SkillProgress skill="Azure DevOps" value={85} />
-              <SkillProgress skill="Azure API Management" value={80} />
-              <SkillProgress skill="Automation with Azure DevOps" value={85} />
-            </Grid>
-              <Grid item xs={12} md={6}>
-              <SkillProgress skill="Google Cloud Platform (GCP)" value={80} />
-              <SkillProgress skill="AWS Cloud" value={80} />
-              <SkillProgress skill="CI/CD Pipelines" value={80} />
-                </Grid>
-            </Grid>
+          </Grid>
         </SectionContainer>
 
 
-        <Divider />
-
-        {/* Cybersecurity */}
-        <SectionContainer>
+        {/* Cybersecurity Section */}
+        <SectionContainer bgcolor="#ffecb3">
           <Typography variant="h5" component="h2" gutterBottom sx={{ fontWeight: 'bold', color: 'grey' }}>
             Cybersecurity Expertise
           </Typography>
@@ -159,10 +169,9 @@ const Portfolio: React.FC = () => {
           <Grid container spacing={2}>
             <Grid item xs={12} md={6}>
               <SkillProgress skill="SIEM (Security Information and Event Management)" value={80} />
-              <SkillProgress skill="GRC(Governance, Risk, Compliance) Management" value={75} />
+              <SkillProgress skill="GRC (Governance, Risk, Compliance) Management" value={75} />
               <SkillProgress skill="Cloud Security (AWS, Azure, Google Cloud)" value={85} />
               <SkillProgress skill="Application Security" value={80} />
-              
             </Grid>
             <Grid item xs={12} md={6}>
               <SkillProgress skill="Vulnerability Management" value={70} />
@@ -171,34 +180,12 @@ const Portfolio: React.FC = () => {
               <SkillProgress skill="Incident Response and Forensics" value={75} />
             </Grid>
           </Grid>
-          
-              <Typography variant="h6" sx={{ fontWeight: 'bold', color: '#00796b', mb:'15px'}}>
-                Security Tools
-              </Typography>
-              <Grid container spacing={2}>
-              <Grid item xs={12} md={6}>
-              <SkillProgress skill="CrowdStrike (EDR)" value={80} />
-              <SkillProgress skill="Palo Alto" value={75} />
-              <SkillProgress skill="Cisco Email Appliance" value={75} />
-              <SkillProgress skill="Jamf (Mobile Device Management)" value={75} />
-              <SkillProgress skill="Google Admin Console" value={70} />
-              </Grid>
-             
-              <Grid item xs={12} md={6}>
-              <SkillProgress skill="Burp Suite" value={75} />
-              <SkillProgress skill="AWS Security Hub" value={75} />
-              <SkillProgress skill="Azure Security Center" value={77} />
-              <SkillProgress skill="Google Cloud Security Command Center (SCC)" value={70} />
-              <SkillProgress skill="Kali Linux" value={75} />
-              </Grid>
-            </Grid>
-          
         </SectionContainer>
 
         <Divider />
 
-        {/* Certifications */}
-        <CertificationSection>
+        {/* Certifications Section */}
+        <SectionContainer bgcolor="#e3f2fd">
           <CertificationTitle variant="h5">Certifications</CertificationTitle>
           <CertificationItem>CompTIA CSAP (Security Analytics Professional)</CertificationItem>
           <CertificationItem>CompTIA Cyber Security Analytices+</CertificationItem>
@@ -206,14 +193,13 @@ const Portfolio: React.FC = () => {
           <CertificationItem>Google Cloud Certified Professional Cloud Architect</CertificationItem>
           <CertificationItem>Microsoft Certified Azure DevOps Engineer Expert</CertificationItem>
           <CertificationItem>Microsoft Certified Azure Developer</CertificationItem>
-        </CertificationSection>
+        </SectionContainer>
 
-        {/* Go to Home Button - Top Center */}
-      <Box display="flex" justifyContent="center" mt={4}>
-        <Button variant="contained" color="primary" onClick={() => navigate('/')}>
-          Go to Home Page
-        </Button>
-      </Box>
+        <Box display="flex" justifyContent="center" mt={4}>
+          <Button variant="contained" color="primary" onClick={() => navigate('/')}>
+            Go to Home Page
+          </Button>
+        </Box>
       </StyledPaper>
     </Container>
   );
