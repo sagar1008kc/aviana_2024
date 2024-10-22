@@ -1,10 +1,16 @@
-import React, { useEffect, useRef } from 'react';
-import { Container, Box, Typography, Paper, LinearProgress, Grid, Divider, Button, Avatar, ListItem, ListItemIcon, ListItemText, List } from '@mui/material';
+import React, { useEffect, useRef, useState } from 'react';
+import { Container, Box, Typography, Paper, LinearProgress, Grid, Button, Avatar, ListItem, ListItemIcon, ListItemText, List } from '@mui/material';
 import { styled } from '@mui/system';
 import { useNavigate } from 'react-router-dom';
 import SagarIcon from '../assets/sagar.png';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import GoogleIcon from '../assets/googleIcon.png';
+import DeveloperIcon from '../assets/developerIcon.png';
+import DevOpsIcon from '../assets/devOpsIcon.jpg';
+import SecurityIcon from '../assets/securityIcon.png';
+import CysaIcon from '../assets/cysaIcon.png';
+import CaspIcon from '../assets/csapIcon.png';
 // Styled components for enhanced design with dynamic background color
 const SectionContainer = styled(Box)<{ bgcolor?: string }>(({ theme, bgcolor }) => ({
   marginTop: theme.spacing(6),
@@ -19,6 +25,47 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
   borderRadius: theme.shape.borderRadius,
   boxShadow: '0 4px 20px rgba(0, 0, 0, 0.2)',
 }));
+const FlipBox = styled(Box)(({ theme }) => ({
+  width: 100,
+  height: 100,
+  perspective: '1000px',
+  cursor: 'pointer',
+}));
+
+const FlipInner = styled(Box)<{ flipped: boolean }>(({ flipped }) => ({
+  position: 'relative',
+  width: '100%',
+  height: '100%',
+  transformStyle: 'preserve-3d',
+  transform: flipped ? 'rotateY(180deg)' : 'none',
+  transition: 'transform 0.6s',
+}));
+
+const FlipFront = styled(Box)(({ theme }) => ({
+  position: 'absolute',
+  width: '100%',
+  height: '100%',
+  backfaceVisibility: 'hidden',
+  backgroundColor: '#000',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  color: '#fff',
+}));
+
+const FlipBack = styled(Box)(({ theme }) => ({
+  position: 'absolute',
+  width: '100%',
+  height: '100%',
+  backfaceVisibility: 'hidden',
+  transform: 'rotateY(180deg)',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  backgroundColor: '#fff',
+  border: '2px solid #000',
+}));
+
 const CertificationSection = styled(Box)(({ theme }) => ({
   borderRadius: theme.shape.borderRadius,
   textAlign: 'left',
@@ -58,8 +105,21 @@ const SkillProgress: React.FC<{ skill: string, value: number }> = ({ skill, valu
 
 const Portfolio: React.FC = () => {
   const navigate = useNavigate();
+  const [flippedIndex, setFlippedIndex] = useState<number | null>(null);
 
   const badgeRef = useRef<HTMLDivElement>(null);
+  const handleFlip = (index: number) => {
+    setFlippedIndex(flippedIndex === index ? null : index);
+  };
+
+  const certifications = [
+    { name: 'Google Cloud Architect', icon: GoogleIcon },
+    { name: 'Azure Developer', icon: DeveloperIcon },
+    { name: 'Azure DevOps Engineer', icon: DevOpsIcon },
+    { name: 'CompTIA Security+', icon: SecurityIcon },
+    { name: 'CompTIA CySA+', icon: CysaIcon },
+    { name: 'CompTIA Security Analyst Professional', icon: CaspIcon },
+  ];
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -216,7 +276,6 @@ const Portfolio: React.FC = () => {
           </Box>
         </SectionContainer>
 
-        <Divider />
 
         {/* Technology Stack Section */}
         <SectionContainer bgcolor="#f1f8e9">
@@ -274,45 +333,37 @@ const Portfolio: React.FC = () => {
           </Grid>
         </SectionContainer>
 
-        <Divider />
-
-        {/* Certifications Section */}
         <SectionContainer bgcolor="#e3f2fd">
-          <CertificationSection>
-            <CertificationTitle variant="h5">Certifications</CertificationTitle>
+          <Typography variant="h5" sx={{ fontWeight: 'bold', color: 'grey', mb: 2 }}>
+            Certifications
+          </Typography>
+          <Grid container spacing={2} columns={{ xs: 2, sm: 4, md: 4 }}>
+            {certifications.map((cert, index) => (
+              <Grid item xs={1} sm={1} md={1} key={index}>
+                <FlipBox onClick={() => handleFlip(index)}>
+                  <FlipInner flipped={flippedIndex === index}>
+                    {/* Front Side */}
+                    <FlipFront />
 
-            <CertificationItem>
-              <CheckCircleIcon sx={{ color: 'green', mr: 1 }} />
-              CompTIA CSAP (Security Analytics Professional)
-            </CertificationItem>
-
-            <CertificationItem>
-              <CheckCircleIcon sx={{ color: 'green', mr: 1 }} />
-              CompTIA CySA+(Cyber Security Analytics)
-            </CertificationItem>
-
-            <CertificationItem>
-              <CheckCircleIcon sx={{ color: 'green', mr: 1 }} />
-              CompTIA Security+
-            </CertificationItem>
-
-            <CertificationItem>
-              <CheckCircleIcon sx={{ color: 'green', mr: 1 }} />
-              Google Cloud Certified Professional Cloud Architect
-            </CertificationItem>
-
-            <CertificationItem>
-              <CheckCircleIcon sx={{ color: 'green', mr: 1 }} />
-              Microsoft Certified Azure DevOps Engineer Expert
-            </CertificationItem>
-
-            <CertificationItem>
-              <CheckCircleIcon sx={{ color: 'green', mr: 1 }} />
-              Microsoft Certified Azure Developer
-            </CertificationItem>
-          </CertificationSection>
+                    {/* Back Side */}
+                    <FlipBack>
+                      <img
+                        src={cert.icon}
+                        alt={cert.name}
+                        style={{ width: '80%', height: '80%' }}
+                      />
+                    </FlipBack>
+                  </FlipInner>
+                </FlipBox>
+                <Typography align="left" sx={{ mt: 1, fontWeight: 'bold' }}>
+                  {cert.name}
+                </Typography>
+              </Grid>
+            ))}
+          </Grid>
         </SectionContainer>
-        <Divider />
+    
+
         <SectionContainer bgcolor="#ffecb3">
         <Box mt={3} p={2} sx={{ backgroundColor: '#f5f5f5', borderRadius: '8px' }}>
       <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 2 }}>
