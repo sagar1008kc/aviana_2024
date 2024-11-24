@@ -13,12 +13,20 @@ import CysaIcon from '../assets/cysaIcon.png';
 import CaspIcon from '../assets/csapIcon.png';
 // Styled components for enhanced design with dynamic background color
 const SectionContainer = styled(Box)<{ bgcolor?: string }>(({ theme, bgcolor }) => ({
+
   marginTop: theme.spacing(6),
   marginBottom: theme.spacing(6),
   padding: theme.spacing(4),
   borderRadius: theme.shape.borderRadius,
   backgroundColor: bgcolor || '#f2f3f4',
   boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
+  opacity: 0, // Initially hidden
+  transform: 'translateY(100px)', // Positioned slightly below
+  transition: 'opacity 0.9s ease-out, transform 0.9s ease-out', // Smooth transition
+  '&.visible': {
+    opacity: 1, 
+    transform: 'translateY(0)', 
+  },
 }));
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
@@ -72,27 +80,6 @@ const CertificationSection = styled(Box)(({ theme }) => ({
   marginTop: theme.spacing(4),
 }));
 
-const CertificationTitle = styled(Typography)({
-  fontWeight: 'bold',
-  fontFamily: 'Roboto Slab',
-  color: '#00796b',
-  marginBottom: '1rem',
-});
-
-const CertificationItem = styled(Box)(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  padding: theme.spacing(2),
-  borderRadius: theme.shape.borderRadius,
-  boxShadow: '0 4px 15px rgba(0, 0, 0, 0.5)',
-  marginBottom: theme.spacing(2),
-  backgroundColor: '#ffffff',
-  fontWeight: 'bold',
-  fontFamily: `'Poppins', sans-serif`,
-  color: '#616161',
-  fontSize: '1.1rem',
-}));
-
 
 const SkillProgress: React.FC<{ skill: string, value: number }> = ({ skill, value }) => (
   <Box mb={3}>
@@ -111,6 +98,45 @@ const Portfolio: React.FC = () => {
   const handleFlip = (index: number) => {
     setFlippedIndex(flippedIndex === index ? null : index);
   };
+  const sectionRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const [currentBackground, setCurrentBackground] = useState('#ffffff');
+
+  const handleIntersection = (entries: IntersectionObserverEntry[]) => {
+    entries.forEach((entry) => {
+      const target = entry.target as HTMLElement;
+      if (entry.isIntersecting) {
+        target.classList.add('visible');
+        if (target.dataset.bgcolor) {
+          setCurrentBackground(target.dataset.bgcolor);
+        }
+      } else {
+        target.classList.remove('visible');
+      }
+    });
+  };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(handleIntersection, { threshold: 0.3 });
+
+    sectionRefs.current.forEach((section) => {
+      if (section) {
+        observer.observe(section);
+      }
+    });
+
+    return () => {
+      sectionRefs.current.forEach((section) => {
+        if (section) {
+          observer.unobserve(section);
+        }
+      });
+    };
+  }, []);
+
+  useEffect(() => {
+    document.body.style.transition = 'background-color 0.5s ease-in-out';
+    document.body.style.backgroundColor = currentBackground;
+  }, [currentBackground]);
 
   const certifications = [
     { name: 'Google Cloud Architect', icon: GoogleIcon },
@@ -177,7 +203,10 @@ const Portfolio: React.FC = () => {
     </Box>
       <StyledPaper>
         {/* About Me Section */}
-        <SectionContainer>
+        <SectionContainer
+          ref={(el: HTMLDivElement | null) => (sectionRefs.current[0] = el)}
+          data-bgcolor="#f2f3f4"
+        >
           <Grid container spacing={2} alignItems="center" sx={{p: 0}}>
             {/* Sagar's Image */}
             <Grid item xs={12} md={4}>
@@ -274,11 +303,13 @@ const Portfolio: React.FC = () => {
       Go to Home Page
     </Button>
           </Box>
-        </SectionContainer>
-
+          </SectionContainer>
 
         {/* Technology Stack Section */}
-        <SectionContainer bgcolor="#f1f8e9">
+        <SectionContainer
+          ref={(el: HTMLDivElement | null) => (sectionRefs.current[1] = el)}
+          data-bgcolor="#f2f3f4"
+        >
           <Typography variant="h5" component="h2" gutterBottom sx={{ fontWeight: 'bold', color: 'grey' }}>
             Technology Stack
           </Typography>
@@ -310,7 +341,10 @@ const Portfolio: React.FC = () => {
 
 
         {/* Cybersecurity Section */}
-        <SectionContainer bgcolor="#ffecb3">
+        <SectionContainer
+          ref={(el: HTMLDivElement | null) => (sectionRefs.current[2] = el)}
+          data-bgcolor="#ffecb3"
+        >
           <Typography variant="h5" component="h2" gutterBottom sx={{ fontWeight: 'bold', color: 'grey' }}>
             Cybersecurity Expertise
           </Typography>
@@ -332,8 +366,10 @@ const Portfolio: React.FC = () => {
             </Grid>
           </Grid>
         </SectionContainer>
-
-        <SectionContainer bgcolor="#e3f2fd">
+        <SectionContainer
+          ref={(el: HTMLDivElement | null) => (sectionRefs.current[3] = el)}
+          data-bgcolor="#e3f2fd"
+        >
           <Typography variant="h5" sx={{ fontWeight: 'bold', color: 'grey', mb: 2 }}>
             Certifications
           </Typography>
@@ -364,7 +400,10 @@ const Portfolio: React.FC = () => {
         </SectionContainer>
     
 
-        <SectionContainer bgcolor="#ffecb3">
+        <SectionContainer
+          ref={(el: HTMLDivElement | null) => (sectionRefs.current[4] = el)}
+          data-bgcolor="#ffecb3"
+        >
         <Box mt={3} p={2} sx={{ backgroundColor: '#f5f5f5', borderRadius: '8px' }}>
       <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 2 }}>
         Project Management Highlights
@@ -394,7 +433,7 @@ const Portfolio: React.FC = () => {
           Tools & Technologies
         </Typography>
         {[
-          'JIRA & Trello for task tracking and sprint planning.',
+          'JIRA, ADO, and Confluence for task tracking and sprint planning.',
           'Microsoft Project for Gantt charts and project scheduling.',
           'Confluence for documentation and collaboration.',
           'Slack & Microsoft Teams for team communication and updates.',
