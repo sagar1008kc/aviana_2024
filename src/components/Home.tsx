@@ -144,7 +144,7 @@ const Home: React.FC = () => {
               <Grid item>
                 <Button
                   variant="text"
-                  onClick={() => handleNavigation('/product')}
+                  onClick={() => handleNavigation('/match')}
                   sx={{ cursor: 'pointer', fontSize: '12px', fontWeight:'bold', ml:'10px'}}
                 >
                   Product

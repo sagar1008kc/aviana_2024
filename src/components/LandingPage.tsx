@@ -1,27 +1,23 @@
-// src/components/HomePage.tsx
 import React from 'react';
-import { Container, Typography, Box, Grid, Button } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Container, Typography, Box, Button } from '@mui/material';
 import GameIcon from '@mui/icons-material/SportsEsports'; 
-import ExploreIcon from '@mui/icons-material/Explore';
-import BackGroundImage from '../assets/background.png';
+
 const LandingPage: React.FC = () => {
   return (
     <Box>
       <Box
         sx={{
-          backgroundImage: `url(${BackGroundImage})`,
-          backgroundPosition: 'center',
-          backgroundSize: 'cover',
-          backgroundRepeat: 'no-repeat',
-          height: '60vh', 
+          background: 'linear-gradient(to bottom, #2196F3, #E91E63)', // Gradient from blue to pink
+          height: '50vh',
+          width: '100%', // Full width
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
-          color: 'black',
+          color: 'white',
           padding: '0',
           textShadow: '0 2px 4px rgba(0, 0, 0, 0.5)',
+          boxShadow: '0 10px 20px rgba(0, 0, 0, 0.2), 0 -10px 20px rgba(0, 0, 0, 0.2)', // Shadow effect on top and bottom
         }}
       >
         <Typography
@@ -31,18 +27,14 @@ const LandingPage: React.FC = () => {
             fontFamily: 'fantasy',
             textAlign: 'center',
             paddingBottom: '18px',
-            animation: 'fadeIn 2s ease-in-out, slideIn 2s ease-in-out',
+            animation: 'fadeIn 2s ease-in-out',
             '@keyframes fadeIn': {
               '0%': { opacity: 0 },
               '100%': { opacity: 1 },
             },
-            '@keyframes slideIn': {
-              '0%': { transform: 'translateY(-50px)' },
-              '100%': { transform: 'translateY(0)' },
-            },
           }}
         >
-          Welcome to Aviana Games App!
+          Welcome to Aviana Games!
         </Typography>
         <Typography
           variant="h5"
@@ -50,56 +42,26 @@ const LandingPage: React.FC = () => {
           textAlign="center"
           maxWidth="600px"
           sx={{
-            animation: 'fadeIn 3s ease-in-out',
-            '@keyframes fadeIn': {
-              '0%': { opacity: 0 },
-              '100%': { opacity: 1 },
-            },
+            padding: '0 20px',
           }}
         >
-          Dive into a world of exciting games designed to enhance your skills and fun!
+          A world of exciting challenges awaits. Play, learn, and grow with every game!
         </Typography>
         <Button
-          variant="text"
-          color="inherit"
-          size="medium"
-          sx={{mt: '100px', fontWeight: 'bold', fontSize: '1.5rem', color: 'red'}}
+          variant="contained"
+          color="primary"
+          size="large"
+          sx={{
+            mt: '30px',
+            fontWeight: 'bold',
+            fontSize: '1.2rem',
+            textTransform: 'none',
+            padding: '10px 30px',
+          }}
         >
-          ~ Click Game Icon To Play ~
+          Play now by clicking game icon
         </Button>
       </Box>
-
-      {/* Features Section */}
-      <Container sx={{ mt: 4 }}>
-        <Typography variant="h4" component="h2"  textAlign="center">
-          Why Play with Aviana?
-        </Typography>
-        <Grid container spacing={4}>
-          <Grid item xs={12} sm={6}>
-            <Box textAlign="center">
-              <GameIcon fontSize="large" color="primary" />
-              <Typography variant="h6" component="h3" gutterBottom>
-                Fun & Engaging
-              </Typography>
-              <Typography variant="body1">
-                Enjoy games that are not only fun but also challenge your mind and creativity.
-              </Typography>
-            </Box>
-          </Grid>
-
-          <Grid item xs={12} sm={6}>
-            <Box textAlign="center">
-              <ExploreIcon fontSize="large" color="success" />
-              <Typography variant="h6" component="h3" gutterBottom>
-                Explore & Learn
-              </Typography>
-              <Typography variant="body1">
-                Discover new challenges and enhance your critical thinking with every game.
-              </Typography>
-            </Box>
-          </Grid>
-        </Grid>
-      </Container>
     </Box>
   );
 };

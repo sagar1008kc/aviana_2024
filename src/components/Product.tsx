@@ -1,287 +1,229 @@
-import React, { useState } from 'react';
-import {
-  Card,
-  CardContent,
-  CardMedia,
-  Typography,
-  Button,
-  Grid,
-  IconButton,
-  Badge,
-  AppBar,
-  Toolbar,
-  Drawer,
-  List,
-  ListItem,
-  ListItemText,
-  ListItemSecondaryAction,
-  CssBaseline,
-  Box,
-  TextField,
-  Divider
-} from '@mui/material';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import CloseIcon from '@mui/icons-material/Close';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import PayPalIcon from '../assets/paypal.png';
-import ComingSoonIcon from '../assets/comingIcon.png';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { Button, Box, Typography, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio } from "@mui/material";
 
-interface Product {
-  id: number;
-  name: string;
-  description: string;
-  price: number;
-  icon: string;
-}
+const LoveMatch: React.FC = () => {
+  const [player1Answers, setPlayer1AnswersState] = useState<string[]>(Array(20).fill(""));
+  const [player2Answers, setPlayer2AnswersState] = useState<string[]>(Array(20).fill(""));
+  const [player1Submitted, setPlayer1Submitted] = useState(false);
+  const [player2Submitted, setPlayer2Submitted] = useState(false);
+  const [matchResult, setMatchResult] = useState<number | null>(null);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [isPlayer1Active, setIsPlayer1Active] = useState(true);
+  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
 
-const products: Product[] = [
-  {
-    id: 1,
-    name: 'Video Game',
-    description: 'Description...',
-    price: 10.99,
-    icon: ComingSoonIcon
-  },
-  {
-    id: 2,
-    name: 'Toycar',
-    description: 'Description..',
-    price: 15.99,
-    icon: ComingSoonIcon
-  },
-  {
-    id: 3,
-    name: 'Dress',
-    description: 'Description..',
-    price: 15.99,
-    icon: ComingSoonIcon
-  },
-  {
-    id: 4,
-    name: 'Dress',
-    description: 'Description..',
-    price: 15.99,
-    icon: ComingSoonIcon
-  },
-  {
-    id: 5,
-    name: 'Dress',
-    description: 'Description..',
-    price: 15.99,
-    icon: ComingSoonIcon
-  },
-  {
-    id: 6,
-    name: 'Toy',
-    description: 'Description..',
-    price: 15.99,
-    icon: ComingSoonIcon
-  },
-];
+  const questionsWithOptions = [
+    {
+      question: "What is their favorite type of movie?",
+      options: ["Action", "Comedy", "Romance", "Horror"],
+    },
+    {
+      question: "What is their preferred type of vacation?",
+      options: ["Beach", "Mountains", "City", "Countryside"],
+    },
+    {
+      question: "What kind of music do you enjoy most?",
+      options: ["Pop", "Rock", "Classical", "Jazz"],
+    },
+    {
+      question: "What is their favorite kind of food?",
+      options: ["Italian", "Chinese", "Indian", "Mexican"],
+    },
+    {
+      question: "Which hobby do you enjoy the most?",
+      options: ["Reading", "Sports", "Gaming", "Cooking"],
+    },
+    {
+      question: "What is their dream job?",
+      options: ["Artist", "Entrepreneur", "Scientist", "Teacher"],
+    },
+    {
+      question: "How do you prefer to spend their weekend?",
+      options: ["Staying in", "Partying", "Traveling", "Catching up on hobbies"],
+    },
+    {
+      question: "What is their favorite pet?",
+      options: ["Dog", "Cat", "Fish", "Bird"],
+    },
+    {
+      question: "What’s their preferred way to relax?",
+      options: ["Watching TV", "Meditation", "Reading", "Exercising"],
+    },
+    {
+      question: "What kind of gift would you appreciate the most?",
+      options: ["Jewelry", "Books", "Gadgets", "Handwritten letter"],
+    },
+    {
+      question: "Do you like spicy food?",
+      options: ["Yes", "No"],
+    },
+    {
+      question: "Are you a morning person?",
+      options: ["Yes", "No"],
+    },
+    {
+      question: "Do you enjoy outdoor activities?",
+      options: ["Yes", "No"],
+    },
+    {
+      question: "Are you a fan of coffee?",
+      options: ["Yes", "No"],
+    },
+    {
+      question: "Do you prefer texting over calling?",
+      options: ["Yes", "No"],
+    },
+    {
+      question: "Do you enjoy watching sports?",
+      options: ["Yes", "No"],
+    },
+    {
+      question: "Do you like surprises?",
+      options: ["Yes", "No"],
+    },
+    {
+      question: "Are you good at cooking?",
+      options: ["Yes", "No"],
+    },
+    {
+      question: "Do you like to dance?",
+      options: ["Yes", "No"],
+    },
+    {
+      question: "Are you an animal lover?",
+      options: ["Yes", "No"],
+    },
+  ];
 
-interface CartItem extends Product {
-  quantity: number;
-}
-
-const Product: React.FC = () => {
-  const [cart, setCart] = useState<CartItem[]>([]);
-  const [drawerOpen, setDrawerOpen] = useState(false);
-  const [checkoutOpen, setCheckoutOpen] = useState(false);
-  const navigate = useNavigate();
-
-  const addToCart = (product: Product) => {
-    setCart((prevCart) => {
-      const existingItem = prevCart.find((item) => item.id === product.id);
-      if (existingItem) {
-        return prevCart.map((item) =>
-          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-        );
+  const handleNextQuestion = () => {
+    if (selectedAnswer) {
+      if (isPlayer1Active) {
+        const updatedAnswers = [...player1Answers];
+        updatedAnswers[currentQuestionIndex] = selectedAnswer;
+        setPlayer1AnswersState(updatedAnswers);
       } else {
-        return [...prevCart, { ...product, quantity: 1 }];
+        const updatedAnswers = [...player2Answers];
+        updatedAnswers[currentQuestionIndex] = selectedAnswer;
+        setPlayer2AnswersState(updatedAnswers);
       }
-    });
+
+      setSelectedAnswer(null);
+
+      if (currentQuestionIndex < questionsWithOptions.length - 1) {
+        setCurrentQuestionIndex((prev) => prev + 1);
+      } else {
+        if (isPlayer1Active) {
+          setPlayer1Submitted(true);
+          setIsPlayer1Active(false);
+          setCurrentQuestionIndex(0);
+        } else {
+          setPlayer2Submitted(true);
+        }
+      }
+    }
   };
 
-  const toggleDrawer = (open: boolean) => () => {
-    setDrawerOpen(open);
+  const handleCalculateMatch = () => {
+    const totalQuestions = questionsWithOptions.length;
+    const matchingAnswers = player1Answers.filter((answer, index) => answer === player2Answers[index]).length;
+    const matchPercentage = Math.round((matchingAnswers / totalQuestions) * 100);
+    setMatchResult(matchPercentage);
   };
-
-  const handleCheckout = () => {
-    setCheckoutOpen(true);
-  };
-
-  const handlePayment = (event: React.FormEvent) => {
-    event.preventDefault();
-    // Implement payment logic here
-    alert('Payment processed successfully!');
-    navigate('/');
-  };
-
-  const handleCloseCheckout = () => {
-    setCheckoutOpen(false);
-    navigate('/');
-  };
-
-  const totalAmount = cart.reduce((total, item) => total + item.price * item.quantity, 0);
 
   return (
-    <>
-      <CssBaseline />
-      <AppBar position="sticky" sx={{ backgroundColor: 'darkslateblue' }}>
-        <Toolbar>
-          <IconButton color="inherit" onClick={() => navigate('/')}>
-            <ArrowBackIcon />
-          </IconButton>
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            Avianaa Online Store <i>--in progress</i>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "space-between",
+        height: "100vh",
+        p: 4,
+        background: "linear-gradient(to bottom, #ffcccc, #ff99cc)",
+      }}
+    >
+      <Box 
+        sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "space-between",
+        height: "50vh",
+        p: 1,
+        background: "linear-gradient(to bottom, lightblue, lightpink)",
+      }}>
+      <Typography variant="h4" gutterBottom textAlign="center" color="Red" paddingBlock="30px">
+        Love Match Game
+      </Typography>
+      <Typography variant="body1" textAlign="center" fontFamily="monospace" paddingBlock="20px">This is a fun love matching game, designed to explore and understand each other's interests, perceptions, and mindsets, all while enjoying the playful journey of discovering how well you connect.</Typography>
+      <Box
+        sx={{
+          width: "100%",
+          background: "#ffe6e6",
+           p: 3,
+          borderRadius: "8px",
+          boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+        }}
+      >
+        <Typography variant="h6" color="darkred" textAlign="center">
+          {isPlayer1Active ? "Player 1" : "Player 2"}
+        </Typography>
+
+        <FormControl sx={{ my: 2 }} fullWidth>
+          <FormLabel>{questionsWithOptions[currentQuestionIndex].question}</FormLabel>
+          <RadioGroup
+            value={selectedAnswer}
+            onChange={(e) => setSelectedAnswer(e.target.value)}
+            sx={{ flexDirection: "row", justifyContent: "center" }}
+          >
+            {questionsWithOptions[currentQuestionIndex].options.map((option, idx) => (
+              <FormControlLabel key={idx} value={option} control={<Radio />} label={option} />
+            ))}
+          </RadioGroup>
+        </FormControl>
+
+        <Button
+          variant="contained"
+          sx={{
+            mt: 2,
+            background: "darkred",
+            color: "white",
+            display: "block",  // Makes the button a block element
+            marginLeft: "auto", // Centers the button horizontally
+            marginRight: "auto", // Centers the button horizontally
+            alignContent: "center"
+          }}
+          onClick={handleNextQuestion}
+          disabled={!selectedAnswer}
+>
+  Next
+</Button>
+      </Box>
+
+      {player1Submitted && player2Submitted && (
+        <Button
+          variant="contained"
+          sx={{ mt: 4, background: "White", color: "black" }}
+          onClick={handleCalculateMatch}
+        >
+          Calculate Love Match
+        </Button>
+      )}
+
+      {matchResult !== null && (
+        <>
+          <Typography
+            variant="h5"
+            sx={{ mt: 3, background: "#ffcccc", p: 2, borderRadius: "8px", textAlign: "center", color: "darkred" }}
+          >
+            Match Result: {matchResult}%
           </Typography>
-          <IconButton color="inherit" onClick={toggleDrawer(true)}>
-            <Badge badgeContent={cart.reduce((sum, item) => sum + item.quantity, 0)} color="secondary">
-              <ShoppingCartIcon />
-            </Badge>
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-
-      <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer(false)}>
-        <List sx={{position:'relative', minWidth: 400}}>
-          <ListItem>
-            <ListItemText primary="Your Cart" />
-            <ListItemSecondaryAction>
-              <IconButton onClick={() => setDrawerOpen(false)}>
-                <CloseIcon />
-              </IconButton>
-            </ListItemSecondaryAction>
-          </ListItem>
-          {cart.map((product, index) => (
-            <ListItem key={index}>
-              <CardMedia
-                component="img"
-                image={product.icon}
-                alt={product.name}
-                sx={{ width: 50, height: 50, marginRight: 2 }}
-              />
-              <ListItemText
-                primary={`${product.name} (${product.quantity})`}
-                secondary={`$${(product.price * product.quantity).toFixed(2)}`}
-              />
-              <ListItemSecondaryAction>
-                <Button
-                  onClick={() => {
-                    setCart(cart.filter((_, i) => i !== index));
-                  }}
-                  sx={{ padding: 1, color: 'red' }}
-                >
-                  Remove
-                </Button>
-              </ListItemSecondaryAction>
-            </ListItem>
-          ))}
-        </List>
-        {cart.length > 0 && (
-          <Box sx={{ padding: 2 }}>
-            <Typography variant="h6" border="1px dotted grey" p="10px">Total: ${totalAmount.toFixed(2)}</Typography>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleCheckout}
-              fullWidth
-              sx={{ marginTop: 2, width: 100, textAlign: 'center'}}
-            >
-              Checkout
-            </Button>
-            {checkoutOpen && (
-              <Box component="form" onSubmit={handlePayment} m={2} marginInline={6}>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <Typography variant="subtitle1"> Please checkout with Credit/Debit card information below:</Typography>
-                </Box>
-                <TextField
-                  label="Credit/Debit Card Number"
-                  variant="outlined"
-                  fullWidth
-                  margin="normal"
-                  required
-                  inputProps={{ pattern: "\\d{16}", title: "Credit/Debit Card Number should be 16 digits" }}
-                />
-                <TextField
-                  label="Expiry Date (MM/YY)"
-                  variant="outlined"
-                  fullWidth
-                  margin="normal"
-                  required
-                  inputProps={{ pattern: "(0[1-9]|1[0-2])/[0-9]{2}", title: "Expiry date format should be MM/YY" }}
-                />
-                <TextField
-                  label="CVV"
-                  variant="outlined"
-                  fullWidth
-                  margin="normal"
-                  required
-                  inputProps={{ maxLength: 4, pattern: "[0-9]{3,4}", title: "CVV should be 3 or 4 digits" }}
-                />
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="success"
-                  fullWidth
-                  sx={{ marginTop: 2 }}
-                >
-                  Pay Now
-                </Button>
-                <Typography variant='h6' textAlign='center' m='2'>OR</Typography>
-                <Button
-                  variant="contained"
-                  color="info"
-                  fullWidth
-                  sx={{display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-                >
-                  <img src={PayPalIcon} alt="PayPal" style={{ width: '40px', marginRight: '8px' }} />
-                  Pay with PayPal
-                </Button>
-              </Box>
-            )}
-          </Box>
-        )}
-      </Drawer>
-
-      <Grid container spacing={2} sx={{ padding: 2 }}>
-        {products.map((product) => (
-          <Grid item xs={12} sm={6} md={4} key={product.id}>
-            <Card>
-              <CardMedia
-                component="img"
-                image={product.icon}
-                alt={product.name}
-                sx={{ width: '100%', height: 'auto', aspectRatio: '1/1' }}
-              />
-              <CardContent sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Box>
-                  <Typography gutterBottom variant="h6" component="div">
-                    {product.name}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary" sx={{ fontSize: { xs: 'subtitle2', sm: 'body2' } }}>
-                    {product.description}
-                  </Typography>
-                  <Typography variant="h6">
-                    ${product.price.toFixed(2)}
-                  </Typography>
-                </Box>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={() => addToCart(product)}
-                  sx={{ marginTop: 2, marginLeft: 2, textTransform: 'none' }}
-                >
-                  Add to Cart
-                </Button>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
-    </>
+          <Typography variant="body2" p="20px">"This percentage reflects how much your interests and mindsets align, but remember, true soulmates don't need to be identical. Each person is unique, and it's these differences that make your love even stronger. Embrace what makes you special together and let your connection grow."</Typography>
+        </>
+      )}
+      </Box>
+      
+    </Box>
   );
 };
 
-export default Product;
+export default LoveMatch;
