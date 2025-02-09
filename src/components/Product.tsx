@@ -58,7 +58,7 @@ const LoveMatch: React.FC = () => {
       options: ["We say 'I love you' and show affection often.", "We do things for each other to show we care.", "We spend quality time together.", "We give each other compliments."],
     },
     {
-      question: "Do you like to dance?",
+      question: "How do you and your partner handle conflicts?",
       options: [" We communicate openly and resolve issues calmly.", "We argue but always find a way to compromise", "One of us usually gives in to avoid further conflict.",
         "We avoid confrontations and let things go."
             ],
@@ -152,7 +152,7 @@ const LoveMatch: React.FC = () => {
         height: "50vh",
         p: 1,
       }}>
-      <Typography variant="h4" gutterBottom textAlign="center" color="Red" paddingBlock="30px">
+      <Typography variant="h4" gutterBottom textAlign="center" color="Red" paddingBlock="10px">
         Love Match Game
       </Typography>
       <Typography variant="body1" textAlign="center" fontFamily="monospace" paddingBlock="20px">This is a fun love matching game, designed to explore and understand each other's interests, perceptions, and mindsets, all while enjoying the playful journey of discovering how well you connect.</Typography>

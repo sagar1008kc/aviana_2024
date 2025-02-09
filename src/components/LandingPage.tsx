@@ -1,65 +1,66 @@
 import React from 'react';
 import { Container, Typography, Box, Button } from '@mui/material';
-import GameIcon from '@mui/icons-material/SportsEsports'; 
+import GameIcon from '@mui/icons-material/SportsEsports';
 
 const LandingPage: React.FC = () => {
   return (
     <Box>
+      {/* Hero Section */}
       <Box
         sx={{
-          background: 'linear-gradient(to bottom, #2196F3, #E91E63)', // Gradient from blue to pink
-          height: '50vh',
-          width: '100%', // Full width
+          background: 'linear-gradient(135deg, #1E3C72, #2A5298, #E91E63)', // Smooth gradient
+          width: '100%',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
+          textAlign: 'center',
           color: 'white',
-          padding: '0',
-          textShadow: '0 2px 4px rgba(0, 0, 0, 0.5)',
-          boxShadow: '0 10px 20px rgba(0, 0, 0, 0.2), 0 -10px 20px rgba(0, 0, 0, 0.2)', // Shadow effect on top and bottom
+          padding: '20px',
+          boxShadow: '0 15px 25px rgba(0, 0, 0, 0.2)',
+          animation: 'fadeIn 2s ease-in-out',
+          '@keyframes fadeIn': {
+            '0%': { opacity: 0 },
+            '100%': { opacity: 1 },
+          },
         }}
       >
         <Typography
-          variant="h3"
+          variant="h2"
           component="h1"
           sx={{
-            fontFamily: 'fantasy',
-            textAlign: 'center',
-            paddingBottom: '18px',
-            animation: 'fadeIn 2s ease-in-out',
-            '@keyframes fadeIn': {
-              '0%': { opacity: 0 },
-              '100%': { opacity: 1 },
+            fontFamily: '"Merriweather", serif',
+            fontWeight: 'bold',
+            textTransform: 'uppercase',
+            letterSpacing: '2px',
+            textShadow: '0 3px 6px rgba(0,0,0,0.3)',
+          }}
+        >
+          Welcome to Aviana Games
+        </Typography>
+
+        <Button
+          variant="contained"
+          color="secondary"
+          size="large"
+          sx={{
+            mt: 3,
+            fontWeight: 'bold',
+            fontSize: '.75rem',
+            padding: '12px 36px',
+            borderRadius: '30px',
+            textTransform: 'none',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 1.5,
+            boxShadow: '0 5px 15px rgba(0,0,0,0.3)',
+            '&:hover': {
+              backgroundColor: '#D81B60',
             },
           }}
         >
-          Welcome to Aviana Games!
-        </Typography>
-        <Typography
-          variant="h5"
-          component="h2"
-          textAlign="center"
-          maxWidth="600px"
-          sx={{
-            padding: '0 20px',
-          }}
-        >
-          A world of exciting challenges awaits. Play, learn, and grow with every game!
-        </Typography>
-        <Button
-          variant="contained"
-          color="primary"
-          size="large"
-          sx={{
-            mt: '30px',
-            fontWeight: 'bold',
-            fontSize: '1.2rem',
-            textTransform: 'none',
-            padding: '10px 30px',
-          }}
-        >
-          Play now by clicking game icon
+          <GameIcon sx={{ fontSize: 28 }} />
+          Play Now--click on game icon
         </Button>
       </Box>
     </Box>

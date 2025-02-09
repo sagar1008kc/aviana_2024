@@ -344,9 +344,9 @@ const Home: React.FC = () => {
             sm={8}
             sx={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
           >
-            <Card sx={{ width: '100%', minHeight: '38vh' }}>
+            <Box sx={{ width: '100%', minHeight: '38vh' }}>
               <CardContent>{renderGame()}</CardContent>
-            </Card>
+            </Box>
           </Grid>
           <Grid item xs={12} sm={2} sx={{ height: isSmallScreen ? 'auto' : '100%' }}>
             {!isSmallScreen &&
