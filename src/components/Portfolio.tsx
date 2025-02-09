@@ -263,8 +263,26 @@ const Portfolio: React.FC = () => {
                  - Full-Stack Engineer, Cybersecurity Specialist & AI Enthusiast
               </Typography>
               <Typography variant="body1" color="textSecondary" paragraph>
-                - A dedicated Full-Stack Engineer with expertise in software development and a strong focus on implementing cutting-edge solutions across diverse technological domains. I have extensive experience in building & managing scalable, high-performing applications, while also ensuring robust cybersecurity measures to protect system integrity and data privacy.
+                - A results-driven Full-Stack Engineer with a proven track record of working with top Fortune 20 companies, delivering scalable, high-performing applications, and driving digital transformation through technical excellence.
+
+With deep expertise in software development, I specialize in designing, building, and managing enterprise-grade solutions that enhance efficiency, security, and user experience. My background includes full-cycle development, from architecture and implementation to deployment and optimization, with a strong emphasis on cybersecurity to safeguard data integrity and system resilience.
+
+Beyond hands-on development, I bring leadership and technical project management experience, effectively aligning engineering efforts with business objectives to deliver high-impact solutions. Whether leading cross-functional teams, mentoring developers, or managing complex projects, I ensure seamless execution and innovation at scale.
+
               </Typography>
+              <Box sx={{ textAlign: 'center', marginBottom: 4 }}>
+        <Typography variant="h4" component="h2" sx={{ fontWeight: 'bold', color: 'secondary.main' }}>
+          Core Strengths
+        </Typography>
+      </Box>
+      <Typography variant="body1" component="div">
+        <p><CheckCircleIcon color="success" /> Full-Stack Development (Frontend & Backend)</p>
+        <p><CheckCircleIcon color="success" /> Scalable & High-Performance System Architecture</p>
+        <p><CheckCircleIcon color="success" /> Cybersecurity & Data Privacy Best Practices</p>
+        <p><CheckCircleIcon color="success" /> Technical Project Management & Agile Methodologies</p>
+        <p><CheckCircleIcon color="success" /> Cloud Computing & DevOps Integration</p>
+        <p><CheckCircleIcon color="success" /> Leadership, Team Building & Cross-Functional Collaboration</p>
+      </Typography>
               </Box>
               
               <Typography variant="body1" color="textSecondary" paragraph>
@@ -276,32 +294,7 @@ const Portfolio: React.FC = () => {
             </Grid>
           </Grid>
           <Box display="flex" justifyContent="center" m={2}>
-          <Button
-      variant="outlined"
-      color="primary"
-      onClick={() => navigate('/')}
-      sx={{
-        border: '2px solid',
-        borderColor: 'primary.main',
-        color: 'primary.main',
-        fontWeight: 'bold',
-        fontSize: '16px',
-        padding: '10px 20px',
-        borderRadius: '8px',
-        transition: 'all 0.3s ease',
-        ':hover': {
-          backgroundColor: 'primary.main',
-          color: 'white',
-          borderColor: 'primary.main',
-          boxShadow: '0 4px 10px rgba(0, 0, 0, 0.2)',
-        },
-        ':active': {
-          transform: 'scale(0.95)',
-        },
-      }}
-    >
-      Go to Home Page
-    </Button>
+      
           </Box>
           </SectionContainer>
 

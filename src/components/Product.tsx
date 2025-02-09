@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, Box, Typography, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const LoveMatch: React.FC = () => {
   const [player1Answers, setPlayer1AnswersState] = useState<string[]>(Array(20).fill(""));
@@ -10,47 +11,61 @@ const LoveMatch: React.FC = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [isPlayer1Active, setIsPlayer1Active] = useState(true);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
-
+  const navigate = useNavigate();
   const questionsWithOptions = [
     {
-      question: "What is their favorite type of movie?",
+      question: "What is your favorite type of movie?",
       options: ["Action", "Comedy", "Romance", "Horror"],
     },
     {
-      question: "What is their preferred type of vacation?",
+      question: "What is your preferred type of vacation?",
       options: ["Beach", "Mountains", "City", "Countryside"],
     },
     {
       question: "What kind of music do you enjoy most?",
-      options: ["Pop", "Rock", "Classical", "Jazz"],
+      options: ["Pop", "Modern", "Lok", "Rap"],
     },
     {
-      question: "What is their favorite kind of food?",
-      options: ["Italian", "Chinese", "Indian", "Mexican"],
+      question: "What is your favorite kind of food?",
+      options: ["Nepali", "Chinese", "Indian", "Mexican"],
     },
     {
       question: "Which hobby do you enjoy the most?",
       options: ["Reading", "Sports", "Gaming", "Cooking"],
     },
     {
-      question: "What is their dream job?",
-      options: ["Artist", "Entrepreneur", "Scientist", "Teacher"],
+      question: "What is your dream job?",
+      options: ["Artist", "Entrepreneur", "Technical", "Other"],
     },
     {
-      question: "How do you prefer to spend their weekend?",
+      question: "How do you prefer to spend your weekend?",
       options: ["Staying in", "Partying", "Traveling", "Catching up on hobbies"],
     },
     {
-      question: "What is their favorite pet?",
+      question: "What is your favorite pet?",
       options: ["Dog", "Cat", "Fish", "Bird"],
     },
     {
-      question: "What’s their preferred way to relax?",
+      question: "What’s your preferred way to relax?",
       options: ["Watching TV", "Meditation", "Reading", "Exercising"],
     },
     {
       question: "What kind of gift would you appreciate the most?",
       options: ["Jewelry", "Books", "Gadgets", "Handwritten letter"],
+    },
+    {
+      question: "How do you and your partner express love daily?",
+      options: ["We say 'I love you' and show affection often.", "We do things for each other to show we care.", "We spend quality time together.", "We give each other compliments."],
+    },
+    {
+      question: "Do you like to dance?",
+      options: [" We communicate openly and resolve issues calmly.", "We argue but always find a way to compromise", "One of us usually gives in to avoid further conflict.",
+        "We avoid confrontations and let things go."
+            ],
+    },
+    {
+      question: "What is your love language?",
+      options: ["Physical touch and affections", "Words of affirmation and appreciation.", "Quality time and undivided attention.", "Acts of service and help."],
     },
     {
       question: "Do you like spicy food?",
@@ -73,23 +88,11 @@ const LoveMatch: React.FC = () => {
       options: ["Yes", "No"],
     },
     {
-      question: "Do you enjoy watching sports?",
+      question: "Do you enjoy walking on park?",
       options: ["Yes", "No"],
     },
     {
       question: "Do you like surprises?",
-      options: ["Yes", "No"],
-    },
-    {
-      question: "Are you good at cooking?",
-      options: ["Yes", "No"],
-    },
-    {
-      question: "Do you like to dance?",
-      options: ["Yes", "No"],
-    },
-    {
-      question: "Are you an animal lover?",
       options: ["Yes", "No"],
     },
   ];
@@ -138,7 +141,6 @@ const LoveMatch: React.FC = () => {
         justifyContent: "space-between",
         height: "100vh",
         p: 4,
-        background: "linear-gradient(to bottom, #ffcccc, #ff99cc)",
       }}
     >
       <Box 
@@ -149,7 +151,6 @@ const LoveMatch: React.FC = () => {
         justifyContent: "space-between",
         height: "50vh",
         p: 1,
-        background: "linear-gradient(to bottom, lightblue, lightpink)",
       }}>
       <Typography variant="h4" gutterBottom textAlign="center" color="Red" paddingBlock="30px">
         Love Match Game
@@ -165,7 +166,7 @@ const LoveMatch: React.FC = () => {
         }}
       >
         <Typography variant="h6" color="darkred" textAlign="center">
-          {isPlayer1Active ? "Player 1" : "Player 2"}
+          {isPlayer1Active ? "You" : "Your Partner"}
         </Typography>
 
         <FormControl sx={{ my: 2 }} fullWidth>
@@ -221,7 +222,32 @@ const LoveMatch: React.FC = () => {
         </>
       )}
       </Box>
-      
+      <Button
+        variant="outlined"
+        color="primary"
+        onClick={() => navigate('/')}
+        sx={{
+          border: '2px solid',
+          borderColor: 'primary.main',
+          color: 'primary.main',
+          fontWeight: 'bold',
+          fontSize: '16px',
+          padding: '10px 20px',
+          borderRadius: '8px',
+          transition: 'all 0.3s ease',
+          ':hover': {
+            backgroundColor: 'primary.main',
+            color: 'white',
+            borderColor: 'primary.main',
+            boxShadow: '0 4px 10px rgba(0, 0, 0, 0.2)',
+          },
+          ':active': {
+            transform: 'scale(0.95)',
+          },
+      }}
+    >
+      Go to Home Page
+    </Button>
     </Box>
   );
 };

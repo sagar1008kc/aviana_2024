@@ -147,7 +147,7 @@ const Home: React.FC = () => {
                   onClick={() => handleNavigation('/match')}
                   sx={{ cursor: 'pointer', fontSize: '12px', fontWeight:'bold', ml:'10px'}}
                 >
-                  Product
+                  Special
                 </Button>
               </Grid>
               <Grid item>
