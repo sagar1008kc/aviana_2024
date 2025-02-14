@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Button, Box, Typography, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { Button, Box, Typography, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Divider } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const LoveMatch: React.FC = () => {
@@ -12,6 +12,7 @@ const LoveMatch: React.FC = () => {
   const [isPlayer1Active, setIsPlayer1Active] = useState(true);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const navigate = useNavigate();
+
   const questionsWithOptions = [
     {
       question: "What is your favorite type of movie?",
@@ -97,6 +98,25 @@ const LoveMatch: React.FC = () => {
     },
   ];
 
+  useEffect(() => {
+    const savedPlayer1Answers = localStorage.getItem("player1Answers");
+    const savedPlayer2Answers = localStorage.getItem("player2Answers");
+    const savedPlayer1Submitted = localStorage.getItem("player1Submitted");
+    const savedPlayer2Submitted = localStorage.getItem("player2Submitted");
+
+    if (savedPlayer1Answers) setPlayer1AnswersState(JSON.parse(savedPlayer1Answers));
+    if (savedPlayer2Answers) setPlayer2AnswersState(JSON.parse(savedPlayer2Answers));
+    if (savedPlayer1Submitted) setPlayer1Submitted(JSON.parse(savedPlayer1Submitted));
+    if (savedPlayer2Submitted) setPlayer2Submitted(JSON.parse(savedPlayer2Submitted));
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("player1Answers", JSON.stringify(player1Answers));
+    localStorage.setItem("player2Answers", JSON.stringify(player2Answers));
+    localStorage.setItem("player1Submitted", JSON.stringify(player1Submitted));
+    localStorage.setItem("player2Submitted", JSON.stringify(player2Submitted));
+  }, [player1Answers, player2Answers, player1Submitted, player2Submitted]);
+
   const handleNextQuestion = () => {
     if (selectedAnswer) {
       if (isPlayer1Active) {
@@ -118,6 +138,7 @@ const LoveMatch: React.FC = () => {
           setPlayer1Submitted(true);
           setIsPlayer1Active(false);
           setCurrentQuestionIndex(0);
+          alert("Your turn is over. Please pass the device to your partner.");
         } else {
           setPlayer2Submitted(true);
         }
@@ -145,82 +166,93 @@ const LoveMatch: React.FC = () => {
     >
       <Box 
         sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "space-between",
-        height: "50vh",
-        p: 1,
-      }}>
-      <Typography variant="h4" gutterBottom textAlign="center" color="Red" paddingBlock="10px">
-        Love Match Game
-      </Typography>
-      <Typography variant="body1" textAlign="center" fontFamily="monospace" paddingBlock="20px">This is a fun love matching game, designed to explore and understand each other's interests, perceptions, and mindsets, all while enjoying the playful journey of discovering how well you connect.</Typography>
-      <Box
-        sx={{
-          width: "100%",
-          background: "#ffe6e6",
-           p: 3,
-          borderRadius: "8px",
-          boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-        }}
-      >
-        <Typography variant="h6" color="darkred" textAlign="center">
-          {isPlayer1Active ? "You" : "Your Partner"}
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "space-between",
+          height: "50vh",
+          p: 1,
+        }}>
+        <Typography variant="h4" gutterBottom textAlign="center" color="Red" paddingBlock="10px">
+          Love Match Game
         </Typography>
-
-        <FormControl sx={{ my: 2 }} fullWidth>
-          <FormLabel>{questionsWithOptions[currentQuestionIndex].question}</FormLabel>
-          <RadioGroup
-            value={selectedAnswer}
-            onChange={(e) => setSelectedAnswer(e.target.value)}
-            sx={{ flexDirection: "row", justifyContent: "center" }}
-          >
-            {questionsWithOptions[currentQuestionIndex].options.map((option, idx) => (
-              <FormControlLabel key={idx} value={option} control={<Radio />} label={option} />
-            ))}
-          </RadioGroup>
-        </FormControl>
-
-        <Button
-          variant="contained"
+        <Typography variant="h6" textAlign="center" paddingBlock="10px">
+        Welcome to the Love Match Game! 🎉 </Typography>
+        <Typography variant="body1" textAlign="center" fontFamily="monospace" paddingBlock="20px">
+          This is a fun love matching game, designed to explore and understand each other's interests, perceptions, and mindsets, all while enjoying the playful journey of discovering how well you connect.
+        </Typography>
+        <Box
           sx={{
-            mt: 2,
-            background: "darkred",
-            color: "white",
-            display: "block",  // Makes the button a block element
-            marginLeft: "auto", // Centers the button horizontally
-            marginRight: "auto", // Centers the button horizontally
-            alignContent: "center"
+            width: "100%",
+            background: "#ffe6e6",
+            p: 3,
+            borderRadius: "8px",
+            boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
           }}
-          onClick={handleNextQuestion}
-          disabled={!selectedAnswer}
->
-  Next
-</Button>
-      </Box>
-
-      {player1Submitted && player2Submitted && (
-        <Button
-          variant="contained"
-          sx={{ mt: 4, background: "White", color: "black" }}
-          onClick={handleCalculateMatch}
         >
-          Calculate Love Match
-        </Button>
-      )}
-
-      {matchResult !== null && (
-        <>
-          <Typography
-            variant="h5"
-            sx={{ mt: 3, background: "#ffcccc", p: 2, borderRadius: "8px", textAlign: "center", color: "darkred" }}
-          >
-            Match Result: {matchResult}%
+          <Typography variant="body2" color="black" textAlign="center">Answer Honestly | Keep It Fun |Pass the Device when your turn is done. Total: 20 questions</Typography>
+          <Divider sx={{ my: 2 }} />
+          <Typography variant="h6" color="darkred" textAlign="center">
+           
+            {isPlayer1Active ? "Your Turn" : "Your Partner's Turn"}
           </Typography>
-          <Typography variant="body2" p="20px">"This percentage reflects how much your interests and mindsets align, but remember, true soulmates don't need to be identical. Each person is unique, and it's these differences that make your love even stronger. Embrace what makes you special together and let your connection grow."</Typography>
-        </>
-      )}
+
+          <FormControl sx={{ my: 2 }} fullWidth>
+            <FormLabel>{questionsWithOptions[currentQuestionIndex].question}</FormLabel>
+            <RadioGroup
+              value={selectedAnswer}
+              onChange={(e) => setSelectedAnswer(e.target.value)}
+              sx={{ flexDirection: "row", justifyContent: "center" }}
+            >
+              {questionsWithOptions[currentQuestionIndex].options.map((option, idx) => (
+                <FormControlLabel key={idx} value={option} control={<Radio />} label={option} />
+              ))}
+            </RadioGroup>
+          </FormControl>
+
+          <Button
+            variant="contained"
+            sx={{
+              mt: 2,
+              background: "darkred",
+              color: "white",
+              display: "block",
+              marginLeft: "auto",
+              marginRight: "auto",
+              alignContent: "center"
+            }}
+            onClick={handleNextQuestion}
+            disabled={!selectedAnswer}
+          >
+            Next
+          </Button>
+        </Box>
+
+        {player1Submitted && player2Submitted && (
+          <Button
+            variant="contained"
+            sx={{ mt: 4, background: "White", color: "black" }}
+            onClick={handleCalculateMatch}
+          >
+            Calculate Love Match
+          </Button>
+        )}
+
+        {matchResult !== null && (
+          <>
+          <Divider sx={{ my: 2 }} />
+            <Typography
+              variant="h5"
+              sx={{ mt: 3, background: "#ffcccc", p: 2, borderRadius: "8px", textAlign: "center", color: "darkred" }}
+            >
+              Match Result: {matchResult}%
+            </Typography>
+            <Divider sx={{ my: 2 }} />
+            <Typography variant="body2" p="20px">
+              "This percentage reflects how much your interests and mindsets align, but remember, true soulmates don't need to be identical. Each person is unique, and it's these differences that make your love even stronger. Embrace what makes you special together and let your connection grow."
+            </Typography>
+          </>
+        )}
       </Box>
       <Button
         variant="outlined"
@@ -244,10 +276,10 @@ const LoveMatch: React.FC = () => {
           ':active': {
             transform: 'scale(0.95)',
           },
-      }}
-    >
-      Go to Home Page
-    </Button>
+        }}
+      >
+        Go to Home Page
+      </Button>
     </Box>
   );
 };
