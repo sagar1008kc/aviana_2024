@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Container, Box, Typography, Paper, LinearProgress, Grid, Button, Avatar, ListItem, ListItemIcon, ListItemText, List } from '@mui/material';
+import { Container, Box, Typography, Paper, LinearProgress, Grid, Button, Avatar, ListItem, ListItemIcon, ListItemText, List, Divider } from '@mui/material';
 import { styled } from '@mui/system';
 import { useNavigate } from 'react-router-dom';
 import SagarIcon from '../assets/sagar.png';
@@ -202,13 +202,11 @@ const Portfolio: React.FC = () => {
       </Typography>
     </Box>
       <StyledPaper>
-        {/* About Me Section */}
         <SectionContainer
           ref={(el: HTMLDivElement | null) => (sectionRefs.current[0] = el)}
           data-bgcolor="#f2f3f4"
         >
           <Grid container spacing={2} alignItems="center" sx={{p: 0}}>
-            {/* Sagar's Image */}
             <Grid item xs={12} md={4}>
               <Avatar
                 src={SagarIcon}
@@ -223,53 +221,51 @@ const Portfolio: React.FC = () => {
               />
                {/* LinkedIn Badge */}
       <Box mt={3}>
-      <div
-        ref={badgeRef}
-        className="badge-base LI-profile-badge"
-        data-locale="en_US"
-        data-size="small"
-        data-theme="dark"
-        data-type="VERTICAL"
-        data-vanity="s777k"
-        data-version="v1"
-        style={{
-          width: '100%',
-          maxWidth: '300px',
-          margin: 'auto',
-          display: 'flex',
-          justifyContent: 'center',
-          height: 'auto',
-        }}
-      >
-        <a
-          className="badge-base__link LI-simple-link"
-          href="https://www.linkedin.com/in/s777k?trk=profile-badge"
-          style={{
-            textDecoration: 'none',
-          }}
-        >
-          {/* This link serves as the clickable area for the badge */}
-        </a>
-      </div>
+      <Typography 
+  variant="h3" 
+  component="h1" 
+  textAlign="center" 
+  gutterBottom 
+  sx={{ fontWeight: 'bold', letterSpacing: 1.5 }}
+>
+  About Me
+</Typography>
+      
     </Box>
             </Grid>
-
-            {/* About Me Content */}
             <Grid item xs={12} md={8}>
               <Box>
-              <Typography variant="h4" component="h1" textAlign="center" gutterBottom sx={{ fontWeight: 'bold', color: 'Red'}}>Hello!</Typography>
-              <Typography variant="h4" component="h3" textAlign="center" gutterBottom sx={{ fontWeight: 'bold', color: 'grey'}}>I am Sagar,</Typography>
-              <Typography variant="h6" component="h5" textAlign="center" fontWeight="bold" gutterBottom>
-                 - Full-Stack Engineer, Cybersecurity Specialist & AI Enthusiast
-              </Typography>
-              <Typography variant="body1" color="textSecondary" paragraph>
-                - A results-driven Full-Stack Engineer with a proven track record of working with top Fortune 20 companies, delivering scalable, high-performing applications, and driving digital transformation through technical excellence.
+             
+<Typography 
+  variant="h5" 
+  component="h4" 
+  textAlign="center" 
+  gutterBottom 
+  sx={{ fontWeight: 'bold', color: 'gray', letterSpacing: 1 }}
+>
+  Hi, I am Sagar
+</Typography>
+              <Typography variant="h6" color="textSecondary" paragraph>
+                  Full-Stack Engineer ...Technical Project Manager | Cybersecurity | Conducting DRP(Doctorate Research Project)
+                </Typography>
+                <Typography variant="body1" color="textSecondary" paragraph>
+                  A results-driven Full-Stack Engineer with extensive experience working with Fortune Global 500, delivering scalable, high-performance applications, and driving digital transformation through technical and strategic leadership. My expertise spans enterprise software development, cloud architectures, and cybersecurity implementation, ensuring secure and efficient digital solutions.
+                </Typography>
+                <Typography variant="body1" color="textSecondary" paragraph>
+                  As a Technical Project Manager, I specialize in aligning engineering efforts with business objectives, ensuring seamless execution of complex projects. My core responsibilities include:
+                  - End-to-End Project Delivery: Managing software development lifecycles from conception to deployment, ensuring timely and budget-conscious execution.
+                  - Cross-Functional Team Leadership: Leading and collaborating with engineers, designers, and stakeholders to drive innovation and deliver impactful solutions.
+                  - Agile & Scrum Methodologies: Implementing Agile best practices to optimize workflows, accelerate delivery, and enhance team productivity.
+                  - Risk & Compliance Management: Identifying technical and security risks, implementing mitigation strategies, and ensuring regulatory compliance.
+                  - Stakeholder Communication & Strategy: Translating technical complexities into actionable business insights, aligning technical roadmaps with strategic goals.
+                </Typography>
+                <Typography variant="body1" color="textSecondary" paragraph>
+                  With a strong foundation in end-to-end software development, I design, build, and optimize secure, enterprise-grade solutions that enhance efficiency and resilience. My approach integrates cybersecurity best practices, safeguarding applications and infrastructure against evolving threats.
+                </Typography>
+                <Typography variant="body1" color="textSecondary" paragraph>
+                  Whether leading technical teams, mentoring developers, or driving complex IT initiatives, I ensure seamless execution, security, and innovation at scale.
+                </Typography>
 
-With deep expertise in software development, I specialize in designing, building, and managing enterprise-grade solutions that enhance efficiency, security, and user experience. My background includes full-cycle development, from architecture and implementation to deployment and optimization, with a strong emphasis on cybersecurity to safeguard data integrity and system resilience.
-
-Beyond hands-on development, I bring leadership and technical project management experience, effectively aligning engineering efforts with business objectives to deliver high-impact solutions. Whether leading cross-functional teams, mentoring developers, or managing complex projects, I ensure seamless execution and innovation at scale.
-
-              </Typography>
               <Box sx={{ textAlign: 'center', marginBottom: 4 }}>
         <Typography variant="h4" component="h2" sx={{ fontWeight: 'bold', color: 'secondary.main' }}>
           Core Strengths
@@ -458,6 +454,36 @@ Beyond hands-on development, I bring leadership and technical project management
         ))}
       </List>
     </Box>
+
+    <div
+        ref={badgeRef}
+        className="badge-base LI-profile-badge"
+        data-locale="en_US"
+        data-size="small"
+        data-theme="dark"
+        data-type="VERTICAL"
+        data-vanity="s777k"
+        data-version="v1"
+        style={{
+          width: '100%',
+          maxWidth: '300px',
+          margin: 'auto',
+          display: 'flex',
+          justifyContent: 'center',
+          height: 'auto',
+          marginBlockStart: '1em',
+        }}
+      >
+        <a
+          className="badge-base__link LI-simple-link"
+          href="https://www.linkedin.com/in/s777k?trk=profile-badge"
+          style={{
+            textDecoration: 'none',
+          }}
+        >
+          {/* This link serves as the clickable area for the badge */}
+        </a>
+      </div>
         </SectionContainer>
         
         <Box display="flex" justifyContent="center" mt={4}>
