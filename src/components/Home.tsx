@@ -20,7 +20,9 @@ import {
   CssBaseline,
   AppBar,
   Toolbar,
-  Paper
+  Paper,
+  Menu,
+  MenuItem
 } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import TicTacToe from '../games/TicTacToe';
@@ -62,7 +64,7 @@ const Home: React.FC = () => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const [darkMode, setDarkMode] = useState(false);
-
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const themeMode = createTheme({
     palette: {
       mode: darkMode ? 'dark' : 'light',
@@ -78,6 +80,13 @@ const Home: React.FC = () => {
 
   const handleNavigation = (path: string) => {
     navigate(path);
+  };
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
   };
 
   const renderGame = () => {
@@ -141,15 +150,23 @@ const Home: React.FC = () => {
               onClick={() => dispatch(selectGame('home'))}
             />
             <Grid container justifyContent="center" display='flex' flexDirection="row">
-              <Grid item>
-                <Button
-                  variant="text"
-                  onClick={() => handleNavigation('/match')}
-                  sx={{ cursor: 'pointer', fontSize: '12px', fontWeight:'bold', ml:'10px'}}
-                >
-                  Special
-                </Button>
-              </Grid>
+            <Grid item>
+      <Button
+        variant="text"
+        onClick={handleClick}
+        sx={{ cursor: 'pointer', fontSize: '12px', fontWeight: 'bold', ml: '10px' }}
+      >
+        Services
+      </Button>
+      <Menu
+        anchorEl={anchorEl}
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+      >
+        <MenuItem onClick={() => handleNavigation('/services')}>Services</MenuItem>
+        <MenuItem onClick={() => handleNavigation('/userData')}>User Data</MenuItem>
+      </Menu>
+    </Grid>
               <Grid item>
                 <Button
                   variant="text"

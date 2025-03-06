@@ -7,6 +7,7 @@ import Product from './components/Product';
 import Login from './components/Login';
 import Resources from './components/Resources';
 import Portfolio from './components/Portfolio';
+import UserDataTable from './features/UserDataTable';
 
 const App: React.FC = () => {
   return (
@@ -14,9 +15,10 @@ const App: React.FC = () => {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/match" element={<Product />} />
+          <Route path="/services" element={<Product />} />
+          <Route path="/userData" element={<UserDataTable />} />
           <Route path="/portfolio" element={<Portfolio />} />
-          <Route path="/" element={<Login />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/resources" element={<Resources />} />
         </Routes>
       </Router>

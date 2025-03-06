@@ -20,6 +20,7 @@ import {
   People,
   Public
 } from '@mui/icons-material';
+import UserDataTable from '../features/UserDataTable';
 
 const services = [
   { 
@@ -74,7 +75,6 @@ const Services = () => {
 
   return (
     <Container maxWidth="xl" sx={{ py: 8 }}>
-      {/* Hero Section */}
       <Box textAlign="center" mb={10}>
         <Typography 
           variant={isMobile ? 'h4' : 'h2'} 
