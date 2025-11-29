@@ -5,7 +5,7 @@ interface GameState {
 }
 
 const initialState: GameState = {
-  selectedGame: 'home',
+  selectedGame: 'Click any icon to play a game!',
 };
 
 const gameSlice = createSlice({

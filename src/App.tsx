@@ -1,25 +1,23 @@
+// src/App.tsx
 import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import store from './store';
-import Home from './components/Home';
-import Product from './components/Product';
-import Login from './components/Login';
-import Resources from './components/Resources';
-import Portfolio from './components/Portfolio';
-import UserDataTable from './features/UserDataTable';
+import Game from './components/Game';               // or './components/Home' if that's the file name
+import LandingHomePage from './components/LandingHomePage';
+import MainLayout from './components/MainLayout';
+
 
 const App: React.FC = () => {
   return (
     <Provider store={store}>
       <Router>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/services" element={<Product />} />
-          <Route path="/userData" element={<UserDataTable />} />
-          <Route path="/portfolio" element={<Portfolio />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/resources" element={<Resources />} />
+          {/* All routes share MainLayout (nav + theme) */}
+          <Route element={<MainLayout />}>
+            <Route path="/" element={<LandingHomePage />} />
+            <Route path="/home" element={<Game />} />
+          </Route>
         </Routes>
       </Router>
     </Provider>

@@ -1,0 +1,167 @@
+
+import React from 'react';
+import {
+  Box,
+  Button,
+  Typography,
+  Container,
+  Grid,
+  Card,
+  CardMedia,
+  CardContent,
+  Divider,
+  Chip,
+} from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+
+interface BookItem {
+  title: string;
+  image: string;
+  link: string;
+}
+
+const books: BookItem[] = [
+  {
+    title: 'Positive Affirmations for Kids',
+    image: '/images/book1.jpg',
+    link: 'https://a.co/d/0mVpvZo',
+  },
+  {
+    title: 'A Halloween Night Story',
+    image: '/images/book2.jpg',
+    link: 'https://a.co/d/iZwW4aj',
+  },
+  {
+    title: 'Animal Coloring Book',
+    image: '/images/book3.jpg',
+    link: 'https://a.co/d/1Twa4fC',
+  },
+  {
+    title: 'Emotional Balance',
+    image: '/images/book4.jpg',
+    link: 'https://a.co/d/7yzSYod',
+  },
+];
+
+const LandingHomePage: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleGoGames = () => navigate('/home');
+
+  return (
+    <Container
+      maxWidth="lg"
+      sx={{
+        py: 6,
+        minHeight: '100vh',
+      }}
+    >
+      {/* Hero section */}
+      <Box textAlign="center" mb={5}>
+        <Typography variant="h3" fontWeight={700} gutterBottom>
+          Welcome to Aviana&apos;s Fun World 🎮📚
+        </Typography>
+        <Typography
+          variant="subtitle1"
+          color="text.secondary"
+          maxWidth="700px"
+          mx="auto"
+          mb={3}
+        >
+          Play brain-boosting mini games and explore inspiring books for kids and
+          families — all in one cozy corner of the internet.
+        </Typography>
+        <Button
+          variant="contained"
+          size="large"
+          onClick={handleGoGames}
+          sx={{ textTransform: 'none', fontWeight: 600, borderRadius: 2 }}
+        >
+          Play Games Now →
+        </Button>
+      </Box>
+
+      <Divider sx={{ my: 4 }}>
+        <Chip label="Books" size="small" />
+      </Divider>
+
+      {/* Books grid: 2 per row, total 4 */}
+      <Grid container spacing={4}>
+        {books.map((book) => (
+          <Grid item xs={12} sm={6} md={6} key={book.title}>
+            <Card
+              sx={{
+                height: '100%',
+                borderRadius: 3,
+                boxShadow: 4,
+                transition: 'all 0.3s ease',
+                '&:hover': {
+                  transform: 'translateY(-6px)',
+                  boxShadow: 8,
+                },
+              }}
+            >
+              <CardMedia
+                component="img"
+                height="320"
+                image={book.image}
+                alt={book.title}
+                sx={{ objectFit: 'cover' }}
+              />
+              <CardContent>
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontWeight: 600,
+                    minHeight: '60px',
+                    mb: 2,
+                    textAlign: 'center',
+                  }}
+                >
+                  {book.title}
+                </Typography>
+                <Box display="flex" justifyContent="center">
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    href={book.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    sx={{
+                      textTransform: 'none',
+                      fontWeight: 600,
+                      borderRadius: 2,
+                      px: 3,
+                      py: 1,
+                    }}
+                  >
+                    Buy on Amazon →
+                  </Button>
+                </Box>
+              </CardContent>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
+
+      <Divider sx={{ my: 4 }}>
+        <Chip label="Games" size="small" />
+      </Divider>
+
+      <Box textAlign="center" mb={4}>
+        <Typography variant="subtitle1" color="text.secondary" mb={2}>
+          Want to jump straight into the fun games?
+        </Typography>
+        <Button
+          variant="outlined"
+          onClick={handleGoGames}
+          sx={{ textTransform: 'none', borderRadius: 2, fontWeight: 600 }}
+        >
+          Go to Games →
+        </Button>
+      </Box>
+    </Container>
+  );
+};
+
+export default LandingHomePage;
