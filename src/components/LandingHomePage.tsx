@@ -77,11 +77,19 @@ const LandingHomePage: React.FC = () => {
         </Typography>
         <Button
           variant="contained"
-          size="large"
+          size="medium"
           onClick={handleGoGames}
           sx={{ textTransform: 'none', fontWeight: 600, borderRadius: 2 }}
         >
           Play Games Now →
+        </Button>
+        <Button
+          variant="contained"
+          size="medium"
+          onClick={() => window.open('https://www.youtube.com/@avianacreation', '_blank')}
+          sx={{ textTransform: 'none', fontWeight: 600, borderRadius: 2,  ml: 3, bgcolor: '#FF0000', '&:hover': { bgcolor: '#CC0000' } }}
+        >
+          Watch Youtube →
         </Button>
       </Box>
 

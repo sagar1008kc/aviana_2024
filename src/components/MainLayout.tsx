@@ -58,7 +58,7 @@ const MainLayout: React.FC = () => {
               <img
                 src={AvianaIcon}
                 alt="Avianaa"
-                style={{ height: '60px', width: '60px', borderRadius: '50%' }}
+                style={{ height: '70px', width: '70px', borderRadius: '10%' }}
               />
             </Box>
 

@@ -79,7 +79,7 @@ const Game: React.FC = () => {
         return <Calculator />;
       default:
         return (
-          <Typography variant="h2" align="center">
+          <Typography variant="h6" align="center" paddingTop="100px">
             {selectedGame}
           </Typography>
         );
