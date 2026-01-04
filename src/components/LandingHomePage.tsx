@@ -13,36 +13,40 @@ import {
   Chip,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-
+import Book1 from '../assets/book1.png';
+import Book2 from '../assets/book2.png';
+import Book3 from '../assets/book3.png';
+import { Book } from '@mui/icons-material';
 interface BookItem {
   title: string;
   image: string;
   link: string;
 }
 
-const books: BookItem[] = [
+const books: readonly BookItem[] = [
   {
     title: 'Positive Affirmations for Kids',
-    image: '/images/book1.jpg',
-    link: 'https://a.co/d/0mVpvZo',
-  },
-  {
-    title: 'A Halloween Night Story',
-    image: '/images/book2.jpg',
-    link: 'https://a.co/d/iZwW4aj',
+    image: Book1,
+    link: 'https://a.co/d/aG3qBjt',
   },
   {
     title: 'Animal Coloring Book',
-    image: '/images/book3.jpg',
-    link: 'https://a.co/d/1Twa4fC',
+    image: Book2,
+    link: 'https://a.co/d/5Is1gE4',
   },
   {
-    title: 'Emotional Balance',
-    image: '/images/book4.jpg',
-    link: 'https://a.co/d/7yzSYod',
+    title: 'A Halloween Night Story',
+    image: Book3,
+    link: 'https://a.co/d/iZwW4aj',
   },
-];
+  {
+    title: 'Next comming soon..',
+    image: 'coming soon',
+    link: 'https://a.co/d/aG3qBjt',
+  },
 
+
+];
 const LandingHomePage: React.FC = () => {
   const navigate = useNavigate();
 
@@ -103,7 +107,7 @@ const LandingHomePage: React.FC = () => {
             >
               <CardMedia
                 component="img"
-                height="320"
+                height="600"
                 image={book.image}
                 alt={book.title}
                 sx={{ objectFit: 'cover' }}
