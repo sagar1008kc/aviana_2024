@@ -120,16 +120,7 @@ const Game: React.FC = () => {
 
       <DigitalClock />
 
-      <Divider
-        sx={{
-          height: 1.5,
-          border: 'none',
-          backgroundImage: borderGradient,
-          mt: 1,
-          mb: 1,
-        }}
-      />
-
+<Typography textAlign="center" bgcolor="darkgray" p="4px">Ready to play? Click an icon and dive in!</Typography>
       <Grid container spacing={1} sx={{ flex: 1 }} mt="8px">
         {/* MOBILE LEFT GAMES */}
         {isSmallScreen && (

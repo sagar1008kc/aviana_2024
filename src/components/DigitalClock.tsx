@@ -1,7 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import { Typography, Box } from '@mui/material';
-import LinearProgress from '@mui/material/LinearProgress';
+import { Typography, Box, Grid } from '@mui/material';;
 const DigitalClock: React.FC = () => {
   const [currentTime, setCurrentTime] = useState<string>("");
   const [progress, setProgress] = React.useState(0);
@@ -50,7 +49,7 @@ const DigitalClock: React.FC = () => {
 
 
   return (
-    <>
+    <Grid mb="10px">
     <Typography variant="subtitle2" fontSize="12px"
       sx={{
         alignItems: 'center',
@@ -62,7 +61,7 @@ const DigitalClock: React.FC = () => {
     >
         {currentTime}
       </Typography>
-      </>
+      </Grid>
   );
 };
 

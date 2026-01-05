@@ -16,7 +16,7 @@ import { useNavigate } from 'react-router-dom';
 import Book1 from '../assets/book1.png';
 import Book2 from '../assets/book2.png';
 import Book3 from '../assets/book3.png';
-import { Book } from '@mui/icons-material';
+import Book4  from '../assets/comingIcon.png';
 interface BookItem {
   title: string;
   image: string;
@@ -41,7 +41,7 @@ const books: readonly BookItem[] = [
   },
   {
     title: 'Next comming soon..',
-    image: 'coming soon',
+    image: Book4,
     link: 'https://a.co/d/aG3qBjt',
   },
 
@@ -93,8 +93,13 @@ const LandingHomePage: React.FC = () => {
         </Button>
       </Box>
 
-      <Divider sx={{ my: 4 }}>
-        <Chip label="Books" size="small" />
+      <Divider sx={{ mb: 2 }}>
+        <Chip label="Books" 
+        sx={{
+          bgcolor: 'green',
+          color: 'white',
+          fontWeight: 'bold',
+        }} />
       </Divider>
 
       {/* Books grid: 2 per row, total 4 */}
